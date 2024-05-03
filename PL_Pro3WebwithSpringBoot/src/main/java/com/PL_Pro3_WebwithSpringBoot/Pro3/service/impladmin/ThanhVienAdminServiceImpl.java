@@ -9,7 +9,9 @@ import com.PL_Pro3_WebwithSpringBoot.Pro3.models.ThanhVien;
 import com.PL_Pro3_WebwithSpringBoot.Pro3.repository.ThanhVienRepository;
 import com.PL_Pro3_WebwithSpringBoot.Pro3.service.serviceadmin.ThanhVienAdminService;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
@@ -19,14 +21,19 @@ import org.springframework.stereotype.Service;
 @Service
 public class ThanhVienAdminServiceImpl implements ThanhVienAdminService{
     
-    private ThanhVienRepository thanhVienRepository;
-    
+    private final ThanhVienRepository thanhVienRepository;
+
+    @Autowired
+    public ThanhVienAdminServiceImpl(ThanhVienRepository thanhVienRepository) {
+        this.thanhVienRepository = thanhVienRepository;
+    }
     
     @Override
     public List<ThanhVienDTO> getAllThanhVien() {
         List<ThanhVien> thanhViens = thanhVienRepository.findAll();
         return thanhViens.stream().map((club ->mapToThanhVienDTO(club))).collect(Collectors.toList());
     }
+    
     private  ThanhVienDTO mapToThanhVienDTO(ThanhVien thanhVien){
         ThanhVienDTO thanhVienDTO = ThanhVienDTO.builder()
                 .maTV(thanhVien.getMaTV())
@@ -39,14 +46,6 @@ public class ThanhVienAdminServiceImpl implements ThanhVienAdminService{
                 .build();
 
         return thanhVienDTO;
-    }
-
-    
-    
-    @Override
-    public ThanhVien AddThanhVien(ThanhVienDTO thanhVienDTO) {
-        ThanhVien thanhVien = mapToThanhVien(thanhVienDTO);
-        return thanhVienRepository.save(thanhVien);
     }
     
     private ThanhVien mapToThanhVien (ThanhVienDTO thanhVienDTO) {
@@ -62,25 +61,45 @@ public class ThanhVienAdminServiceImpl implements ThanhVienAdminService{
         return thanhVien;
     }
 
-   
+    @Override
+    public ThanhVien AddThanhVien(ThanhVienDTO thanhVienDTO) {
+//        Optional<ThanhVien> existingThanhVien = thanhVienRepository.findByMaTV(thanhVienDTO.getMaTV());
+//        if (existingThanhVien.isPresent()) {
+//            throw new RuntimeException("Mã thành viên đã tồn tại");
+//        }
+        ThanhVien thanhVien = mapToThanhVien(thanhVienDTO);
+        return thanhVienRepository.save(thanhVien);
+    }
+
     @Override
     public ThanhVienDTO getThanhVienById(int thanhVienID) {
-         ThanhVien thanhVien = thanhVienRepository.findById(thanhVienID).get();
+        ThanhVien thanhVien = thanhVienRepository.findById(thanhVienID).get();
         return mapToThanhVienDTO(thanhVien);
     }
 
     @Override
-    public void updateThanhVien(ThanhVienDTO thanhVienDTO) {
-        ThanhVien thanhVien = mapToThanhVien(thanhVienDTO);
-        thanhVienRepository.save(thanhVien);
+    public void updateThanhVien(int id, ThanhVienDTO thanhVienDTO) {
+        Optional<ThanhVien> optionalThanhVien = thanhVienRepository.findById(id);
+        if (optionalThanhVien.isPresent()) {
+            ThanhVien existingThanhVien = optionalThanhVien.get();
+            // Cập nhật thông tin trong dòng hiện tại
+            existingThanhVien.setMaTV(thanhVienDTO.getMaTV());
+            existingThanhVien.setHoTen(thanhVienDTO.getHoTen());
+            existingThanhVien.setKhoa(thanhVienDTO.getKhoa());
+            existingThanhVien.setNganh(thanhVienDTO.getNganh());
+            existingThanhVien.setSdt(thanhVienDTO.getSdt());
+            existingThanhVien.setEmail(thanhVienDTO.getEmail());
+            existingThanhVien.setPassword(thanhVienDTO.getPassword());
+
+            thanhVienRepository.save(existingThanhVien);
+        } else {
+            // Xử lý khi không tìm thấy dòng cần cập nhật
+        }
     }
 
     @Override
     public void deleteThanhVienByID(int thanhVienID) {
         thanhVienRepository.deleteById(thanhVienID);
     }
-    
-    
-    
     
 }

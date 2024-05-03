@@ -24,7 +24,7 @@ public class ThietBi implements Serializable {
     private int maTB;
     @Column(name = "TenTB")
     private String tenTB;
-    @Column(name = "MoTaTB")
+    @Column(name = "motatb")
     private String moTaTB;
     
 

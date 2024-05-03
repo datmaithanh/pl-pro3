@@ -21,19 +21,18 @@ import java.io.Serializable;
 @Table(name = "thanhvien")
 public class ThanhVien implements Serializable {
     @Id
-    @Column(name = "MaTV")
+    @Column(name = "maTV")
     private int maTV;
-    @Column(name = "HoTen")
+    @Column(name = "hoten")
     private String hoTen;
-    @Column(name = "Khoa")
+    @Column(name = "khoa")
     private String khoa;
-    @Column(name = "Nganh")
+    @Column(name = "nganh")
     private String nganh;
-    @Column(name = "SDT")
+    @Column(name = "sdt")
     private String sdt;
-    @Column(name = "Email")
+    @Column(name = "email")
     private String email;
-    @Column(name = "Password")
+    @Column(name = "password")
     private String password;
-
 }

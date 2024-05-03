@@ -29,4 +29,15 @@ public class ThanhVienDTO {
     private String email;
     @NotEmpty(message = "Password không thể bỏ trống")
     private String password;
+    
+    public ThanhVienDTO() {}
+    public ThanhVienDTO(int maTV, String hoTen, String khoa, String nganh, String sdt, String email, String password) {
+        this.maTV = maTV;
+        this.hoTen = hoTen;
+        this.khoa = khoa;
+        this.nganh = nganh;
+        this.sdt = sdt;
+        this.email = email;
+        this.password = password;
+    }
 }
