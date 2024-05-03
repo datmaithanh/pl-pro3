@@ -13,7 +13,7 @@ import java.util.List;
  * @author Lenovo
  */
 public interface ThietBiAdminService {
-    List<ThietBiDTO> getAllThietBiDTO();
+    List<ThietBiDTO> getAllThietBi();
     
     ThietBi AddThietBi(ThietBiDTO thietBiDTO);
 

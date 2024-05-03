@@ -28,7 +28,7 @@ public class ThietBiAdminServiceImpl implements ThietBiAdminService{
     }
 
     @Override
-    public List<ThietBiDTO> getAllThietBiDTO() {
+    public List<ThietBiDTO> getAllThietBi() {
         List<ThietBi> thanhViens = thietBiRepository.findAll();
         return thanhViens.stream().map((club ->mapToThietBiDTO(club))).collect(Collectors.toList());
     }
