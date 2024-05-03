@@ -23,25 +23,49 @@ import java.time.LocalDateTime;
 @Entity
 @Table(name = "xuly")
 public class XuLy implements Serializable {
-    @Id
-    @Column(name = "MaXL")
-    private int maXL;
-    
-    @ManyToOne
-    @JoinColumn(name = "maTV")
-    private ThanhVien thanhVien;
-    
-    @Column(name = "HinhThucXL")
-    private String hinhThucXL;
-    
-    @Column(name = "SoTien")
-    private int soTien;
-    
-    @CreationTimestamp
-    @Column(name = "NgayXL")
-    private LocalDateTime ngayXL;
-    
-    @Column(name = "TrangThaiXL")
-    private boolean trangThaiXL;
+//    @Id
+//    @Column(name = "MaXL")
+//    private int maXL;
+//    
+//    @ManyToOne
+//    @JoinColumn(name = "MaTV")
+//    private ThanhVien thanhVien;
+//    
+//    @Column(name = "HinhThucXL")
+//    private String hinhThucXL;
+//    
+//    @Column(name = "SoTien")
+//    private int soTien;
+//    
+//    @CreationTimestamp
+//    @Column(name = "NgayXL")
+//    private LocalDateTime ngayXL;
+//    
+//    @Column(name = "TrangThaiXL")
+//    private boolean trangThaiXL;
 
+    
+    
+      @Id
+    @Column(name = "maxl")
+    private Integer maXL;
+
+    @OneToOne
+    @JoinColumn(name = "matv", nullable = false)
+    private ThanhVien thanhVien;
+       
+
+
+    @Column(name = "hinhthucxl", length = 250)
+    private String hinhThucXL;
+
+    @Column(name = "sotien")
+    private Integer soTien;
+
+    @CreationTimestamp
+    @Column(name = "ngayxl")
+    private LocalDateTime ngayXL;
+
+    @Column(name = "trangthaixl")
+    private Boolean trangThaiXL; 
 }
