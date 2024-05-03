@@ -289,7 +289,7 @@
                         </div>
                     </div>
                 </div>
-                <form class="w-full h-full" id="addDeviceForm" th:action="@{/admin/editdevice_result}" method="get">
+                <form class="w-full h-full" id="addDeviceForm" th:action="@{/admin/editdevice_result}" method="post" enctype="multipart/form-data">
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
@@ -385,7 +385,7 @@
         var cells = row.getElementsByTagName("td");
         
         // Vô hiệu hóa trường maTV để không cho phép chỉnh sửa
-        document.getElementById("maTB").disabled = true;
+        document.getElementById("maTB").readonly = true;
         // Lấy giá trị từ các ô td và đổ vào các trường dữ liệu trong form
         document.getElementById("maTB").value = cells[0].innerText;
         document.getElementById("tenTB").value = cells[1].innerText;
@@ -393,6 +393,7 @@
        
         // Hiển thị form cập nhật thành viên
         document.getElementById("addFormContainer").classList.remove("d-none");
+    
     };
 </script>
 </html>

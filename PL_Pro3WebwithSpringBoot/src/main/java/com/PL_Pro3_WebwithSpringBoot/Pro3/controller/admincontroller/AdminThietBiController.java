@@ -105,12 +105,12 @@ public class AdminThietBiController {
     @GetMapping("/admin/editdevice_result")
     public String editThietBi(@RequestParam("maTB") int maTB, @ModelAttribute ThietBiDTO thietBiDTO) {
         thietBiAdminService.updateThietBi(maTB, thietBiDTO);
-        return "redirect:/admin/thietbi";
+        return "redirect:/admin/editdevice";
     }
      @GetMapping("/admin/deletedevice_result")
     public String deleteThietBi(@RequestParam("maTB") int maTB) {
         thietBiAdminService.deleteThietBiByID(maTB);
-        return "redirect:/admin/thietbi";
+        return "redirect:/admin/deletedevice";
     }
     
 }
