@@ -9,6 +9,7 @@ import com.PL_Pro3_WebwithSpringBoot.Pro3.models.ThietBi;
 import com.PL_Pro3_WebwithSpringBoot.Pro3.repository.ThietBiRepository;
 import com.PL_Pro3_WebwithSpringBoot.Pro3.service.serviceadmin.ThietBiAdminService;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,7 +21,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class ThietBiAdminServiceImpl implements ThietBiAdminService{
     
-    private ThietBiRepository thietBiRepository;
+    private final ThietBiRepository thietBiRepository;
     @Autowired
     public ThietBiAdminServiceImpl(ThietBiRepository thietBiRepository) {
         this.thietBiRepository = thietBiRepository;
@@ -48,46 +49,42 @@ public class ThietBiAdminServiceImpl implements ThietBiAdminService{
                 .build();
         return thietBi;
     }
-    
+
     @Override
     public ThietBi AddThietBi(ThietBiDTO thietBiDTO) {
 //        Optional<ThanhVien> existingThanhVien = thanhVienRepository.findByMaTV(thanhVienDTO.getMaTV());
 //        if (existingThanhVien.isPresent()) {
 //            throw new RuntimeException("Mã thành viên đã tồn tại");
 //        }
-        ThietBi thietBi = mapToThanhVien(thanhVienDTO);
-        return thanhVienRepository.save(thanhVien);
+        ThietBi thietBi = mapToThietBi(thietBiDTO);
+        return thietBiRepository.save(thietBi);
     }
 
     @Override
-    public ThanhVienDTO getThanhVienById(int thanhVienID) {
-        ThanhVien thanhVien = thanhVienRepository.findById(thanhVienID).get();
-        return mapToThanhVienDTO(thanhVien);
+    public ThietBiDTO getThietBiById(int thietBiID) {
+        ThietBi thietBi = thietBiRepository.findById(thietBiID).get();
+        return mapToThietBiDTO(thietBi);
     }
 
     @Override
-    public void updateThanhVien(int id, ThanhVienDTO thanhVienDTO) {
-        Optional<ThanhVien> optionalThanhVien = thanhVienRepository.findById(id);
-        if (optionalThanhVien.isPresent()) {
-            ThanhVien existingThanhVien = optionalThanhVien.get();
+    public void updateThietBi(int id, ThietBiDTO thietBiDTO) {
+        Optional<ThietBi> optionalThietBi = thietBiRepository.findById(id);
+        if (optionalThietBi.isPresent()) {
+            ThietBi existingThietBi = optionalThietBi.get();
             // Cập nhật thông tin trong dòng hiện tại
-            existingThanhVien.setMaTV(thanhVienDTO.getMaTV());
-            existingThanhVien.setHoTen(thanhVienDTO.getHoTen());
-            existingThanhVien.setKhoa(thanhVienDTO.getKhoa());
-            existingThanhVien.setNganh(thanhVienDTO.getNganh());
-            existingThanhVien.setSdt(thanhVienDTO.getSdt());
-            existingThanhVien.setEmail(thanhVienDTO.getEmail());
-            existingThanhVien.setPassword(thanhVienDTO.getPassword());
+            existingThietBi.setMaTB(thietBiDTO.getMaTB());
+            existingThietBi.setTenTB(thietBiDTO.getTenTB());
+            existingThietBi.setMoTaTB(thietBiDTO.getMoTaTB());          
 
-            thanhVienRepository.save(existingThanhVien);
+            thietBiRepository.save(existingThietBi);
         } else {
             // Xử lý khi không tìm thấy dòng cần cập nhật
         }
     }
 
+    @Override
     public void deleteThietBiByID(int thietBiID) {
         thietBiRepository.deleteById(thietBiID);
     }
-    
-    
+      
 }

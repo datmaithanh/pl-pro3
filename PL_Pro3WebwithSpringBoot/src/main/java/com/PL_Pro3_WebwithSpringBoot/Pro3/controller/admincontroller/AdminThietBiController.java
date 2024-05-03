@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 /**
  *
@@ -26,7 +27,7 @@ public class AdminThietBiController {
     }
     
     @GetMapping("/admin/thietbi") // Xử lý yêu cầu GET trên đường dẫn "/admin/thietbi"
-    public String Thanhvien(Model model) {
+    public String Thietbi(Model model) {
         List<ThietBiDTO> list = thietBiAdminService.getAllThietBiDTO();
         model.addAttribute("list", list);
         return "admin/thietbi";
@@ -44,5 +45,10 @@ public class AdminThietBiController {
         List<ThietBiDTO> list = thietBiAdminService.getAllThietBiDTO();
         model.addAttribute("list", list);
         return "admin/deletedevice";
+    }
+    @GetMapping("/admin/deletedevice_result")
+    public String deleteThietBi(@RequestParam("maTB") int maTB) {
+        thietBiAdminService.deleteThietBiByID(maTB);
+        return "redirect:/admin/thanhvien";
     }
 }
