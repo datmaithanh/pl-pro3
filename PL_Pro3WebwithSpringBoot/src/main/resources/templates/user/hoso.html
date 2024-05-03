@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<!--
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this template
+-->
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8">
+        <title>User Profile</title>
+        <link rel="stylesheet" th:href="@{/css/style.css}">
+
+    </head>
+
+    <body>
+        
+        <div id="form_signUp">
+            <h2>Hồ sơ thành viên</h2>
+            <form th:each="thanhVien : ${thanhVien}"> 
+                <label for="id">Mã thành viên</label>
+                <input th:value="${thanhVien.maTV}" disabled>
+
+                <label for="hoten">Họ và tên</label>
+                <input th:value="${thanhVien.hoTen}" disabled>
+
+                <label for="khoa">Khoa</label>
+                <input th:value="${thanhVien.khoa}" disabled>
+
+                <label for="nganh">Ngành</label>
+                <input th:value="${thanhVien.nganh}" disabled>
+
+                <label for="phone">Số điện thoại</label>
+                <input th:value="${thanhVien.sdt}" disabled>
+
+                <label for="email">Email</label>
+                <input th:value="${thanhVien.email}" disabled>
+
+                <label for="password">Mật khẩu</label>
+                <input th:value="${thanhVien.password}" disabled>
+            </form>
+        </div>
+    </body>
+</html>
+

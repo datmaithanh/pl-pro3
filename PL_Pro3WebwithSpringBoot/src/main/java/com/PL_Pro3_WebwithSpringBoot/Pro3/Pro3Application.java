@@ -9,5 +9,4 @@ public class Pro3Application {
 	public static void main(String[] args) {
 		SpringApplication.run(Pro3Application.class, args);
 	}
-
 }

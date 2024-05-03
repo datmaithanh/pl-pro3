@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<!--
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this template
+-->
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8">
+        <title>User Profile</title>
+        <link rel="stylesheet" th:href="@{/css/style.css}">
+
+    </head>
+
+    <body>
+        
+        <div id="form_signUp">
+            <h2>Thiết bị đang mượn</h2>
+            <form th:each="thongTin : ${thongTin}"> 
+                <label for="id">Mã thiết bị</label>
+                <input th:value="${thongTin.thietBi.maTB}" disabled>
+
+                <label for="id">Tên thiết bị</label>
+                <input th:value="${thongTin.thietBi.tenTB}" disabled>
+
+                <label for="id">Mô tả thiết bị</label>
+                <input th:value="${thongTin.thietBi.moTaTB}" disabled>
+
+                <label for="hoten">Thời gian mượn</label>
+                <input th:value="${thongTin.tgMuon}" disabled>
+
+                <label for="khoa">Thời gian trả</label>
+                <input th:value="${thongTin.tgTra}" disabled>
+
+            </form>
+        </div>
+    </body>
+</html>
+

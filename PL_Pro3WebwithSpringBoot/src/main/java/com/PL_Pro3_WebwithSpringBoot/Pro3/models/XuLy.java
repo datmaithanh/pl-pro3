@@ -35,7 +35,7 @@ public class XuLy implements Serializable {
     private String hinhThucXL;
     
     @Column(name = "SoTien")
-    private int soTien;
+    private Integer soTien;
     
     @CreationTimestamp
     @Column(name = "NgayXL")

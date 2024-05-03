@@ -4,15 +4,17 @@
  */
 package com.PL_Pro3_WebwithSpringBoot.Pro3.repository;
 
-
+import com.PL_Pro3_WebwithSpringBoot.Pro3.models.ThanhVien;
 import com.PL_Pro3_WebwithSpringBoot.Pro3.models.XuLy;
-import java.util.Optional;
 import org.springframework.data.jpa.repository.JpaRepository;
-
+import org.springframework.stereotype.Repository;
+import java.util.List;
 /**
  *
  * @author Lenovo
  */
-public interface XuLyRepository extends JpaRepository<XuLy, Object>{
-     Optional<XuLy> findByMaXL(int maXL);
+@Repository
+public interface XuLyRepository extends JpaRepository<XuLy, Integer> {
+
+    List<XuLy> findByThanhVien(ThanhVien tv);
 }

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<!--
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this template
+-->
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8">
+        <title>User Profile</title>
+        <link rel="stylesheet" th:href="@{/css/style.css}">
+
+    </head>
+
+    <body>
+        <div class="wrap">
+            <h2>Đặt chỗ thiết bị</h2>
+            <div class="table_info">
+                <div style="display:table; width:100%;">
+                    <table class="boardRead">
+                        <colgroup>
+                            <col style="width:25%">
+                            <col style="width:25%">
+                            <col style="width:25%">
+                            <col style="width:25%">
+                        </colgroup>
+                        <tbody>
+                            <tr>
+                                <td style="font-weight: bold;">Mã Thiết Bị</td>
+                                <td style="font-weight: bold;">Tên Thiết Bị</td>
+                                <td style="font-weight: bold;">Mô tả thiết bị</td>
+                                <td style="font-weight: bold;">Đặt chỗ</td>
+                            </tr>
+                            <tr th:each="device : ${thietBi}">
+                                <td th:text="${device.maTB}"></td>
+                                <td th:text="${device.tenTB}"></td>
+                                <td th:text="${device.moTaTB}"></td>
+                                <!-- Add your reservation form or button here -->
+                                <td><button>Đặt chỗ</button></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

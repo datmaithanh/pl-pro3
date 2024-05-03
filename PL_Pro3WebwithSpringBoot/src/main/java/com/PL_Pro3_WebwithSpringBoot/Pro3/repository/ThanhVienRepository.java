@@ -7,11 +7,14 @@ package com.PL_Pro3_WebwithSpringBoot.Pro3.repository;
 import com.PL_Pro3_WebwithSpringBoot.Pro3.models.ThanhVien;
 import java.util.Optional;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
 /**
  *
  * @author Lenovo
  */
-public interface ThanhVienRepository extends JpaRepository<ThanhVien, Integer>{
-     Optional<ThanhVien> findByHoTen(String url);
+@Repository
+public interface ThanhVienRepository extends JpaRepository<ThanhVien, Integer> {
+    @Override
+    Optional<ThanhVien> findById(Integer id);
 }

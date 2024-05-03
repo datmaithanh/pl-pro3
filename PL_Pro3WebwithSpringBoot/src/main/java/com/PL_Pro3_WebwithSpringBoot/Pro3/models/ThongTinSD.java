@@ -30,7 +30,7 @@ public class ThongTinSD implements Serializable {
     private ThanhVien thanhVien;
     @ManyToOne
     @JoinColumn(name = "maTB")
-    private ThietBi thietBi;
+    public ThietBi thietBi;
     @CreationTimestamp
     @Column(name = "TGVao")
     private LocalDateTime tgVao;
@@ -43,7 +43,4 @@ public class ThongTinSD implements Serializable {
     @CreationTimestamp
     @Column(name = "TGDatCho")
     private LocalDateTime tgDatCho;
-
-    
-
 }
