@@ -67,8 +67,6 @@ public class UserHomeController {
                 return "user/xemtrangthaivp";
             } else {
                 // Xử lý trường hợp soTien là null ở đây
-                // Ví dụ: có thể đặt giá trị mặc định hoặc hiển thị một thông báo cho người dùng
-                // Ở đây, tôi sẽ đặt giá trị mặc định là 0
                 xl.setSoTien(0); // Đặt giá trị mặc định cho soTien
                 model.addAttribute("xuLy", xl);
                 return "user/xemtrangthaivp";
@@ -117,8 +115,7 @@ public class UserHomeController {
     }
 
     @GetMapping("/userDatChoThietBi")
-    public String datchotbpage(Model model
-    ) {
+    public String datchotbpage(Model model) {
         // Lấy danh sách tất cả các thiết bị từ cơ sở dữ liệu
         List<ThietBi> danhSachThietBi = thietBiRepository.findAll();
 
