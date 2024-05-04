@@ -9,6 +9,7 @@ import com.PL_Pro3_WebwithSpringBoot.Pro3.dto.XuLyDTO;
 import com.PL_Pro3_WebwithSpringBoot.Pro3.models.XuLy;
 import org.springframework.web.bind.annotation.GetMapping;
 import com.PL_Pro3_WebwithSpringBoot.Pro3.service.serviceadmin.XuLyAdminService;
+import com.PL_Pro3_WebwithSpringBoot.Pro3.service.serviceadmin.ThanhVienAdminService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -29,10 +30,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class AdminXuLyController {
 
     private XuLyAdminService xuLyAdminService;
-
+ private ThanhVienAdminService thanhVienAdminService;
     @Autowired
-    public AdminXuLyController(XuLyAdminService xuLyAdminService) {
+    public AdminXuLyController(XuLyAdminService xuLyAdminService, ThanhVienAdminService thanhVienAdminService) {
         this.xuLyAdminService = xuLyAdminService;
+        this.thanhVienAdminService = thanhVienAdminService;
     }
 
     @GetMapping("/admin/index")
@@ -46,20 +48,15 @@ public class AdminXuLyController {
     public String create(Model model) {
         List<XuLyDTO> xuLys = xuLyAdminService.getAllXuLy();
         model.addAttribute("xuLys", xuLys);
-          List<ThanhVienDTO> thanhViens = xuLyAdminService.getAllThanhVien();
+          List<ThanhVienDTO> thanhViens = thanhVienAdminService.getAllThanhVien();
         model.addAttribute("thanhViens", thanhViens);
         return "/admin/create";
     }
 
     @GetMapping("/admin/store")
-    public String addXuLy(@ModelAttribute XuLyDTO xuLyDTO) {
-        xuLyAdminService.AddXuLy(xuLyDTO);
-
-//      System.out.println();
-//        System.out.println(xuLyDTO.getThanhVien().getMaTV());
-        // Optional: Redirect to confirmation page or display success message
-//        xuLyAdminService.AddXuLy(xuLyDTO);
-        return "/admin/index";
+    public String addXuLy(@ModelAttribute XuLyDTO xuLyDTO, @RequestParam("maTV") int maTV) {
+        xuLyAdminService.AddXuLy(maTV, xuLyDTO);
+        return "redirect:/admin/index";
     }
 
     @GetMapping("/admin/delete/{id}")
@@ -78,6 +75,5 @@ public class AdminXuLyController {
     public String update(@ModelAttribute XuLyDTO xuLyDTO, @PathVariable("id") int id) {
         xuLyAdminService.updateXuLy(id, xuLyDTO);
         return  "redirect:/admin/index";
-//            return "/admin/index";
     }
 }

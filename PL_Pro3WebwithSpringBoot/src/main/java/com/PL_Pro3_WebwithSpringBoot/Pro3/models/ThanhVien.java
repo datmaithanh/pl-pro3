@@ -11,7 +11,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import java.io.Serializable;
-
+import java.util.HashSet;
+import java.util.Set;
 
 @Data
 @NoArgsConstructor
@@ -20,20 +21,21 @@ import java.io.Serializable;
 @Entity
 @Table(name = "thanhvien")
 public class ThanhVien implements Serializable {
-    @Id
-    @Column(name = "MaTV")
-    private int maTV;
-    @Column(name = "HoTen")
-    private String hoTen;
-    @Column(name = "Khoa")
-    private String khoa;
-    @Column(name = "Nganh")
-    private String nganh;
-    @Column(name = "SDT")
-    private String sdt;
-    @Column(name = "Email")
-    private String email;
-    @Column(name = "Password")
-    private String password;
 
+    @Id
+    @Column(name = "maTV")
+    private int maTV;
+    @Column(name = "hoten")
+    private String hoTen;
+    @Column(name = "khoa")
+    private String khoa;
+    @Column(name = "nganh")
+    private String nganh;
+    @Column(name = "sdt")
+    private String sdt;
+    @Column(name = "email")
+    private String email;
+    @Column(name = "password")
+    private String password;
+   
 }

@@ -10,6 +10,7 @@ import com.PL_Pro3_WebwithSpringBoot.Pro3.repository.ThanhVienRepository;
 import com.PL_Pro3_WebwithSpringBoot.Pro3.service.serviceadmin.ThanhVienAdminService;
 import java.util.List;
 import java.util.stream.Collectors;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
@@ -17,17 +18,22 @@ import org.springframework.stereotype.Service;
  * @author Lenovo
  */
 @Service
-public class ThanhVienAdminServiceImpl implements ThanhVienAdminService{
-    
+public class ThanhVienAdminServiceImpl implements ThanhVienAdminService {
+
     private ThanhVienRepository thanhVienRepository;
-    
-    
-    @Override
+
+    @Autowired
+//    @Override
+    public ThanhVienAdminServiceImpl(ThanhVienRepository thanhVienRepository) {
+        this.thanhVienRepository = thanhVienRepository;
+    }
+
     public List<ThanhVienDTO> getAllThanhVien() {
         List<ThanhVien> thanhViens = thanhVienRepository.findAll();
-        return thanhViens.stream().map((club ->mapToThanhVienDTO(club))).collect(Collectors.toList());
+        return thanhViens.stream().map((club -> mapToThanhVienDTO(club))).collect(Collectors.toList());
     }
-    private  ThanhVienDTO mapToThanhVienDTO(ThanhVien thanhVien){
+
+    private ThanhVienDTO mapToThanhVienDTO(ThanhVien thanhVien) {
         ThanhVienDTO thanhVienDTO = ThanhVienDTO.builder()
                 .maTV(thanhVien.getMaTV())
                 .hoTen(thanhVien.getHoTen())
@@ -41,15 +47,13 @@ public class ThanhVienAdminServiceImpl implements ThanhVienAdminService{
         return thanhVienDTO;
     }
 
-    
-    
     @Override
     public ThanhVien AddThanhVien(ThanhVienDTO thanhVienDTO) {
         ThanhVien thanhVien = mapToThanhVien(thanhVienDTO);
         return thanhVienRepository.save(thanhVien);
     }
-    
-    private ThanhVien mapToThanhVien (ThanhVienDTO thanhVienDTO) {
+
+    private ThanhVien mapToThanhVien(ThanhVienDTO thanhVienDTO) {
         ThanhVien thanhVien = ThanhVien.builder()
                 .maTV(thanhVienDTO.getMaTV())
                 .hoTen(thanhVienDTO.getHoTen())
@@ -62,10 +66,9 @@ public class ThanhVienAdminServiceImpl implements ThanhVienAdminService{
         return thanhVien;
     }
 
-   
     @Override
     public ThanhVienDTO getThanhVienById(int thanhVienID) {
-         ThanhVien thanhVien = thanhVienRepository.findById(thanhVienID).get();
+        ThanhVien thanhVien = thanhVienRepository.findById(thanhVienID).get();
         return mapToThanhVienDTO(thanhVien);
     }
 
@@ -79,8 +82,5 @@ public class ThanhVienAdminServiceImpl implements ThanhVienAdminService{
     public void deleteThanhVienByID(int thanhVienID) {
         thanhVienRepository.deleteById(thanhVienID);
     }
-    
-    
-    
-    
+
 }

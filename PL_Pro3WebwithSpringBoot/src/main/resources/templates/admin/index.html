@@ -355,11 +355,9 @@
                             <div class="col-lg-12 grid-margin stretch-card">
                                 <div class="card">
                                     <div class="card-body">
-                                        <h4 class="card-title">Striped Table</h4>
-                                        <p class="card-description">
-                                            Add class <code>.table-striped</code>
-                                        </p>
-                                        <a th:href = "@{/admin/create}">Create</a>
+                                        <h4 class="card-title">Danh Sach Xu Ly</h4>
+
+                                        <a class="btn btn-primary" th:href = "@{/admin/create}">Create</a>
 
 
 
@@ -371,7 +369,7 @@
                                                         <th>Ma Thanh Vien</th>
                                                         <th>Hinh Thuc Xu Ly</th>
                                                         <th>So Tien</th>
-                                                        <th>Status</th>
+                                                        <th>Trang Thai</th>
                                                         <th>Action</th>
                                                     </tr>
                                                 </thead>
@@ -389,9 +387,9 @@
                                                         <td th:text="${xuLy.soTien}"></td>
 
                                                         <td th:text="${xuLy.trangThaiXL} ? 'Da xu ly' : 'Chua xu ly'" ></td>
-                                                        <td><a th:href="@{/admin/detail/{id}(id=${xuLy.maXL})}">Detail</a></td>
-
-                                                        <td><a th:href="@{/admin/delete/{id}(id=${xuLy.maXL})}">Delete</a></td>
+                                                        <td><a class="btn btn-warning" th:href="@{/admin/detail/{id}(id=${xuLy.maXL})}">Detail</a>
+                                                            <a onclick="return confirm('Are you sure?')"  class="btn btn-danger" th:href="@{/admin/delete/{id}(id=${xuLy.maXL})}">Delete</a>
+                                                        </td>
 
 
 

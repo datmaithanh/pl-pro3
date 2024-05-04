@@ -35,7 +35,6 @@ public class XuLyAdminServiceImpl implements XuLyAdminService {
         this.thanhVienRepository = thanhVienRepository;
     }
 
-//    @Override
     public boolean checkMaSoSVTrongXuLy(int maSoSinhVien) {
         List<XuLy> xuLyList = xuLyRepository.findByThanhVien_MaTV(maSoSinhVien);
         return !xuLyList.isEmpty();
@@ -63,7 +62,7 @@ public class XuLyAdminServiceImpl implements XuLyAdminService {
     @Override
     public List<ThanhVienDTO> getAllThanhVien() {
         List<ThanhVien> thanhViens = thanhVienRepository.findAll();
-        System.out.println(thanhViens);
+
         return thanhViens.stream().map((club -> mapToThanhVienDTO(club))).collect(Collectors.toList());
     }
 
@@ -93,20 +92,13 @@ public class XuLyAdminServiceImpl implements XuLyAdminService {
         return xuLys;
     }
 
-    private XuLy mapToXuLy(XuLyDTO xuLyDTO) {
-//        XuLy xuLy = XuLy.builder()
-//                .maXL(xuLyDTO.getMaXL())
-//                .thanhVien(xuLyDTO.getThanhVien())
-//                .hinhThucXL(xuLyDTO.getHinhThucXL())
-//                .soTien(xuLyDTO.getSoTien())
-//                .ngayXL(xuLyDTO.getNgayXL())
-//                .trangThaiXL(xuLyDTO.getTrangThaiXL())
-//                .build();
-//        return xuLy;
+    private XuLy mapToXuLy(int maTV, XuLyDTO xuLyDTO) {
+
+        ThanhVien thanhVien = thanhVienRepository.findById(maTV).get();
 
         XuLy xuLy = XuLy.builder()
                 .maXL(xuLyDTO.getMaXL())
-                .thanhVien(xuLyDTO.getThanhVien())
+                .thanhVien(thanhVien)
                 .hinhThucXL(xuLyDTO.getHinhThucXL())
                 .soTien(xuLyDTO.getSoTien())
                 .ngayXL(xuLyDTO.getNgayXL())
@@ -115,8 +107,8 @@ public class XuLyAdminServiceImpl implements XuLyAdminService {
         return xuLy;
     }
 
-    public XuLy AddXuLy(XuLyDTO xuLyDTO) {
-        XuLy xuLy = mapToXuLy(xuLyDTO);
+    public XuLy AddXuLy(int maTV, XuLyDTO xuLyDTO) {
+        XuLy xuLy = mapToXuLy(maTV, xuLyDTO);
         return xuLyRepository.save(xuLy);
 
     }

@@ -23,7 +23,7 @@ public interface XuLyAdminService {
 
     List<XuLy> getXuLyByMaTV(int maTV);
 
-    XuLy AddXuLy(XuLyDTO xuLyDTO);
+    XuLy AddXuLy(int maTV, XuLyDTO xuLyDTO);
 
     void deleteXuLyByID(int xuLyID);
 
