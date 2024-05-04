@@ -4,6 +4,7 @@
  */
 package com.PL_Pro3_WebwithSpringBoot.Pro3.service.serviceadmin;
 
+import com.PL_Pro3_WebwithSpringBoot.Pro3.dto.ThanhVienDTO;
 import com.PL_Pro3_WebwithSpringBoot.Pro3.dto.XuLyDTO;
 import com.PL_Pro3_WebwithSpringBoot.Pro3.models.XuLy;
 import java.util.List;
@@ -16,6 +17,8 @@ public interface XuLyAdminService {
 
     List<XuLyDTO> getAllXuLy();
 
+    List<ThanhVienDTO> getAllThanhVien();
+
     XuLyDTO getXuLyByID(int xuLyID);
 
     List<XuLy> getXuLyByMaTV(int maTV);
@@ -24,5 +27,5 @@ public interface XuLyAdminService {
 
     void deleteXuLyByID(int xuLyID);
 
-    void updateXuLy(int id,XuLyDTO xuLyDTO);
+    void updateXuLy(int id, XuLyDTO xuLyDTO);
 }

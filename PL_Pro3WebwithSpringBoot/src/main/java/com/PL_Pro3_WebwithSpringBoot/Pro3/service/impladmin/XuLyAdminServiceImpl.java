@@ -61,6 +61,27 @@ public class XuLyAdminServiceImpl implements XuLyAdminService {
     }
 
     @Override
+    public List<ThanhVienDTO> getAllThanhVien() {
+        List<ThanhVien> thanhViens = thanhVienRepository.findAll();
+        System.out.println(thanhViens);
+        return thanhViens.stream().map((club -> mapToThanhVienDTO(club))).collect(Collectors.toList());
+    }
+
+    private ThanhVienDTO mapToThanhVienDTO(ThanhVien thanhVien) {
+        ThanhVienDTO thanhVienDTO = ThanhVienDTO.builder()
+                .maTV(thanhVien.getMaTV())
+                .hoTen(thanhVien.getHoTen())
+                .khoa(thanhVien.getKhoa())
+                .nganh(thanhVien.getNganh())
+                .sdt(thanhVien.getSdt())
+                .email(thanhVien.getEmail())
+                .password(thanhVien.getPassword())
+                .build();
+
+        return thanhVienDTO;
+    }
+
+    @Override
     public XuLyDTO getXuLyByID(int xuLyID) {
         XuLy xuLy = xuLyRepository.findById(xuLyID).get();
         return mapToXuLyDTO(xuLy);

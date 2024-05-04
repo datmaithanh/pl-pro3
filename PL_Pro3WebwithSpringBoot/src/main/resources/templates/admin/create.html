@@ -244,7 +244,7 @@
                                                 <label for="exampleFormControlSelect3">Small select</label>
                                                 <select class="form-control form-control-sm" id="exampleFormControlSelect3" name="maTV" >
                                                     <option value="0">Ma Thanh Vien</option>
-                                                    <option th:each="xuLy : ${xuLys}" th:value="${xuLy.thanhVien.maTV}" th:text="${xuLy.thanhVien.maTV}"></option>
+                                                    <option th:each="thanhVien : ${thanhViens}" th:value="${thanhVien}" th:text="${thanhVien.maTV}"></option>
                                                 </select>
                                             </div>
 

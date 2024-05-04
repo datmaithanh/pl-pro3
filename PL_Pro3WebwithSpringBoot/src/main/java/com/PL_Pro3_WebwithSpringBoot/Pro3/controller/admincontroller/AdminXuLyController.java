@@ -4,6 +4,7 @@
  */
 package com.PL_Pro3_WebwithSpringBoot.Pro3.controller.admincontroller;
 
+import com.PL_Pro3_WebwithSpringBoot.Pro3.dto.ThanhVienDTO;
 import com.PL_Pro3_WebwithSpringBoot.Pro3.dto.XuLyDTO;
 import com.PL_Pro3_WebwithSpringBoot.Pro3.models.XuLy;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -45,6 +46,8 @@ public class AdminXuLyController {
     public String create(Model model) {
         List<XuLyDTO> xuLys = xuLyAdminService.getAllXuLy();
         model.addAttribute("xuLys", xuLys);
+          List<ThanhVienDTO> thanhViens = xuLyAdminService.getAllThanhVien();
+        model.addAttribute("thanhViens", thanhViens);
         return "/admin/create";
     }
 
