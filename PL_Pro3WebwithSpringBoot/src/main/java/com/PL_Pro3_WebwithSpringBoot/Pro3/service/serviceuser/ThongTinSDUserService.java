@@ -4,10 +4,21 @@
  */
 package com.PL_Pro3_WebwithSpringBoot.Pro3.service.serviceuser;
 
+import java.util.List;
+
+import com.PL_Pro3_WebwithSpringBoot.Pro3.dto.ThongTinSDDTO;
+import com.PL_Pro3_WebwithSpringBoot.Pro3.models.ThongTinSD;
+
 /**
  *
  * @author Lenovo
  */
 public interface ThongTinSDUserService {
+    ThongTinSD addThongTinSD (ThongTinSDDTO thongTinSDDTO);
     
+    ThongTinSD getThongTinSDByMaTB(int maTB);
+    
+    void updateThongTinSD (ThongTinSD thongTinSD);
+    
+    List<ThongTinSDDTO> getThongTinSDDaDatCho();
 }

@@ -23,7 +23,7 @@ import java.time.LocalDateTime;
 @Table(name = "thongtinsd")
 public class ThongTinSD implements Serializable {
     @Id
-    @Column(name = "MaTT")
+    @Column(name = "maTT")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int maTT;
     @ManyToOne
