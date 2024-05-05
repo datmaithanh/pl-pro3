@@ -24,25 +24,30 @@ import java.time.LocalDateTime;
 public class ThongTinSD implements Serializable {
     @Id
     @Column(name = "MaTT")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int maTT;
     @ManyToOne
     @JoinColumn(name = "maTV")
     private ThanhVien thanhVien;
+    
+    
     @ManyToOne
     @JoinColumn(name = "maTB")
     private ThietBi thietBi;
-    @CreationTimestamp
+    
     @Column(name = "TGVao")
     private LocalDateTime tgVao;
-    @CreationTimestamp
+    
     @Column(name = "TGMuon")
     private LocalDateTime tgMuon;
-    @CreationTimestamp
+    
     @Column(name = "TGTra")
     private LocalDateTime tgTra;
-    @CreationTimestamp
-    @Column(name = "TGDatCho")
+    
+    @Column(name = "tgdatcho")
     private LocalDateTime tgDatCho;
+
+    
 
     
 

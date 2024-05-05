@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>RoyalUI Admin</title>
+  <!-- plugins:css -->
+  <link rel="stylesheet" href="../../vendors/ti-icons/css/themify-icons.css">
+  <link rel="stylesheet" href="../../vendors/base/vendor.bundle.base.css">
+  <!-- endinject -->
+  <!-- plugin css for this page -->
+  <!-- End plugin css for this page -->
+  <!-- inject:css -->
+  <link rel="stylesheet" href="../../css/style.css">
+  <!-- endinject -->
+  <link rel="shortcut icon" href="../../images/favicon.png" />
+    </head>
+    <body>
+        <div class="container mx-auto" style="max-width: 700px">
+            <div class="card">
+                <div class="card-body">
+                  <h4 class="card-title">Thông tin đổi mật khẩu</h4>
+                  <p class="card-description">
+                    Thay đổi mật khẩu của bạn
+                  </p>
+                  <form class="forms-sample" action="#" th:action="@{/user/testdoimatkhau}" method="post">
+                    <div class="form-group">
+                      <label for="maTV">Mã thành viên</label>
+                      <input type="password" class="form-control" id="maTV" name="maTV" placeholder="Mã thành viên" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary me-2">Tiếp theo</button>
+                  </form>
+                </div>
+              </div>
+        </div>
+    </body>
+</html>

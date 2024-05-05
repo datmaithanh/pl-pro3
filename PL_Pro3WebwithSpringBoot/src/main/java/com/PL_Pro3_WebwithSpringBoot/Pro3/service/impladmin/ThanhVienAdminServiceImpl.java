@@ -10,6 +10,7 @@ import com.PL_Pro3_WebwithSpringBoot.Pro3.repository.ThanhVienRepository;
 import com.PL_Pro3_WebwithSpringBoot.Pro3.service.serviceadmin.ThanhVienAdminService;
 import java.util.List;
 import java.util.stream.Collectors;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
@@ -20,12 +21,18 @@ import org.springframework.stereotype.Service;
 public class ThanhVienAdminServiceImpl implements ThanhVienAdminService{
     
     private ThanhVienRepository thanhVienRepository;
+    @Autowired
+    public ThanhVienAdminServiceImpl(ThanhVienRepository thanhVienRepository) {
+        this.thanhVienRepository = thanhVienRepository;
+    }
+    
+   
     
     
     @Override
     public List<ThanhVienDTO> getAllThanhVien() {
         List<ThanhVien> thanhViens = thanhVienRepository.findAll();
-        return thanhViens.stream().map((club ->mapToThanhVienDTO(club))).collect(Collectors.toList());
+        return thanhViens.stream().map((thanhVien ->mapToThanhVienDTO(thanhVien))).collect(Collectors.toList());
     }
     private  ThanhVienDTO mapToThanhVienDTO(ThanhVien thanhVien){
         ThanhVienDTO thanhVienDTO = ThanhVienDTO.builder()
@@ -64,9 +71,13 @@ public class ThanhVienAdminServiceImpl implements ThanhVienAdminService{
 
    
     @Override
-    public ThanhVienDTO getThanhVienById(int thanhVienID) {
-         ThanhVien thanhVien = thanhVienRepository.findById(thanhVienID).get();
-        return mapToThanhVienDTO(thanhVien);
+    public ThanhVienDTO getThanhVienDTOById(int thanhVienID) {
+        ThanhVien thanhVien = thanhVienRepository.findById(thanhVienID).orElse(null);
+        if (thanhVien != null) {
+            return mapToThanhVienDTO(thanhVien);
+        } else {
+            return null;
+        }
     }
 
     @Override
@@ -78,6 +89,16 @@ public class ThanhVienAdminServiceImpl implements ThanhVienAdminService{
     @Override
     public void deleteThanhVienByID(int thanhVienID) {
         thanhVienRepository.deleteById(thanhVienID);
+    }
+
+    @Override
+    public ThanhVien getThanhVienById(int thanhVienID) {
+        ThanhVien thanhVien = thanhVienRepository.findById(thanhVienID).orElse(null);
+        if (thanhVien != null) {
+            return thanhVien;
+        } else {
+            return null;
+        }   
     }
     
     

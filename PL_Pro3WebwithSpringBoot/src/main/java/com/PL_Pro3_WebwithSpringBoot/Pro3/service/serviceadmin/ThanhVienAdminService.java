@@ -17,8 +17,9 @@ public interface ThanhVienAdminService {
     
     ThanhVien AddThanhVien(ThanhVienDTO thanhVienDTO);
 
-    ThanhVienDTO getThanhVienById(int thanhVienID);
-
+    ThanhVienDTO getThanhVienDTOById(int thanhVienID);
+    
+    ThanhVien getThanhVienById(int thanhVienID);
 
     void updateThanhVien(ThanhVienDTO thanhVienDTO);
     

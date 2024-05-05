@@ -10,6 +10,10 @@ import jakarta.validation.constraints.NotEmpty;
  *
  * @author Lenovo
  */
+import lombok.Builder;
+import lombok.Data;
+@Data
+@Builder
 public class ThietBiDTO {
     @NotEmpty(message = "MaTB không thể bỏ trống")
     private int maTB;

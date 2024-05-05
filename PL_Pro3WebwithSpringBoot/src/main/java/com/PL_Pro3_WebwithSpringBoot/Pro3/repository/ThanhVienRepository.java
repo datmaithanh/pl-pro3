@@ -12,6 +12,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
  *
  * @author Lenovo
  */
-public interface ThanhVienRepository extends JpaRepository<ThanhVien, Integer>{
-     Optional<ThanhVien> findByHoTen(String url);
+public interface ThanhVienRepository extends JpaRepository<ThanhVien, Object>{
+    ThanhVien findByMaTVAndPassword(int maTV, String password);
 }
