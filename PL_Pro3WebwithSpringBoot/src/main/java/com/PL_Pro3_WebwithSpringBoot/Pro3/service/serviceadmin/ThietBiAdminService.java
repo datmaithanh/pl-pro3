@@ -4,10 +4,28 @@
  */
 package com.PL_Pro3_WebwithSpringBoot.Pro3.service.serviceadmin;
 
+import com.PL_Pro3_WebwithSpringBoot.Pro3.dto.ThietBiDTO;
+import com.PL_Pro3_WebwithSpringBoot.Pro3.models.ThietBi;
+import java.util.List;
+
 /**
  *
  * @author Lenovo
  */
 public interface ThietBiAdminService {
+    List<ThietBiDTO> getAllThietBi();
+    List<ThietBiDTO> getAllThietBiDTOs();
     
+    ThietBi AddThietBi(ThietBiDTO thietBiDTO);
+
+    ThietBiDTO getThietBiDTOByID(int thietBiID);
+    ThietBi getThietBiByID(int thietBiID);
+
+    void updateThietBi(int id, ThietBiDTO thietBiDTO);
+    
+    void deleteThietBiByID(int thietBiID);
+    
+    List<ThietBiDTO> getThietBiNotInThongTinSDs();
+    
+    List<ThietBiDTO> getThietBiDaMuon();
 }

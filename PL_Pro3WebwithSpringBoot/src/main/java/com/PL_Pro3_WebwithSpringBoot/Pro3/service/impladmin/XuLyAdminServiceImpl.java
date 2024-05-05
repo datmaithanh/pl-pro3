@@ -4,8 +4,6 @@
  */
 package com.PL_Pro3_WebwithSpringBoot.Pro3.service.impladmin;
 
-import com.PL_Pro3_WebwithSpringBoot.Pro3.service.serviceadmin.XuLyAdminService;
-import org.springframework.stereotype.Service;
 import com.PL_Pro3_WebwithSpringBoot.Pro3.dto.ThanhVienDTO;
 import com.PL_Pro3_WebwithSpringBoot.Pro3.dto.XuLyDTO;
 import com.PL_Pro3_WebwithSpringBoot.Pro3.models.ThanhVien;
@@ -19,34 +17,35 @@ import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+
 /**
  *
  * @author Lenovo
  */
 @Service
-public class XuLyAdminServiceImpl implements XuLyAdminService {
-
+public class XuLyAdminServiceImpl implements XuLyAdminService{
     private XuLyRepository xuLyRepository;
     private ThanhVienRepository thanhVienRepository;
-
+    
     @Autowired
     public XuLyAdminServiceImpl(XuLyRepository xuLyRepository, ThanhVienRepository thanhVienRepository) {
         this.xuLyRepository = xuLyRepository;
         this.thanhVienRepository = thanhVienRepository;
     }
-
+    
+    
+    @Override
     public boolean checkMaSoSVTrongXuLy(int maSoSinhVien) {
-        List<XuLy> xuLyList = xuLyRepository.findByThanhVien_MaTV(maSoSinhVien);
+       List<XuLy> xuLyList = xuLyRepository.findByThanhVien_MaTV(maSoSinhVien);
         return !xuLyList.isEmpty();
     }
 
     @Override
     public List<XuLyDTO> getAllXuLy() {
         List<XuLy> xuLys = xuLyRepository.findAll();
-        return xuLys.stream().map((xuly -> mapToXuLyDTO(xuly))).collect(Collectors.toList());
+        return xuLys.stream().map((xuly ->mapToXuLyDTO(xuly))).collect(Collectors.toList());
     }
-
-    private XuLyDTO mapToXuLyDTO(XuLy xuLy) {
+    private  XuLyDTO mapToXuLyDTO(XuLy xuLy){
         XuLyDTO xuLyDTO = XuLyDTO.builder()
                 .maXL(xuLy.getMaXL())
                 .thanhVien(xuLy.getThanhVien())
@@ -54,6 +53,7 @@ public class XuLyAdminServiceImpl implements XuLyAdminService {
                 .soTien(xuLy.getSoTien())
                 .ngayXL(xuLy.getNgayXL())
                 .trangThaiXL(xuLy.getTrangThaiXL())
+                
                 .build();
 
         return xuLyDTO;
@@ -131,4 +131,6 @@ public class XuLyAdminServiceImpl implements XuLyAdminService {
 
         }
     }
+    
+    
 }

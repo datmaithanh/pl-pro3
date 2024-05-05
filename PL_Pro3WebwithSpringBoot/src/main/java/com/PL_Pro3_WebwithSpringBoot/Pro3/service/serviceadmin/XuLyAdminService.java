@@ -28,4 +28,5 @@ public interface XuLyAdminService {
     void deleteXuLyByID(int xuLyID);
 
     void updateXuLy(int id, XuLyDTO xuLyDTO);
+    public boolean checkMaSoSVTrongXuLy(int maSoSinhVien);
 }

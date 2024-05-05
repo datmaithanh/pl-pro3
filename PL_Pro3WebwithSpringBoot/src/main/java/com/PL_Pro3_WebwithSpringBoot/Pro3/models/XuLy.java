@@ -35,6 +35,7 @@ public class XuLy implements Serializable {
     private LocalDateTime ngayXL;
 
     @Column(name = "trangthaixl")
-    private Boolean trangThaiXL;    
+    private Boolean trangThaiXL; 
+    
     
 }

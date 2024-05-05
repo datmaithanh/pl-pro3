@@ -15279,6 +15279,7 @@ fieldset:disabled .btn {
   z-index: 1020;
 }
 
+
 @media (min-width: 576px) {
   .sticky-sm-top {
     position: sticky;
@@ -19802,6 +19803,16 @@ address p {
 }
 
 /* Miscellanoeous */
+.my-custom-scrollbar {
+    position: relative;
+    max-height: 300px; /* Đặt chiều cao tối đa của bảng để cuộn */
+    overflow-y: auto; /* Tạo thanh cuộn dọc */
+    
+}
+
+.table-wrapper-scroll-y {
+    display: block;
+}
 body,
 html {
   overflow-x: hidden;
