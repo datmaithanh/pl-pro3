@@ -5,6 +5,7 @@
 package com.PL_Pro3_WebwithSpringBoot.Pro3.controller.usercontroller;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 
 /**
  *
@@ -12,5 +13,9 @@ import org.springframework.stereotype.Controller;
  */
 @Controller
 public class UserHomeController {
-    
+    @GetMapping("/user")
+    public String userPage(){
+        return "user/index";
+    }
+
 }

@@ -13,14 +13,20 @@ import java.util.List;
  * @author Lenovo
  */
 public interface ThanhVienAdminService {
+    
     List<ThanhVienDTO> getAllThanhVien();
     
     ThanhVien AddThanhVien(ThanhVienDTO thanhVienDTO);
 
-    ThanhVienDTO getThanhVienById(int thanhVienID);
+    ThanhVienDTO getThanhVienDTOById(int thanhVienID);
 
+    ThanhVien getThanhVienById(int thanhVienID);
 
     void updateThanhVien(ThanhVienDTO thanhVienDTO);
+    void updateThanhVien(int id, ThanhVienDTO thanhVienDTO);
     
     void deleteThanhVienByID(int thanhVienID);
+    
+    List<String> getAllNganh();   
+    List<String> getAllKhoa();
 }
