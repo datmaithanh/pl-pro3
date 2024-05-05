@@ -178,42 +178,55 @@
       <!-- partial:partials/_sidebar.html -->
       <nav class="sidebar sidebar-offcanvas" id="sidebar">
         <ul class="nav">
-          <li class="nav-item">
-            <a class="nav-link" href="index.html">
+          <li class="nav-item active">
+            <a class="nav-link" href="/admin">
               <i class="ti-shield menu-icon"></i>
               <span class="menu-title">Dashboard</span>
             </a>
           </li>
-          <li class="nav-item">
+          <li class="nav-item active">
             <a class="nav-link" data-bs-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
               <i class="ti-palette menu-icon"></i>
               <span class="menu-title">Quản lý thành viên</span>
               <i class="menu-arrow"></i>
             </a>
-            <div class="collapse" id="ui-basic">
+            <div class="collapse show" id="ui-basic">
               <ul class="nav flex-column sub-menu">
-                <li class="nav-item"> <a class="nav-link" href="pages/ui-features/buttons.html">Buttons</a></li>
-                <li class="nav-item"> <a class="nav-link" href="pages/ui-features/typography.html">Typography</a></li>
+                <li class="nav-item"> <a class="nav-link active" href="/admin/thanhvien">Quản lý thành viên</a></li>
+                <li class="nav-item"> <a class="nav-link active" href="/admin/kiemtravipham">Kiểm tra vi phạm</a></li>
+                <li class="nav-item"> <a class="nav-link active" href="/admin/vaokhuhoctap">Vào khu học tập</a></li>
+                <li class="nav-item"> <a class="nav-link active" href="/admin/muonthietbi">Mượn thiết bị</a></li>
+                <li class="nav-item"> <a class="nav-link active" href="/admin/trathietbi">Trả thiết bị</a></li>
+                <li class="nav-item"> <a class="nav-link active" href="/admin/datchomuonthietbi">Đặt chổ mượn thiết bị</a></li>
+                
               </ul>
             </div>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="pages/forms/basic_elements.html">
+          <li class="nav-item active">
+            <a class="nav-link" href="/admin/thietbi">
               <i class="ti-layout-list-post menu-icon"></i>
-              <span class="menu-title">Quản lý thiết bị</span>
+              <span class="menu-title" id="QLTV">Quản lý thiết bị</span>
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="pages/charts/chartjs.html">
+            <a class="nav-link" href="/admin/xulyvipham">
               <i class="ti-pie-chart menu-icon"></i>
               <span class="menu-title">Xử lý vi phạm</span>
             </a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="pages/tables/basic-table.html">
+          <li class="nav-item active">
+            <a class="nav-link" data-bs-toggle="collapse" href="#ui-basic2" aria-expanded="false" aria-controls="ui-basic2">
               <i class="ti-view-list-alt menu-icon"></i>
               <span class="menu-title">Thống kê</span>
+              <i class="menu-arrow"></i>
             </a>
+            <div class="collapse show" id="ui-basic2">
+              <ul class="nav flex-column sub-menu">
+                <li class="nav-item"> <a class="nav-link active" href="/admin/thongke-soluongvaoKHT">Khu học tập</a></li>
+                <li class="nav-item"> <a class="nav-link active" href="/admin/thongke-thietbi">Thiết bị</a></li>
+                <li class="nav-item"> <a class="nav-link active" href="/admin/thongke-vipham">Vi phạm</a></li>             
+              </ul>
+            </div>
           </li>
           
         </ul>

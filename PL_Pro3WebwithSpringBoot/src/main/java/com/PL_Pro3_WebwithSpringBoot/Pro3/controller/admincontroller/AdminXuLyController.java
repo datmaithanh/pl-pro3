@@ -37,43 +37,43 @@ public class AdminXuLyController {
         this.thanhVienAdminService = thanhVienAdminService;
     }
 
-    @GetMapping("/admin/index")
+    @GetMapping("/admin/xulyvipham")
     public String index(Model model) {
         List<XuLyDTO> xuLys = xuLyAdminService.getAllXuLy();
         model.addAttribute("xuLys", xuLys);
-        return "/admin/index";
+        return "/admin/xulyvipham";
     }
 
-    @GetMapping("/admin/create")
+    @GetMapping("/admin/themxulyvipham")
     public String create(Model model) {
         List<XuLyDTO> xuLys = xuLyAdminService.getAllXuLy();
         model.addAttribute("xuLys", xuLys);
           List<ThanhVienDTO> thanhViens = thanhVienAdminService.getAllThanhVien();
         model.addAttribute("thanhViens", thanhViens);
-        return "/admin/create";
+        return "/admin/themxulyvipham";
     }
 
     @GetMapping("/admin/store")
     public String addXuLy(@ModelAttribute XuLyDTO xuLyDTO, @RequestParam("maTV") int maTV) {
         xuLyAdminService.AddXuLy(maTV, xuLyDTO);
-        return "redirect:/admin/index";
+        return "redirect:/admin/xulyvipham";
     }
 
     @GetMapping("/admin/delete/{id}")
     public String delete(@PathVariable("id") int id, Model model) {
         xuLyAdminService.deleteXuLyByID(id);
-        return "redirect:/admin/index";
+        return "redirect:/admin/xulyvipham";
     }
 
-    @GetMapping("/admin/detail/{id}")
+    @GetMapping("/admin/chitietvipham/{id}")
     public String detail(@PathVariable("id") int id, Model model) {
         model.addAttribute("xuLy", xuLyAdminService.getXuLyByID(id));
-        return "/admin/detail";
+        return "/admin/chitietvipham";
     }
 
     @GetMapping("/admin/update/{id}")
     public String update(@ModelAttribute XuLyDTO xuLyDTO, @PathVariable("id") int id) {
         xuLyAdminService.updateXuLy(id, xuLyDTO);
-        return  "redirect:/admin/index";
+        return  "redirect:/admin/xulyvipham";
     }
 }

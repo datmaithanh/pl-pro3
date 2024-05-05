@@ -161,90 +161,71 @@
                 <!-- partial:../../partials/_sidebar.html -->
                 <nav class="sidebar sidebar-offcanvas" id="sidebar">
                     <ul class="nav">
-                        <li class="nav-item">
-                            <a class="nav-link" href="../../index.html">
-                                <i class="ti-shield menu-icon"></i>
-                                <span class="menu-title">Dashboard</span>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" data-bs-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
-                                <i class="ti-palette menu-icon"></i>
-                                <span class="menu-title">UI Elements</span>
-                                <i class="menu-arrow"></i>
-                            </a>
-                            <div class="collapse" id="ui-basic">
-                                <ul class="nav flex-column sub-menu">
-                                    <li class="nav-item"> <a class="nav-link" href="../../pages/ui-features/buttons.html">Buttons</a></li>
-                                    <li class="nav-item"> <a class="nav-link" href="../../pages/ui-features/typography.html">Typography</a></li>
-                                </ul>
-                            </div>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="../../pages/forms/basic_elements.html">
-                                <i class="ti-layout-list-post menu-icon"></i>
-                                <span class="menu-title">Form elements</span>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="../../pages/charts/chartjs.html">
-                                <i class="ti-pie-chart menu-icon"></i>
-                                <span class="menu-title">Charts</span>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="../../pages/tables/basic-table.html">
-                                <i class="ti-view-list-alt menu-icon"></i>
-                                <span class="menu-title">Tables</span>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="../../pages/icons/themify.html">
-                                <i class="ti-star menu-icon"></i>
-                                <span class="menu-title">Icons</span>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" data-bs-toggle="collapse" href="#auth" aria-expanded="false" aria-controls="auth">
-                                <i class="ti-user menu-icon"></i>
-                                <span class="menu-title">User Pages</span>
-                                <i class="menu-arrow"></i>
-                            </a>
-                            <div class="collapse" id="auth">
-                                <ul class="nav flex-column sub-menu">
-                                    <li class="nav-item"> <a class="nav-link" href="../../pages/samples/login.html"> Login </a></li>
-                                    <li class="nav-item"> <a class="nav-link" href="../../pages/samples/login-2.html"> Login 2 </a></li>
-                                    <li class="nav-item"> <a class="nav-link" href="../../pages/samples/register.html"> Register </a></li>
-                                    <li class="nav-item"> <a class="nav-link" href="../../pages/samples/register-2.html"> Register 2 </a></li>
-                                    <li class="nav-item"> <a class="nav-link" href="../../pages/samples/lock-screen.html"> Lockscreen </a></li>
-                                </ul>
-                            </div>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="../../documentation/documentation.html">
-                                <i class="ti-write menu-icon"></i>
-                                <span class="menu-title">Documentation</span>
-                            </a>
-                        </li>
+                      <li class="nav-item active">
+                        <a class="nav-link" href="/admin">
+                          <i class="ti-shield menu-icon"></i>
+                          <span class="menu-title">Dashboard</span>
+                        </a>
+                      </li>
+                      <li class="nav-item active">
+                        <a class="nav-link" data-bs-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
+                          <i class="ti-palette menu-icon"></i>
+                          <span class="menu-title">Quản lý thành viên</span>
+                          <i class="menu-arrow"></i>
+                        </a>
+                        <div class="collapse show" id="ui-basic">
+                          <ul class="nav flex-column sub-menu">
+                            <li class="nav-item"> <a class="nav-link active" href="/admin/thanhvien">Quản lý thành viên</a></li>
+                            <li class="nav-item"> <a class="nav-link active" href="/admin/kiemtravipham">Kiểm tra vi phạm</a></li>
+                            <li class="nav-item"> <a class="nav-link active" href="/admin/vaokhuhoctap">Vào khu học tập</a></li>
+                            <li class="nav-item"> <a class="nav-link active" href="/admin/muonthietbi">Mượn thiết bị</a></li>
+                            <li class="nav-item"> <a class="nav-link active" href="/admin/trathietbi">Trả thiết bị</a></li>
+                            <li class="nav-item"> <a class="nav-link active" href="/admin/datchomuonthietbi">Đặt chổ mượn thiết bị</a></li>
+                            
+                          </ul>
+                        </div>
+                      </li>
+                      <li class="nav-item active">
+                        <a class="nav-link" href="/admin/thietbi">
+                          <i class="ti-layout-list-post menu-icon"></i>
+                          <span class="menu-title" id="QLTV">Quản lý thiết bị</span>
+                        </a>
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link" href="/admin/xulyvipham">
+                          <i class="ti-pie-chart menu-icon"></i>
+                          <span class="menu-title">Xử lý vi phạm</span>
+                        </a>
+                      </li>
+                      <li class="nav-item active">
+                        <a class="nav-link" data-bs-toggle="collapse" href="#ui-basic2" aria-expanded="false" aria-controls="ui-basic2">
+                          <i class="ti-view-list-alt menu-icon"></i>
+                          <span class="menu-title">Thống kê</span>
+                          <i class="menu-arrow"></i>
+                        </a>
+                        <div class="collapse show" id="ui-basic2">
+                          <ul class="nav flex-column sub-menu">
+                            <li class="nav-item"> <a class="nav-link active" href="/admin/thongke-soluongvaoKHT">Khu học tập</a></li>
+                            <li class="nav-item"> <a class="nav-link active" href="/admin/thongke-thietbi">Thiết bị</a></li>
+                            <li class="nav-item"> <a class="nav-link active" href="/admin/thongke-vipham">Vi phạm</a></li>             
+                          </ul>
+                        </div>
+                      </li>
+                      
                     </ul>
-                </nav>
+                  </nav>
                 <!-- partial -->
                 <div class="main-panel">        
                     <div class="content-wrapper">
-                        <div class="row">
+                        <div class="row d-flex justify-content-center">
                             <div class="col-md-6 grid-margin stretch-card">
                                 <div class="card">
                                     <div class="card-body">
-                                        <h4 class="card-title">Default form</h4>
-                                        <p class="card-description">
-                                            Basic form layout
-                                        </p>
-
-
-
+                                        <h4 class="card-title">Chi tiết vi phạm</h4>
+                                        <p class="card-description"></p>
                                         <form class="forms-sample" th:action="@{/admin/update/{id}(id=${xuLy.maXL})}" th:object = "${store}" method="GET">
                                             <div class="form-group">
-                                                <label for="exampleInputUsername1">Ma Xu Ly</label>
+                                                <label for="exampleInputUsername1">Mã xử lý</label>
                                                 <input type="text" name ="soTien" value="${xuLy.maXL}" readonly
                                                        class="form-control" id="exampleInputUsername1" 
                                                        th:field="${xuLy.maXL}"
@@ -252,7 +233,7 @@
                                             </div>
                                             
                                             <div class="form-group">
-                                                <label for="exampleFormControlSelect3">Small select</label>
+                                                <label for="exampleFormControlSelect3">Thành viên</label>
                                                 <select class="form-control form-control-sm" id="exampleFormControlSelect3" name="maTV" readonly >
 
                                                     <option th:value="${xuLy.thanhVien.maTV}" th:text="${xuLy.thanhVien.maTV}"></option>
@@ -260,7 +241,7 @@
                                             </div>
 
                                             <div class="form-group">
-                                                <label for="exampleInputUsername1">So Tien</label>
+                                                <label for="exampleInputUsername1">Số tiền</label>
                                                 <input type="number" name ="soTien" th:value="${xuLy.soTien}"
                                                        class="form-control" id="exampleInputUsername1" th:field="${xuLy.soTien}">
                                             </div>
@@ -268,7 +249,7 @@
                                          
 
                                             <div class="form-group">
-                                                <label for="exampleInputUsername1">Hinh thuc xu ly</label>
+                                                <label for="exampleInputUsername1">Hình thức xử lý</label>
                                                 <input type="text" name ="hinhThucXuLy" value="${xuLy.hinhThucXL}" 
                                                        class="form-control" id="exampleInputUsername1"  th:field="${xuLy.hinhThucXL}">
                                             </div>
@@ -278,7 +259,7 @@
 
 
                                             <div class="form-group">
-                                                <label class="col-sm-3 col-form-label">Membership</label>
+                                                <label class="">Trạng thái</label>
                                                 <div class="col-sm-4">
                                                     <div class="form-check">
                                                         <label class="form-check-label">
@@ -303,14 +284,11 @@
                                             </div>
 
                                             <div class="form-group">
-                                                <label for="exampleInputUsername1">Ngay Xu Ly</label>
+                                                <label for="exampleInputUsername1">Ngày xử lý</label>
                                                 <input type="text" name ="ngayXuLy" value="${xuLy.ngayXL}" 
                                                        class="form-control" id="exampleInputUsername1"  th:field="${xuLy.ngayXL}">
                                             </div>
-
-
-
-                                            <button type="submit" class="btn btn-primary me-2">Submit</button>                
+                                            <button type="submit" class="btn btn-primary me-2">Cập nhật</button>                
                                         </form>
                                     </div>
                                 </div>
