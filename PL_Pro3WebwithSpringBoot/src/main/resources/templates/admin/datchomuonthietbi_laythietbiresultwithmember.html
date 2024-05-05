@@ -232,13 +232,13 @@
         </div>
         
             <div th:if="${coViPham}" class="alert alert-danger col-md-6 mt-4" role="alert">
-                <strong>Thông báo: Trả thiết bị không thành công</strong>
+                <strong>Thông báo: Lấy thiết bị không thành công</strong>
                 <ul>
                     <li th:each="msg : ${messages}" th:text="${msg}"></li>
                 </ul>
             </div>
             <div th:unless="${coViPham}" class="alert alert-success col-md-7 mt-4" role="alert">
-                <strong>Thông báo: Trả thiết bị thành công </strong>
+                <strong>Thông báo: Lấy thiết bị thành công </strong>
                 <ul>
                     <li th:each="msg : ${messages}" th:text="${msg}"></li>
                 </ul>
