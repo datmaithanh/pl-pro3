@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
-  <  <!-- Required meta tags -->
+  <!-- Required meta tags -->
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <title>Royal Admin</title>
@@ -183,7 +183,7 @@
       <nav class="sidebar sidebar-offcanvas" id="sidebar">
         <ul class="nav">
           <li class="nav-item">
-            <a class="nav-link" href="index.html">
+            <a class="nav-link" href="/admin">
               <i class="ti-shield menu-icon"></i>
               <span class="menu-title">Dashboard</span>
             </a>
@@ -196,7 +196,7 @@
             </a>
             <div class="collapse" id="ui-basic">
               <ul class="nav flex-column sub-menu">
-                <li class="nav-item"> <a class="nav-link" href="">Quản lý thành viên</a></li>
+                <li class="nav-item"> <a class="nav-link" href="/admin/thanhvien">Quản lý thành viên</a></li>
                 <li class="nav-item"> <a class="nav-link" href="/admin/kiemtravipham">Kiểm tra vi phạm</a></li>
                 <li class="nav-item"> <a class="nav-link" href="/admin/vaokhuhoctap">Vào khu học tập</a></li>
                 <li class="nav-item"> <a class="nav-link" href="/admin/muonthietbi">Mượn thiết bị</a></li>
@@ -219,10 +219,18 @@
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="pages/tables/basic-table.html">
+            <a class="nav-link" data-bs-toggle="collapse" href="#ui-basic2" aria-expanded="false" aria-controls="ui-basic2">
               <i class="ti-view-list-alt menu-icon"></i>
               <span class="menu-title">Thống kê</span>
+              <i class="menu-arrow"></i>
             </a>
+            <div class="collapse" id="ui-basic2">
+              <ul class="nav flex-column sub-menu">
+                <li class="nav-item"> <a class="nav-link" href="/admin/thongke-soluongvaoKHT">Khu học tập</a></li>
+                <li class="nav-item"> <a class="nav-link" href="/admin/thongke-thietbi">Thiết bị</a></li>
+                <li class="nav-item"> <a class="nav-link" href="/admin/thongke-vipham">Vi phạm</a></li>             
+              </ul>
+            </div>
           </li>
           
         </ul>

@@ -19,24 +19,28 @@ import org.springframework.stereotype.Service;
  * @author Lenovo
  */
 @Service
-public class ThietBiAdminServiceImpl implements ThietBiAdminService{
+public class ThietBiAdminServiceImpl implements ThietBiAdminService{   
     
-    private final ThietBiRepository thietBiRepository;
+    private ThietBiRepository thietBiRepository;
+    
     @Autowired
     public ThietBiAdminServiceImpl(ThietBiRepository thietBiRepository) {
         this.thietBiRepository = thietBiRepository;
     }
-
+    
+    
     @Override
-    public List<ThietBiDTO> getAllThietBi() {
-        List<ThietBi> thanhViens = thietBiRepository.findAll();
-        return thanhViens.stream().map((club ->mapToThietBiDTO(club))).collect(Collectors.toList());
+    public List<ThietBiDTO> getAllThietBiDTOs() {
+        List<ThietBi> thietBis = thietBiRepository.findAll();
+        return thietBis.stream().map((thietBi ->mapToThietBiDTO(thietBi))).collect(Collectors.toList());
     }
+    
     private  ThietBiDTO mapToThietBiDTO(ThietBi thietBi){
         ThietBiDTO thietBiDTO = ThietBiDTO.builder()
                 .maTB(thietBi.getMaTB())
                 .tenTB(thietBi.getTenTB())
-                .moTaTB(thietBi.getMoTaTB())               
+                .moTaTB(thietBi.getMoTaTB())
+                
                 .build();
 
         return thietBiDTO;
@@ -61,9 +65,23 @@ public class ThietBiAdminServiceImpl implements ThietBiAdminService{
     }
 
     @Override
-    public ThietBiDTO getThietBiById(int thietBiID) {
-        ThietBi thietBi = thietBiRepository.findById(thietBiID).get();
-        return mapToThietBiDTO(thietBi);
+    public ThietBi getThietBiByID(int thietBiID) {
+        ThietBi thietBi = thietBiRepository.findById(thietBiID).orElse(null);
+        if (thietBi != null) {
+            return thietBi;
+        } else {
+            return null;
+        }   
+    }
+
+    @Override
+    public ThietBiDTO getThietBiDTOByID(int thietBiID) {
+        ThietBi thietBi = thietBiRepository.findById(thietBiID).orElse(null);
+        if (thietBi != null) {
+            return mapToThietBiDTO(thietBi);
+        } else {
+            return null;
+        }
     }
 
     @Override
@@ -80,11 +98,27 @@ public class ThietBiAdminServiceImpl implements ThietBiAdminService{
         } else {
             // Xử lý khi không tìm thấy dòng cần cập nhật
         }
-    }
+    }    
 
     @Override
     public void deleteThietBiByID(int thietBiID) {
         thietBiRepository.deleteById(thietBiID);
     }
       
+    public List<ThietBiDTO> getThietBiNotInThongTinSDs() {
+        List<ThietBi> thietBis = thietBiRepository.findThietBiNotInThongTinSD();
+        return thietBis.stream().map((thietBi ->mapToThietBiDTO(thietBi))).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<ThietBiDTO> getThietBiDaMuon() {
+        List<ThietBi> thietBis = thietBiRepository.findThieBiDaMuon();
+        return thietBis.stream().map((thietBi ->mapToThietBiDTO(thietBi))).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<ThietBiDTO> getAllThietBi() {
+        List<ThietBi> thanhViens = thietBiRepository.findAll();
+        return thanhViens.stream().map((thietBi ->mapToThietBiDTO(thietBi))).collect(Collectors.toList());
+    }
 }

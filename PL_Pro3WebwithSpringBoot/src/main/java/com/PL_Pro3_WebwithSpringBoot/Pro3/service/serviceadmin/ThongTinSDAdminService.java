@@ -4,10 +4,27 @@
  */
 package com.PL_Pro3_WebwithSpringBoot.Pro3.service.serviceadmin;
 
+import com.PL_Pro3_WebwithSpringBoot.Pro3.dto.ThongTinSDDTO;
+import com.PL_Pro3_WebwithSpringBoot.Pro3.models.ThongTinSD;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.List;
+import org.springframework.data.jpa.domain.Specification;
+
 /**
  *
  * @author Lenovo
  */
 public interface ThongTinSDAdminService {
     
+    ThongTinSD addThongTinSD (ThongTinSDDTO thongTinSDDTO);
+    
+    ThongTinSD getThongTinSDByMaTB(int maTB);
+    
+    void updateThongTinSD (ThongTinSD thongTinSD);
+    
+    List<ThongTinSDDTO> getThongTinSDDaDatCho();
+    List<ThongTinSDDTO> getAllThongTinSD();
+    List<ThongTinSDDTO> filterVaoKHT(LocalDate ngayBatDau, LocalDate ngayKetThuc, String khoa, String nganh);
+    List<ThongTinSDDTO> filterMuonTB(String tenThietBi, LocalDate tgMuonTu, LocalDate tgMuonDen);
 }

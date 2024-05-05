@@ -5,15 +5,23 @@
 package com.PL_Pro3_WebwithSpringBoot.Pro3.dto;
 
 import jakarta.validation.constraints.NotEmpty;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 /**
  *
  * @author Lenovo
  */
 @Data
+@Getter
+@Setter
 @Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class ThanhVienDTO {
     @NotEmpty(message = "MaTV không thể bỏ trống")
     private int maTV;
@@ -29,15 +37,4 @@ public class ThanhVienDTO {
     private String email;
     @NotEmpty(message = "Password không thể bỏ trống")
     private String password;
-    
-    public ThanhVienDTO() {}
-    public ThanhVienDTO(int maTV, String hoTen, String khoa, String nganh, String sdt, String email, String password) {
-        this.maTV = maTV;
-        this.hoTen = hoTen;
-        this.khoa = khoa;
-        this.nganh = nganh;
-        this.sdt = sdt;
-        this.email = email;
-        this.password = password;
-    }
 }

@@ -11,9 +11,17 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+import lombok.Getter;
+import lombok.Setter;
+
 
 
 @Data
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
@@ -21,18 +29,20 @@ import java.io.Serializable;
 @Table(name = "thanhvien")
 public class ThanhVien implements Serializable {
     @Id
-    @Column(name = "maTV")
+    @Column(name = "MaTV")
     private int maTV;
     @Column(name = "hoten")
     private String hoTen;
-    @Column(name = "khoa")
+    @Column(name = "Khoa")
     private String khoa;
-    @Column(name = "nganh")
+    @Column(name = "Nganh")
     private String nganh;
-    @Column(name = "sdt")
+    @Column(name = "SDT")
     private String sdt;
-    @Column(name = "email")
+    @Column(name = "Email")
     private String email;
-    @Column(name = "password")
+    @Column(name = "Password")
     private String password;
+    @OneToMany(mappedBy = "thanhVien" ,cascade =CascadeType.REMOVE )
+    private Set<XuLy> xuLys = new HashSet<>();
 }

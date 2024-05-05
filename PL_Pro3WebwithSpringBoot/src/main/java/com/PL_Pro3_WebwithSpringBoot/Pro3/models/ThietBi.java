@@ -10,9 +10,15 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
+import lombok.Getter;
+import lombok.Setter;
 
 
 @Data
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
@@ -27,5 +33,7 @@ public class ThietBi implements Serializable {
     @Column(name = "motatb")
     private String moTaTB;
     
+    @OneToMany(mappedBy = "thietBi", cascade = CascadeType.REMOVE)
+    private Set<ThongTinSD> thongTinSDs = new HashSet<>();
 
 }
