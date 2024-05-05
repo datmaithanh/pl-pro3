@@ -24,4 +24,8 @@ public interface ThanhVienAdminService {
     void updateThanhVien(ThanhVienDTO thanhVienDTO);
     
     void deleteThanhVienByID(int thanhVienID);
+    
+    List<String> getAllNganh();   
+    List<String> getAllKhoa();
+
 }
