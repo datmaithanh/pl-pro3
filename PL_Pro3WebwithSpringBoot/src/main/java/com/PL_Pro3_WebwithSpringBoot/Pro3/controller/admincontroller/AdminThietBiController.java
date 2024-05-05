@@ -61,7 +61,12 @@ public class AdminThietBiController {
         return "admin/editdevice";
     }
     
-    
+    @GetMapping("/admin/adddevice_result") // Xử lý yêu cầu get trên đường dẫn "/admin/addmember_result"
+    public String addThietBi(@ModelAttribute ThietBiDTO thietBiDTO, Model model) {
+        thietBiAdminService.AddThietBi(thietBiDTO);
+        // Optional: Redirect to confirmation page or display success message
+        return "redirect:/admin/thietbi";
+    }
     @GetMapping("/admin/deletedevice") // Xử lý yêu cầu GET trên đường dẫn "/admin/deletedevice"
     public String DeleteThietbipage(Model model) {
         List<ThietBiDTO> list = thietBiAdminService.getAllThietBi();
@@ -105,12 +110,12 @@ public class AdminThietBiController {
     @GetMapping("/admin/editdevice_result")
     public String editThietBi(@RequestParam("maTB") int maTB, @ModelAttribute ThietBiDTO thietBiDTO) {
         thietBiAdminService.updateThietBi(maTB, thietBiDTO);
-        return "redirect:/admin/editdevice";
+        return "redirect:/admin/thietbi";
     }
      @GetMapping("/admin/deletedevice_result")
     public String deleteThietBi(@RequestParam("maTB") int maTB) {
         thietBiAdminService.deleteThietBiByID(maTB);
-        return "redirect:/admin/deletedevice";
+        return "redirect:/admin/thietbi";
     }
     
 }

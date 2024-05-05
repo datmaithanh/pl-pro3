@@ -313,14 +313,18 @@
   <!-- End custom js for this page-->
   <!--</<script src="/js/QLTV.js"></script>-->
   <script>
-  document.addEventListener('DOMContentLoaded', function () {
+document.addEventListener('DOMContentLoaded', function () {
     document.getElementById('searchButton').addEventListener('click', function () {
       var searchText = document.getElementById('searchInput').value.toLowerCase();
       var rows = document.querySelectorAll('tbody tr');
 
       rows.forEach(function (row) {
         var maTB = row.querySelector('td:nth-child(1)').textContent.toLowerCase(); // Lấy nội dung cột maTB
-        if (maTB.includes(searchText)) {
+        var tenTB = row.querySelector('td:nth-child(2)').textContent.toLowerCase(); // Lấy nội dung cột tenTB
+        var moTaTB = row.querySelector('td:nth-child(3)').textContent.toLowerCase(); // Lấy nội dung cột moTaTB
+        
+        // Kiểm tra nếu searchText xuất hiện trong bất kỳ cột nào
+        if (maTB.includes(searchText) || tenTB.includes(searchText) || moTaTB.includes(searchText)) {
           row.style.display = '';
         } else {
           row.style.display = 'none';
@@ -328,6 +332,7 @@
       });
     });
   });
+
 </script>
 
 </body>
