@@ -63,10 +63,10 @@ public class ThongTinSDAdminServiceImpl implements ThongTinSDAdminService{
     @Override
     public List<ThongTinSDDTO> getThongTinSDDaDatCho() {
         List<ThongTinSD> thongTinSDs = thongTinSDRepository.findThongTinSDDaDatCho();
-        return thongTinSDs.stream().map((thongTinSD ->mapToThongTinSD(thongTinSD))).collect(Collectors.toList());
+        return thongTinSDs.stream().map((thongTinSD ->mapToThongTinSDDTO(thongTinSD))).collect(Collectors.toList());
     }
     
-    private  ThongTinSDDTO mapToThongTinSD(ThongTinSD thongTinSD){
+    private  ThongTinSDDTO mapToThongTinSDDTO(ThongTinSD thongTinSD){
         ThongTinSDDTO thongTinSDDTO = ThongTinSDDTO.builder()
                 .maTT(thongTinSD.getMaTT())
                 .thanhVien(thongTinSD.getThanhVien())
@@ -83,13 +83,19 @@ public class ThongTinSDAdminServiceImpl implements ThongTinSDAdminService{
     @Override
     public List<ThongTinSDDTO> getAllThongTinSD() {
         List<ThongTinSD> thongTinSDs = thongTinSDRepository.findAll();
-        return thongTinSDs.stream().map((thongTinSD ->mapToThongTinSD(thongTinSD))).collect(Collectors.toList());
+        return thongTinSDs.stream().map((thongTinSD ->mapToThongTinSDDTO(thongTinSD))).collect(Collectors.toList());
     }
 
     @Override
-    public List<ThongTinSDDTO> filterThongTinSD(LocalDate ngayBatDau, LocalDate ngayKetThuc, String khoa, String nganh){
-        List<ThongTinSD> thongTinSDs = thongTinSDRepository.findAll(ThongTinSDFilterSpecification.withParams(ngayBatDau, ngayKetThuc, khoa, nganh));
-        return thongTinSDs.stream().map((thongTinSD ->mapToThongTinSD(thongTinSD))).collect(Collectors.toList());
+    public List<ThongTinSDDTO> filterVaoKHT(LocalDate ngayBatDau, LocalDate ngayKetThuc, String khoa, String nganh){
+        List<ThongTinSD> thongTinSDs = thongTinSDRepository.findAll(ThongTinSDFilterSpecification.thoiGianVao(ngayBatDau, ngayKetThuc, khoa, nganh));
+        return thongTinSDs.stream().map((thongTinSD ->mapToThongTinSDDTO(thongTinSD))).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<ThongTinSDDTO> filterMuonTB(String tenThietBi, LocalDate tgMuonTu, LocalDate tgMuonDen) {
+        List<ThongTinSD> thongTinSDs = thongTinSDRepository.findAll(ThongTinSDFilterSpecification.thoiGianMuon(tenThietBi, tgMuonTu, tgMuonDen));
+        return thongTinSDs.stream().map((thongTinSD ->mapToThongTinSDDTO(thongTinSD))).collect(Collectors.toList());
     }
     
 }

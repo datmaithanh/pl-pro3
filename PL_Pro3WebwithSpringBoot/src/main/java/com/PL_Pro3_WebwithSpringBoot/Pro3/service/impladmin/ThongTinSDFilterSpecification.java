@@ -6,6 +6,7 @@ package com.PL_Pro3_WebwithSpringBoot.Pro3.service.impladmin;
 
 import com.PL_Pro3_WebwithSpringBoot.Pro3.dto.ThongTinSDDTO;
 import com.PL_Pro3_WebwithSpringBoot.Pro3.models.ThanhVien;
+import com.PL_Pro3_WebwithSpringBoot.Pro3.models.ThietBi;
 import com.PL_Pro3_WebwithSpringBoot.Pro3.models.ThongTinSD;
 import jakarta.persistence.criteria.Join;
 import jakarta.persistence.criteria.JoinType;
@@ -18,11 +19,10 @@ import org.springframework.data.jpa.domain.Specification;
  * @author agond
  */
 public class ThongTinSDFilterSpecification {
-    public static Specification<ThongTinSD> withParams(LocalDate ngayBatDau, LocalDate ngayKetThuc, String khoa, String nganh){
+    public static Specification<ThongTinSD> thoiGianVao(LocalDate ngayBatDau, LocalDate ngayKetThuc, String khoa, String nganh){
         return (root, query, builder) -> {
             Predicate predicate = builder.conjunction();
             if (ngayBatDau!=null && ngayKetThuc!=null) {
-                System.err.println("||||||||||||||||||||||--- " + ngayBatDau + " " + ngayKetThuc);
                 predicate = builder.and(predicate, builder.between(root.get("tgVao"), ngayBatDau, ngayKetThuc));
             }
             
@@ -32,6 +32,22 @@ public class ThongTinSDFilterSpecification {
             }
             if (!nganh.equals("--") && nganh!=null && nganh!="" && !nganh.equals("")) {
                 predicate = builder.and(predicate, builder.equal(thanhVienJoin.get("nganh"), nganh));
+            }
+            return predicate;
+        };
+    }
+    
+    public static Specification<ThongTinSD> thoiGianMuon(String tenThietBi, LocalDate tgMuonTu, LocalDate tgMuonDen){
+        return ( root, query, builder) -> {
+            Predicate predicate = builder.conjunction();
+            
+            Join<ThongTinSD, ThietBi> thietBiJoin = root.join("thietBi", JoinType.INNER);
+            if (tenThietBi != null && !tenThietBi.equals("")) {
+                predicate = builder.and(predicate, builder.like(thietBiJoin.get("tenTB"), "%"+tenThietBi+"%"));
+            }
+            
+            if (tgMuonTu!=null && tgMuonDen!=null) {
+                predicate = builder.and(predicate, builder.between(root.get("tgMuon"), tgMuonTu, tgMuonDen));
             }
             return predicate;
         };

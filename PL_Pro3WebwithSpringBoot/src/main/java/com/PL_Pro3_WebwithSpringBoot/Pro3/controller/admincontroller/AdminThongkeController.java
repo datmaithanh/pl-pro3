@@ -7,6 +7,7 @@ package com.PL_Pro3_WebwithSpringBoot.Pro3.controller.admincontroller;
 import com.PL_Pro3_WebwithSpringBoot.Pro3.dto.ThongTinSDDTO;
 import com.PL_Pro3_WebwithSpringBoot.Pro3.models.ThongTinSD;
 import com.PL_Pro3_WebwithSpringBoot.Pro3.service.serviceadmin.ThanhVienAdminService;
+import com.PL_Pro3_WebwithSpringBoot.Pro3.service.serviceadmin.ThietBiAdminService;
 import com.PL_Pro3_WebwithSpringBoot.Pro3.service.serviceadmin.ThongTinSDAdminService;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -29,17 +30,20 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 @RequestMapping(value = "/admin")
 public class AdminThongkeController {
+    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
     private ThongTinSDAdminService thongTinSDAdminService;
     private ThanhVienAdminService thanhVienAdminService; 
+    private ThietBiAdminService thietBiAdminService;
     
     @Autowired
-    public AdminThongkeController(ThongTinSDAdminService thongTinSDAdminService, ThanhVienAdminService thanhVienAdminService){
+    public AdminThongkeController(ThongTinSDAdminService thongTinSDAdminService, ThanhVienAdminService thanhVienAdminService, ThietBiAdminService thietBiAdminService){
         this.thongTinSDAdminService = thongTinSDAdminService;
         this.thanhVienAdminService = thanhVienAdminService;
+        this.thietBiAdminService = thietBiAdminService;
     }
     
     @GetMapping("/thongke-soluongvaoKHT")
-    public String vaoThongKe (Model model)
+    public String vaoThongKeSLvaoKHT (Model model)
     {
         List<ThongTinSDDTO> allThongtin = thongTinSDAdminService.getAllThongTinSD();
         model.addAttribute("history", allThongtin);        
@@ -52,7 +56,7 @@ public class AdminThongkeController {
     }   
     
     @PostMapping("/thongke-soluongvaoKHT")
-    public String thongKe(Model model, 
+    public String thongKeSLvaoKHT(Model model, 
             @RequestParam("ngayBatDau") String ngayBatDau,
             @RequestParam("ngayKetThuc") String ngayKetThuc,
             @RequestParam("khoa") String khoaDuocChon,
@@ -63,14 +67,12 @@ public class AdminThongkeController {
         List<String> dsnganh = thanhVienAdminService.getAllNganh();
         model.addAttribute("dsNganh", dsnganh);
         
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-        
 //        Pattern regexPattern = Pattern.compile("^(0[1-9]|1[0-2])-(0[1-9]|[12]\\d|3[01])-(\\d{4})$");
 //        Matcher ngayBatDauMatcher = regexPattern.matcher(ngayBatDau);
 //        Matcher ngayKetThucMatcher = regexPattern.matcher(ngayKetThuc);
         
-        System.out.println("|||||||||||" + ngayBatDau);
-        System.out.println("|||||||||||" + ngayKetThuc);
+//        System.out.println("|||||||||||" + ngayBatDau);
+//        System.out.println("|||||||||||" + ngayKetThuc);
         
         LocalDate fromDateTime = null, toDateTime =null;
         if (ngayBatDau.length()>0 && ngayKetThuc.length()>0) {
@@ -78,9 +80,34 @@ public class AdminThongkeController {
             toDateTime = LocalDate.parse(ngayKetThuc.trim(), formatter);
         }        
         
-        List<ThongTinSDDTO> allThongtin = thongTinSDAdminService.filterThongTinSD(fromDateTime, toDateTime, khoaDuocChon, nganhDuocChon);
+        List<ThongTinSDDTO> allThongtin = thongTinSDAdminService.filterVaoKHT(fromDateTime, toDateTime, khoaDuocChon, nganhDuocChon);
         model.addAttribute("history", allThongtin);   
         
         return "admin/thongke-soluongvaoKHT";
+    }
+    
+    @GetMapping("/thongke-thietbi")
+    public String vaoThongKeThietBiDuocMuon(Model model){
+        List<ThongTinSDDTO> allThongtin = thongTinSDAdminService.getAllThongTinSD();
+        model.addAttribute("historyThietBi", allThongtin);        
+        return "admin/thongke-thietbi";
+    }
+    
+    @PostMapping("/thongke-thietbi")
+    public String thongKeThietBi(Model model,
+            @RequestParam("tenThietBi") String tenThietBi,
+            @RequestParam("tgMuonTu") String tgMuonTu,
+            @RequestParam("tgMuonDen") String tgMuonDen)
+    {        
+        LocalDate fromDateTime = null, toDateTime =null;
+        if (tgMuonTu.length()>0 && tgMuonDen.length()>0) {
+            fromDateTime = LocalDate.parse(tgMuonTu.trim(), formatter);
+            toDateTime = LocalDate.parse(tgMuonDen.trim(), formatter);
+        } 
+        
+        List<ThongTinSDDTO> allThongtin = thongTinSDAdminService.filterMuonTB(tenThietBi, fromDateTime, toDateTime);
+        model.addAttribute("historyThietBi", allThongtin);   
+        
+        return "admin/thongke-thietbi";
     }
 }
