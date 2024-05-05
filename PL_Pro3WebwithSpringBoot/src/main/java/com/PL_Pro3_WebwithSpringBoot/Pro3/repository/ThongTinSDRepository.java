@@ -4,17 +4,20 @@
  */
 package com.PL_Pro3_WebwithSpringBoot.Pro3.repository;
 
+import com.PL_Pro3_WebwithSpringBoot.Pro3.dto.ThongTinSDDTO;
 import com.PL_Pro3_WebwithSpringBoot.Pro3.models.ThongTinSD;
 import java.util.List;
 import java.util.Optional;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.jpa.repository.Query;
 
 /**
  *
  * @author Lenovo
  */
-public interface ThongTinSDRepository extends JpaRepository<ThongTinSD, Object>{
+public interface ThongTinSDRepository extends JpaRepository<ThongTinSD, Object>, JpaSpecificationExecutor<ThongTinSD>{
     Optional<ThongTinSD> findByMaTT(int maTT);
      
     ThongTinSD findByThietBi_MaTB(int maTB);
@@ -26,5 +29,7 @@ public interface ThongTinSDRepository extends JpaRepository<ThongTinSD, Object>{
     @Query("SELECT sd " +
         "FROM ThongTinSD sd " +
         "WHERE sd.tgDatCho IS NOT NULL AND sd.tgMuon IS NULL AND CURRENT_TIMESTAMP - sd.tgDatCho <= 1 HOUR")
-     List<ThongTinSD> findThongTinSDDaDatCho();
+    List<ThongTinSD> findThongTinSDDaDatCho();
+     
+    List<ThongTinSD> findAll(Specification<ThongTinSD> spec);
 }

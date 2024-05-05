@@ -100,7 +100,17 @@ public class ThanhVienAdminServiceImpl implements ThanhVienAdminService{
             return null;
         }   
     }
-    
+
+    @Override
+    public List<String> getAllNganh() {
+        List<String> nganh = thanhVienRepository.getAllNganh();
+        return nganh;
+    }
+    @Override
+    public List<String> getAllKhoa() {
+        List<String> khoa = thanhVienRepository.getAllKhoa();
+        return khoa;
+    }
     
     
     
