@@ -417,7 +417,7 @@
         var cells = row.getElementsByTagName("td");
         
         // Vô hiệu hóa trường maTV để không cho phép chỉnh sửa
-        document.getElementById("maTV").disabled = true;
+        document.getElementById("maTV").readonly = true;
         // Lấy giá trị từ các ô td và đổ vào các trường dữ liệu trong form
         document.getElementById("maTV").value = cells[0].innerText;
         document.getElementById("hoTen").value = cells[1].innerText;

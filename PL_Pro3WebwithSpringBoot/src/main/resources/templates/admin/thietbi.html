@@ -248,6 +248,17 @@
                     </div>
                 </div>
             </div>
+            <div class="row">
+  <div class="col-md-12 grid-margin">
+    <div class="input-group">
+      <input type="text" class="form-control" id="searchInput" placeholder="Search...">
+      <div class="input-group-append">
+        <button class="btn btn-primary" type="button" id="searchButton">Search</button>
+      </div>
+    </div>
+  </div>
+</div>
+
             <table class="table table-striped table-bordered table-hover table-responsive">
                 <thead>
                     <tr>
@@ -301,7 +312,24 @@
   <script src="/js/dashboard.js"></script>
   <!-- End custom js for this page-->
   <!--</<script src="/js/QLTV.js"></script>-->
-  
+  <script>
+  document.addEventListener('DOMContentLoaded', function () {
+    document.getElementById('searchButton').addEventListener('click', function () {
+      var searchText = document.getElementById('searchInput').value.toLowerCase();
+      var rows = document.querySelectorAll('tbody tr');
+
+      rows.forEach(function (row) {
+        var maTB = row.querySelector('td:nth-child(1)').textContent.toLowerCase(); // Lấy nội dung cột maTB
+        if (maTB.includes(searchText)) {
+          row.style.display = '';
+        } else {
+          row.style.display = 'none';
+        }
+      });
+    });
+  });
+</script>
+
 </body>
 </html>
 
