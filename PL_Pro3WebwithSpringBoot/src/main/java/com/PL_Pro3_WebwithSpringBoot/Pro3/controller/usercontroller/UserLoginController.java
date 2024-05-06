@@ -4,6 +4,7 @@
  */
 package com.PL_Pro3_WebwithSpringBoot.Pro3.controller.usercontroller;
 
+import com.PL_Pro3_WebwithSpringBoot.Pro3.dto.ThanhVienDTO;
 import com.PL_Pro3_WebwithSpringBoot.Pro3.models.ThanhVien;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,6 +12,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import com.PL_Pro3_WebwithSpringBoot.Pro3.repository.ThanhVienRepository;
+import com.PL_Pro3_WebwithSpringBoot.Pro3.service.serviceuser.ThanhVienUserService;
+import org.apache.el.stream.Optional;
+import java.util.List;
+
 import org.springframework.web.bind.annotation.GetMapping;
 /**
  *
@@ -18,21 +23,30 @@ import org.springframework.web.bind.annotation.GetMapping;
  */
 @Controller
 public class UserLoginController {
+    public static ThanhVienDTO userLogin = new ThanhVienDTO();
+
 
     @Autowired
-    private ThanhVienRepository tvRe;
+    private ThanhVienUserService tvSe;
     @PostMapping("checklogin")
-    public String checklogin(Model m, @RequestParam("taiKhoan") String taiKhoan, @RequestParam("password") String password) {
+    public String checklogin(Model m, @RequestParam("taiKhoan") String taiKhoan , @RequestParam("password") String password) {
         if (taiKhoan.equals("") && password.equals("")) {
             m.addAttribute("erroll", "Tài khoản và mật khẩu không được để trống");
             return "user/login";
         } else {
-            Iterable<ThanhVien> list = tvRe.findAll();
+            List<ThanhVien> list = tvSe.findAll();
             for (ThanhVien us : list) {
                 if (us.getEmail().equals(taiKhoan) && us.getPassword().equals(password)) {
                     System.out.println("Đăng nhập thành công !!");
+                    userLogin.setMaTV(us.getMaTV());
+                    System.out.println("userLogin: "+us.getMaTV());
+//                    userLogin.setHoTen(us.getHoTen());
+//                    userLogin.set(us.getMaTV());
+//                    userLogin.setHoTen(us.getMaTV());
+//                    userLogin.setMaTV(us.getMaTV());
+//                    userLogin.setHoTen(us.getMaTV());
                     m.addAttribute("username", us.getHoTen());
-                    m.addAttribute("maTV", us.getMaTV());
+                    m.addAttribute("maTV", userLogin.getMaTV());
                     return "user/index";
                 }
             }

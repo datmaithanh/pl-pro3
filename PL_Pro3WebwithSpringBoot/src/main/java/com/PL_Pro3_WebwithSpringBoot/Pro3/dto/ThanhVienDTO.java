@@ -15,6 +15,9 @@ import lombok.Data;
 @Data
 @Builder
 public class ThanhVienDTO {
+
+   
+    
     @NotEmpty(message = "MaTV không thể bỏ trống")
     private int maTV;
     @NotEmpty(message = "Họ Tên không thể bỏ trống")
@@ -29,4 +32,17 @@ public class ThanhVienDTO {
     private String email;
     @NotEmpty(message = "Password không thể bỏ trống")
     private String password;
+
+    public ThanhVienDTO() {
+    }
+    
+    public ThanhVienDTO(int maTV, String hoTen, String khoa, String nganh, String sdt, String email, String password) {
+        this.maTV = maTV;
+        this.hoTen = hoTen;
+        this.khoa = khoa;
+        this.nganh = nganh;
+        this.sdt = sdt;
+        this.email = email;
+        this.password = password;
+    }
 }

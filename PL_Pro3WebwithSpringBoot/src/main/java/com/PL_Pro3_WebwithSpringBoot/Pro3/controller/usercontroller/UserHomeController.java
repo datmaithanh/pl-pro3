@@ -1,13 +1,15 @@
 package com.PL_Pro3_WebwithSpringBoot.Pro3.controller.usercontroller;
 
+import static com.PL_Pro3_WebwithSpringBoot.Pro3.controller.usercontroller.UserLoginController.userLogin;
 import com.PL_Pro3_WebwithSpringBoot.Pro3.models.ThanhVien;
 import com.PL_Pro3_WebwithSpringBoot.Pro3.models.ThietBi;
 import com.PL_Pro3_WebwithSpringBoot.Pro3.models.ThongTinSD;
 import com.PL_Pro3_WebwithSpringBoot.Pro3.models.XuLy;
-import com.PL_Pro3_WebwithSpringBoot.Pro3.repository.ThanhVienRepository;
-import com.PL_Pro3_WebwithSpringBoot.Pro3.repository.ThietBiRepository;
-import com.PL_Pro3_WebwithSpringBoot.Pro3.repository.ThongTinSDRepository;
 import com.PL_Pro3_WebwithSpringBoot.Pro3.repository.XuLyRepository;
+import com.PL_Pro3_WebwithSpringBoot.Pro3.service.serviceuser.ThanhVienUserService;
+import com.PL_Pro3_WebwithSpringBoot.Pro3.service.serviceuser.ThietBiUserService;
+import com.PL_Pro3_WebwithSpringBoot.Pro3.service.serviceuser.ThongTinSDUserService;
+import com.PL_Pro3_WebwithSpringBoot.Pro3.service.serviceuser.XuLyUserService;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -21,17 +23,17 @@ import java.util.Optional;
 @Controller
 public class UserHomeController {
 
-    private final ThanhVienRepository thanhVienRepository;
-    private final XuLyRepository xuLyRepository;
-    private final ThongTinSDRepository thongTinSDRepository;
-    private final ThietBiRepository thietBiRepository;
+    private final ThanhVienUserService tvService;
+    private final XuLyUserService xlService;
+    private final ThongTinSDUserService ttService;
+    private final ThietBiUserService tbService;
 
     @Autowired
-    public UserHomeController(ThanhVienRepository thanhVienRepository, XuLyRepository xuLyRepository, ThongTinSDRepository thongTinSDRepository, ThietBiRepository thietBiRepository) {
-        this.thanhVienRepository = thanhVienRepository;
-        this.xuLyRepository = xuLyRepository;
-        this.thongTinSDRepository = thongTinSDRepository;
-        this.thietBiRepository = thietBiRepository;
+    public UserHomeController(ThanhVienUserService tvService, XuLyUserService xlService, ThongTinSDUserService ttService, ThietBiUserService tbService) {
+        this.tvService = tvService;
+        this.xlService = xlService;
+        this.ttService = ttService;
+        this.tbService = tbService;
     }
 
     @GetMapping("/user")
@@ -42,13 +44,15 @@ public class UserHomeController {
     @GetMapping("/userHoSo")
     public String hosopage(Model model, @RequestParam("maTV") String maTV) {
         // Lấy thông tin thành viên từ session
-        Optional<ThanhVien> user = thanhVienRepository.findById(Integer.parseInt(maTV));
+        Optional<ThanhVien> user = tvService.findById(Integer.parseInt(maTV));
         ThanhVien tv = user.get();
         // Nếu tìm thấy, truyền thông tin thành viên qua model
         if (user != null) {
             model.addAttribute("thanhVien", tv);
         }
+        System.out.println("userLogin: " + userLogin.getMaTV());
 
+        model.addAttribute("maTV", userLogin.getMaTV());
         return "user/hoso";
     }
 
@@ -56,7 +60,7 @@ public class UserHomeController {
     public String trangthaivppage(Model model, @RequestParam("maTV") String maTV) {
         ThanhVien tv = new ThanhVien();
         tv.setMaTV(Integer.parseInt(maTV));
-        List<XuLy> user = xuLyRepository.findByThanhVien(tv);
+        List<XuLy> user = xlService.findByThanhVien(tv);
 
         if (!user.isEmpty()) {
             XuLy xl = user.get(0);
@@ -64,11 +68,18 @@ public class UserHomeController {
             // Kiểm tra xem thuộc tính soTien có null không trước khi truy cập
             if (xl.getSoTien() != null) {
                 model.addAttribute("xuLy", xl);
+                System.out.println("userLogin: " + userLogin.getMaTV());
+
+                model.addAttribute("maTV", userLogin.getMaTV());
                 return "user/xemtrangthaivp";
             } else {
                 // Xử lý trường hợp soTien là null ở đây
                 xl.setSoTien(0); // Đặt giá trị mặc định cho soTien
                 model.addAttribute("xuLy", xl);
+                System.out.println("userLogin: " + userLogin.getMaTV());
+
+                model.addAttribute("maTV", userLogin.getMaTV());
+
                 return "user/xemtrangthaivp";
             }
         } else {
@@ -85,21 +96,23 @@ public class UserHomeController {
 //        tb.getMaTB();
 
         // Tìm thông tin về việc sử dụng thiết bị của thành viên
-        List<ThongTinSD> user = thongTinSDRepository.findByThanhVien(tv);
+        Optional<ThongTinSD> user = ttService.findByThanhVien(tv);
 
         // Tìm thông tin về việc thiết bị đã được sử dụng bởi thành viên
 //        List<ThongTinSD> device = thongTinSDRepository.findByThietBi(tb);
         // Kiểm tra xem có thông tin sử dụng thiết bị của thành viên hay không
         if (!user.isEmpty()) {
-            ThongTinSD ttsdUser = user.get(0);
+            ThongTinSD ttsdUser = user.get();
             if (ttsdUser.getThietBi() != null) {
                 // Thêm thông tin sử dụng thiết bị của thành viên vào model
+                model.addAttribute("maTV", userLogin.getMaTV());
                 model.addAttribute("thongTin", ttsdUser);
             } else {
                 return "user/khongcothongtin";
             }
 
         } else {
+            model.addAttribute("maTV", userLogin.getMaTV());
             // Trả về trang thông báo không có thông tin nếu không tìm thấy
             return "user/khongcothongtin";
         }
@@ -117,9 +130,11 @@ public class UserHomeController {
     @GetMapping("/userDatChoThietBi")
     public String datchotbpage(Model model) {
         // Lấy danh sách tất cả các thiết bị từ cơ sở dữ liệu
-        List<ThietBi> danhSachThietBi = thietBiRepository.findAll();
+        List<ThietBi> danhSachThietBi = tbService.findAll();
 
         // Truyền danh sách các thiết bị qua model
+        model.addAttribute("maTV", userLogin.getMaTV());
+
         model.addAttribute("thietBi", danhSachThietBi);
 
         return "user/xemdatchothietbi";

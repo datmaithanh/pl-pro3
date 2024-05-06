@@ -1,17 +1,20 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package com.PL_Pro3_WebwithSpringBoot.Pro3.service.impluser;
 
+import com.PL_Pro3_WebwithSpringBoot.Pro3.models.ThanhVien;
+import com.PL_Pro3_WebwithSpringBoot.Pro3.models.ThongTinSD;
+import com.PL_Pro3_WebwithSpringBoot.Pro3.repository.ThongTinSDRepository;
 import com.PL_Pro3_WebwithSpringBoot.Pro3.service.serviceuser.ThongTinSDUserService;
+import java.util.Optional;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-/**
- *
- * @author Lenovo
- */
 @Service
-public class ThongTinSDUserServiceImpl implements ThongTinSDUserService{
-    
+public class ThongTinSDUserServiceImpl implements ThongTinSDUserService {
+    @Autowired
+    ThongTinSDRepository repository;
+
+    @Override
+    public Optional<ThongTinSD> findByThanhVien(ThanhVien thanhVien) {
+        return repository.findByThanhVien(thanhVien);
+    }
 }
