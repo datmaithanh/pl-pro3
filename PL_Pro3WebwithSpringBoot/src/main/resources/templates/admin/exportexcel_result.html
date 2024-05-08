@@ -276,53 +276,22 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
                     </div>
                 </div>
             </div>
-            <table class="table table-striped table-bordered table-hover table-responsive">
-                <thead>
-                    <tr>
-                       <th scope="col">MaTB</th>
-                        <th scope="col">TenTB</th>
-                        <th scope="col">MoTaTB</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr th:each="thietBi : ${list}">
-                        <td th:text="${thietBi.maTB}"></td>
-                        <td th:text="${thietBi.tenTB}"></td>
-                        <td th:text="${thietBi.moTaTB}"></td>
-                        
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-        <div class="container position-absolute bg-white d-none w-75 h-95 border border-dark rounded" id="uploadFormContainer">
-            <div class="upload-form position-relative">
-                <div class="row mb-3 mt-3">
-                    <div class="col-20">
-                        <h2 class="text-center">Tải lên tập tin Excel</h2>
-                    </div>
-                    <div class="col-2">
-                        <div class="close-button position-absolute end-0 top-0" id="closeUploadButton">
-                            <i class="ti-close cursor-pointer"></i>
-                        </div>
-                    </div>
+           <div class="row d-flex justify-content-center">
+                <div th:if="${coViPham}" class="alert alert-danger col-md-6 mt-4" role="alert">
+                            <strong>Thông báo: Thêm thiết bị không thành công</strong>
+                            <ul>
+                                <li th:each="msg : ${messages}" th:text="${msg}"></li>
+                            </ul>
                 </div>
-                <form class="w-full h-full" id="uploadForm" action="/admin/thietbi/upload" method="post" enctype="multipart/form-data">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="form-group">
-                                <label for="file">Chọn tập tin Excel:</label>
-                                <input type="file" class="form-control" name="file" id="file">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-12">
-                            <button type="submit" class="btn btn-primary">Tải lên</button>
-                        </div>
-                    </div>
-                </form>
+                <div th:unless="${coViPham}" class="alert alert-success col-md-7 mt-4" role="alert">
+                            <strong>Thông báo: Thêm thiết bị thành công </strong>
+                            <ul>
+                                <li th:each="msg : ${messages}" th:text="${msg}"></li>
+                            </ul>
+                </div>
             </div>
         </div>
+        
         <!-- content-wrapper ends -->
         <!-- partial:partials/_footer.html -->
         <footer class="footer">

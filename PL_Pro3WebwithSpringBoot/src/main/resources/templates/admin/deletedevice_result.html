@@ -272,25 +272,20 @@
                 </div>
             </div>
            
-             <table class="table table-striped table-bordered table-hover table-responsive">
-                <thead>
-                    <tr>
-                        <th scope="col">MaTB</th>
-                        <th scope="col">TenTB</th>
-                        <th scope="col">MoTaTB</th>
-                      
-                    </tr>
-                </thead>
-                <tbody>
-                     <tr th:each="thietBi : ${list}">
-                        <td th:text="${thietBi.maTB}"></td>
-                        <td th:text="${thietBi.tenTB}"></td>
-                        <td th:text="${thietBi.moTaTB}"></td>
-                        <td><button><i class="ti-trash"></i></button></td>
-                        
-                    </tr>
-                </tbody>
-            </table>
+             <div class="row d-flex justify-content-center">
+                <div th:if="${coViPham}" class="alert alert-danger col-md-6 mt-4" role="alert">
+                            <strong>Thông báo: Xóa thiết bị không thành công</strong>
+                            <ul>
+                                <li th:each="msg : ${messages}" th:text="${msg}"></li>
+                            </ul>
+                </div>
+                <div th:unless="${coViPham}" class="alert alert-success col-md-7 mt-4" role="alert">
+                            <strong>Thông báo: Xóa thiết bị thành công </strong>
+                            <ul>
+                                <li th:each="msg : ${messages}" th:text="${msg}"></li>
+                            </ul>
+                </div>
+            </div>
         </div>
         <!-- content-wrapper ends -->
         <!-- partial:partials/_footer.html -->
@@ -330,7 +325,7 @@
 </body>
 <script>
 
-    // Lấy danh sách tất cả các nút "Trash"
+   // Lấy danh sách tất cả các nút "Trash"
     var trashButtons = document.querySelectorAll('.table tbody button');
 
     // Xử lý sự kiện khi click vào nút "Trash"
@@ -340,22 +335,17 @@
         var confirmDelete = confirm("Bạn có muốn xóa thiết bị này không?");
 
         if (confirmDelete) {
-          // Thực hiện hành động xóa thành viên trong database
+          // Lấy mã thành viên từ ô đầu tiên trong dòng
           var row = this.parentNode.parentNode;
           var maTB = row.querySelector('td:first-child').textContent;
-          console.log("Xóa thiết bị có mã: " + maTB);
 
-          // Thực hiện các hành động xóa trong database ở đây
-          // ...
-
-          // Xóa dòng tương ứng trong bảng
-          row.remove();
-        } else {
-          // Hủy việc xóa thành viên
-          console.log("Hủy xóa thiết bị");
+          // Chuyển hướng đến trang xử lý xóa thiết bị và truyền mã thiết bị
+          window.location.href = "/admin/deletedevice_result?maTB=" + maTB;
         }
       });
     });
+    
+   
 
 </script>
 </html>

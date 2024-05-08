@@ -21,10 +21,12 @@ public interface ThietBiAdminService {
     ThietBiDTO getThietBiDTOByID(int thietBiID);
     ThietBi getThietBiByID(int thietBiID);
 
-    void updateThietBi(int id, ThietBiDTO thietBiDTO);
+    void updateThietBi(ThietBiDTO thietBiDTO);
+    boolean updateThietBi(int id, ThietBiDTO thietBiDTO);
     
-    void deleteThietBiByID(int thietBiID);
+    boolean deleteThietBiByID(int thietBiID);
     
+    boolean isMaTBExisting(int maTB);
     List<ThietBiDTO> getThietBiNotInThongTinSDs();
     
     List<ThietBiDTO> getThietBiDaMuon();

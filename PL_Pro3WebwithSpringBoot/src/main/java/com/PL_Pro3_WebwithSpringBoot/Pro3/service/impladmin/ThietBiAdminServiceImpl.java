@@ -84,25 +84,49 @@ public class ThietBiAdminServiceImpl implements ThietBiAdminService{
         }
     }
 
+   @Override
+    public void updateThietBi(ThietBiDTO thietBiDTO) {
+        ThietBi thietBi = mapToThietBi(thietBiDTO);
+        thietBiRepository.save(thietBi);
+    }
+
     @Override
-    public void updateThietBi(int id, ThietBiDTO thietBiDTO) {
+    public boolean updateThietBi(int id, ThietBiDTO thietBiDTO) {
         Optional<ThietBi> optionalThietBi = thietBiRepository.findById(id);
         if (optionalThietBi.isPresent()) {
             ThietBi existingThietBi = optionalThietBi.get();
             // Cập nhật thông tin trong dòng hiện tại
             existingThietBi.setMaTB(thietBiDTO.getMaTB());
             existingThietBi.setTenTB(thietBiDTO.getTenTB());
-            existingThietBi.setMoTaTB(thietBiDTO.getMoTaTB());          
+            existingThietBi.setMoTaTB(thietBiDTO.getMoTaTB());
+            
 
-            thietBiRepository.save(existingThietBi);
+            try {
+                thietBiRepository.save(existingThietBi);
+                return true; // Cập nhật thiết bị thành công
+            } catch (Exception e) {
+                return false; // Cập nhật thiết bị thất bại
+            }
         } else {
-            // Xử lý khi không tìm thấy dòng cần cập nhật
+            return false; // Xử lý khi không tìm thấy dòng cần cập nhật
         }
-    }    
+        
+    }
+
 
     @Override
-    public void deleteThietBiByID(int thietBiID) {
-        thietBiRepository.deleteById(thietBiID);
+    public boolean deleteThietBiByID(int thietBiID) {
+        try {
+            thietBiRepository.deleteById(thietBiID);
+            return true; // Xóa thiết bị  thành công
+        } catch (Exception e) {
+            return false; // Xóa thiết bị thất bại
+        }
+    }
+    @Override
+    public boolean isMaTBExisting(int maTB) {
+        Optional<ThietBi> existingThietBi= thietBiRepository.findByMaTB(maTB);
+        return existingThietBi.isPresent();
     }
       
     public List<ThietBiDTO> getThietBiNotInThongTinSDs() {
