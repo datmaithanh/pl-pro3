@@ -5,16 +5,23 @@
 package com.PL_Pro3_WebwithSpringBoot.Pro3.controller.admincontroller;
 
 import com.PL_Pro3_WebwithSpringBoot.Pro3.dto.ThongTinSDDTO;
+import com.PL_Pro3_WebwithSpringBoot.Pro3.dto.XuLyDTO;
 import com.PL_Pro3_WebwithSpringBoot.Pro3.models.ThongTinSD;
+import com.PL_Pro3_WebwithSpringBoot.Pro3.models.XuLy;
 import com.PL_Pro3_WebwithSpringBoot.Pro3.service.serviceadmin.ThanhVienAdminService;
 import com.PL_Pro3_WebwithSpringBoot.Pro3.service.serviceadmin.ThietBiAdminService;
 import com.PL_Pro3_WebwithSpringBoot.Pro3.service.serviceadmin.ThongTinSDAdminService;
+import com.PL_Pro3_WebwithSpringBoot.Pro3.service.serviceadmin.XuLyAdminService;
+
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -34,13 +41,17 @@ public class AdminThongkeController {
     private ThongTinSDAdminService thongTinSDAdminService;
     private ThanhVienAdminService thanhVienAdminService; 
     private ThietBiAdminService thietBiAdminService;
+    private XuLyAdminService xuLyAdminService;
+
     
     @Autowired
-    public AdminThongkeController(ThongTinSDAdminService thongTinSDAdminService, ThanhVienAdminService thanhVienAdminService, ThietBiAdminService thietBiAdminService){
+    public AdminThongkeController(ThongTinSDAdminService thongTinSDAdminService, ThanhVienAdminService thanhVienAdminService, ThietBiAdminService thietBiAdminService, XuLyAdminService xuLyAdminService){
         this.thongTinSDAdminService = thongTinSDAdminService;
         this.thanhVienAdminService = thanhVienAdminService;
         this.thietBiAdminService = thietBiAdminService;
+        this.xuLyAdminService = xuLyAdminService;
     }
+
     
     @GetMapping("/thongke-soluongvaoKHT")
     public String vaoThongKeSLvaoKHT (Model model)
@@ -110,4 +121,45 @@ public class AdminThongkeController {
         
         return "admin/thongke-thietbi";
     }
+    // @GetMapping("/thongke-vipham")
+    // public String thongKeViPham(Model model) {
+        
+    //     return "admin/thongke-vipham";
+    // }
+    @GetMapping("/thongke-vipham")
+    public String vaoThongKeSLvaoVP (Model model) {
+        List<XuLyDTO> xuLys = xuLyAdminService.getAllXuLy();
+       
+        model.addAttribute("xuLys", xuLys);
+
+         // Tính tổng số tiền bồi thường cho các mục có trạng thái xử lý là đã xử lý
+        //  double totalCompensation = xuLys.stream()
+        //  .filter(XuLyDTO::getTrangThaiXL) // Chỉ lấy các mục đã xử lý
+        //  .mapToDouble(XuLyDTO::getSoTien) // Lấy số tiền bồi thường
+        //  .sum();
+
+        // model.addAttribute("totalCompensation", totalCompensation); // Đặt biến vào model
+        List<XuLyDTO> xuLystt = xuLyAdminService.getAllXuLy().stream()
+                                      .filter(xuLy -> xuLy.getTrangThaiXL())
+                                      .collect(Collectors.toList());
+
+        // Tính tổng bồi thường
+        int tongBoiThuong = xuLystt.stream()
+        .filter(xuLy -> xuLy.getSoTien() != null) // Lọc ra các đối tượng có giá trị soTien không null
+        .mapToInt(XuLyDTO::getSoTien)
+        .sum();
+        // Đưa tổng bồi thường vào model để hiển thị trên giao diện
+        model.addAttribute("tongBoiThuong", tongBoiThuong);
+        return "admin/thongke-vipham";
+}   
+    
+    // @PostMapping("/thongke-vipham")
+    // public String thongKeSLvaoKVP(Model model)
+    // {        
+    //     // List<ThongTinSDDTO> allThongtin = thongTinSDAdminService.filterVaoKHT(fromDateTime, toDateTime, khoaDuocChon, nganhDuocChon);
+    //     // model.addAttribute("history", allThongtin);   
+        
+    //     return "admin/thongke-vipham";
+    // }
+    
 }
