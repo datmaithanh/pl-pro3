@@ -26,16 +26,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
   <link rel="stylesheet" href="/static/vendors/ti-icons/css/themify-icons.css" type="text/css">
 
 </head>
-<!--<style>
-/*    #addFormContainer {
-        position: fixed;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        z-index: 9999;
-        width: 400px;
-    }*/
-</style>-->
+
 <body>
   <div class="container-scroller">
     <div class="row p-0 m-0 proBanner" id="proBanner">
@@ -260,76 +251,38 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
                             <h4 class="font-weight-bold mb-0">Quản lý thành viên</h4>
                         </div>
                         <div>
-                            <button type="button" class="btn btn-primary btn-icon-text btn-rounded">
-                                <a href="addmember"><i class="ti-plus btn-icon-prepend"></i>Thêm</a>
+                            <button id="addButton" type="button" class="btn btn-primary btn-icon-text btn-rounded">
+                                <a href="addmember" class="text-decoration-none link-dark"><i class="ti-plus btn-icon-prepend"></i>Thêm</a>
                             </button>
                             <button id="excelButton" type="button" class="btn btn-primary btn-icon-text btn-rounded">
-                                 <a href="uploadexcel"><i class="ti-plus btn-icon-prepend"></i>Excel</a>
+                                 <a href="uploadexcel" class="text-decoration-none link-dark"><i class="ti-plus btn-icon-prepend"></i>Excel</a>
                             </button>
                             <button type="button" class="btn btn-primary btn-icon-text btn-rounded">
-                                <a href="editmember"><i class="ti-pencil btn-icon-prepend"></i>Sửa</a>
+                                <a href="editmember" class="text-decoration-none link-dark"><i class="ti-pencil btn-icon-prepend"></i>Sửa</a>
                             </button>
                             <button type="button" class="btn btn-primary btn-icon-text btn-rounded">
-                                <a href="deletemember"><i class="ti-minus btn-icon-prepend"></i>Xóa</a>
+                                <a href="deletemember" class="text-decoration-none link-dark"><i class="ti-trash btn-icon-prepend"></i>Xóa</a>
                             </button>
                         </div>
                     </div>
                 </div>
             </div>
-            <table class="table table-striped table-bordered table-hover table-responsive">
-                <thead>
-                    <tr>
-                        <th scope="col">MaTV</th>
-                        <th scope="col">HoTen</th>
-                        <th scope="col">Khoa</th>
-                        <th scope="col">Nganh</th>
-                        <th scope="col">SDT</th>
-                        <th scope="col">Email</th>
-                        <th scope="col">Password</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr th:each="thanhVien : ${list}">
-                        <td th:text="${thanhVien.maTV}"></td>
-                        <td th:text="${thanhVien.hoTen}"></td>
-                        <td th:text="${thanhVien.khoa}"></td>
-                        <td th:text="${thanhVien.nganh}"></td>
-                        <td th:text="${thanhVien.sdt}"></td>
-                        <td th:text="${thanhVien.email}"></td>
-                        <td th:text="${thanhVien.password}"></td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-        <div class="container position-absolute bg-white d-none w-75 h-95 border border-dark rounded" id="uploadFormContainer">
-            <div class="upload-form position-relative">
-                <div class="row mb-3 mt-3">
-                    <div class="col-20">
-                        <h2 class="text-center">Tải lên tập tin Excel</h2>
-                    </div>
-                    <div class="col-2">
-                        <div class="close-button position-absolute end-0 top-0" id="closeUploadButton">
-                            <i class="ti-close cursor-pointer"></i>
-                        </div>
-                    </div>
+            <div class="row d-flex justify-content-center">
+                <div th:if="${coViPham}" class="alert alert-danger col-md-6 mt-4" role="alert">
+                            <strong>Thông báo: Thêm thành viên không thành công</strong>
+                            <ul>
+                                <li th:each="msg : ${messages}" th:text="${msg}"></li>
+                            </ul>
                 </div>
-                <form class="w-full h-full" id="uploadForm" action="/admin/thanhvien/upload" method="post" enctype="multipart/form-data">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="form-group">
-                                <label for="file">Chọn tập tin Excel:</label>
-                                <input type="file" class="form-control" name="file" id="file">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-12">
-                            <button type="submit" class="btn btn-primary">Tải lên</button>
-                        </div>
-                    </div>
-                </form>
+                <div th:unless="${coViPham}" class="alert alert-success col-md-7 mt-4" role="alert">
+                            <strong>Thông báo: Thêm thành viên thành công </strong>
+                            <ul>
+                                <li th:each="msg : ${messages}" th:text="${msg}"></li>
+                            </ul>
+                </div>
             </div>
         </div>
+
         <!-- content-wrapper ends -->
         <!-- partial:partials/_footer.html -->
         <footer class="footer">

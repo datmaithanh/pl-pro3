@@ -35,8 +35,10 @@ import com.PL_Pro3_WebwithSpringBoot.Pro3.service.serviceadmin.ThietBiAdminServi
 import com.PL_Pro3_WebwithSpringBoot.Pro3.service.serviceadmin.ThongTinSDAdminService;
 import com.PL_Pro3_WebwithSpringBoot.Pro3.service.serviceadmin.XuLyAdminService;
 import jakarta.validation.Valid;
+import java.text.DecimalFormat;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Collections;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -44,6 +46,9 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.regex.Pattern;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.CellType;
 
 
 @Controller
@@ -110,19 +115,47 @@ public class AdminThanhVienController {
     
     
     
-    @GetMapping("/admin/addmember_result") // Xử lý yêu cầu get trên đường dẫn "/admin/addmember_result"
+    @GetMapping("/admin/addmember_result")
     public String addThanhVien(@ModelAttribute ThanhVienDTO thanhVienDTO, Model model) {
-        thanhVienAdminService.AddThanhVien(thanhVienDTO);
-        // Optional: Redirect to confirmation page or display success message
-        return "redirect:/admin/thanhvien";
+        int maTV = thanhVienDTO.getMaTV();
+        String sdt = thanhVienDTO.getSdt();
+        String email = thanhVienDTO.getEmail();
+
+        boolean isExistingmaTV = thanhVienAdminService.isMaTVExisting(maTV);
+        boolean isExistingEmail = thanhVienAdminService.isExistingEmail(email);
+        boolean isExistingSDT = thanhVienAdminService.isExistingSDT(sdt);
+        
+        if (isExistingmaTV) {
+            model.addAttribute("coViPham", true);
+            model.addAttribute("messages", Collections.singletonList("Thành viên" +" "+ maTV + " "+ "đã tồn tại."));
+        } else if (isExistingEmail) {
+            model.addAttribute("coViPham", true);
+            model.addAttribute("messages", Collections.singletonList("Email"+" "+email+ " " +"đã tồn tại."));
+        } else if (isExistingSDT) {
+            model.addAttribute("coViPham", true);
+            model.addAttribute("messages", Collections.singletonList("Số điện thoại"+" "+sdt+" "+"đã tồn tại."));
+        } else {
+            thanhVienAdminService.AddThanhVien(thanhVienDTO);
+            model.addAttribute("coViPham", false);
+            model.addAttribute("messages", Collections.singletonList("Thêm thành viên"+" " + maTV + " "+"thành công."));
+        }
+        return "/admin/addmember_result";
     }
     
-    @GetMapping("/admin/uploadexcel_result")// Xử lý yêu cầu get trên đường dẫn "/admin/uploadexcel_result"
-    public String uploadExcelFile(@RequestParam("file") MultipartFile file) {
+    public static boolean isValidEmail(String email) {
+        String emailRegex = "^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+$";
+        return Pattern.matches(emailRegex, email);
+    }
+    
+    @PostMapping("/admin/uploadexcel_result")// Xử lý yêu cầu get trên đường dẫn "/admin/uploadexcel_result"
+    public String uploadExcelFile(@RequestParam("file") MultipartFile file, Model model) {
         try (Workbook workbook = new XSSFWorkbook(file.getInputStream())) {
             org.apache.poi.ss.usermodel.Sheet sheet = workbook.getSheetAt(0);
             List<ThanhVienDTO> thanhViens = new ArrayList<>();
             Iterator<org.apache.poi.ss.usermodel.Row> rowIterator = sheet.iterator();
+            boolean Null = false;
+            boolean Exist = false;
+            
             // Bỏ qua dòng tiêu đề nếu cần
             if (rowIterator.hasNext()) {
                 rowIterator.next();
@@ -130,13 +163,87 @@ public class AdminThanhVienController {
             while (rowIterator.hasNext()) {
                 org.apache.poi.ss.usermodel.Row row = rowIterator.next();
                 ThanhVienDTO thanhVien = new ThanhVienDTO();
-                thanhVien.setMaTV((int) row.getCell(0).getNumericCellValue());
+                
+
+                // Kiểm tra ô trống
+                    if (row.getCell(0) == null || row.getCell(0).getCellType() == CellType.BLANK ||
+                        row.getCell(1) == null || row.getCell(1).getCellType() == CellType.BLANK ||
+                        row.getCell(2) == null || row.getCell(2).getCellType() == CellType.BLANK ||
+                        row.getCell(3) == null || row.getCell(3).getCellType() == CellType.BLANK ||
+                        row.getCell(4) == null || row.getCell(4).getCellType() == CellType.BLANK ||
+                        row.getCell(5) == null || row.getCell(5).getCellType() == CellType.BLANK ||
+                        row.getCell(6) == null || row.getCell(6).getCellType() == CellType.BLANK) {
+                        Null = true;
+                        break; // Ngừng thêm dữ liệu nếu có ô trống
+                    }
+                
+                int maTV = 0;
+                Cell maTVCells = row.getCell(0);
+                if (maTVCells != null) {
+                    if (maTVCells.getCellType() == CellType.NUMERIC) {
+                        maTV = (int) maTVCells.getNumericCellValue();
+                    } else if (maTVCells.getCellType() == CellType.STRING) {
+                        String maTVValue = maTVCells.getStringCellValue();
+                        if (!maTVValue.isEmpty() && maTVValue.matches("\\d+")) {
+                            maTV = Integer.parseInt(maTVValue);
+                        } else {
+                            // Xử lý trường hợp giá trị của ô không phải số nguyên
+                        }
+                    } else {
+                        // Xử lý trường hợp ô không phải kiểu dữ liệu số hoặc chuỗi
+                    }
+                }
+                String email = row.getCell(6).getStringCellValue();
+                String sdt = row.getCell(4).getStringCellValue();
+
+                if (thanhVienAdminService.isMaTVExisting(maTV) || thanhVienAdminService.isExistingEmail(email) || thanhVienAdminService.isExistingSDT(sdt)) {
+                    Exist = true;
+                    break; // Ngừng thêm dữ liệu nếu có trùng matv, email hoặc sdt
+                }
+
+                Cell maTVCell = row.getCell(0);
+                if (maTVCell.getCellType() == CellType.NUMERIC) {
+                    thanhVien.setMaTV((int) maTVCell.getNumericCellValue());
+                } else if (maTVCell.getCellType() == CellType.STRING) {
+                        int maTVcell = Integer.parseInt(maTVCell.getStringCellValue());
+                        thanhVien.setMaTV(maTVcell);
+                }
+                
                 thanhVien.setHoTen(row.getCell(1).getStringCellValue());
                 thanhVien.setKhoa(row.getCell(2).getStringCellValue());
                 thanhVien.setNganh(row.getCell(3).getStringCellValue());
                 thanhVien.setSdt(row.getCell(4).getStringCellValue());
-                thanhVien.setEmail(row.getCell(5).getStringCellValue());
-                thanhVien.setPassword(row.getCell(5).getStringCellValue());
+                
+                //Kiểm tra xem cột email có kí tự '@' hay kh bằng regex
+                Cell emailCell = row.getCell(6);
+                if (emailCell.getCellType() == CellType.STRING) {
+                    email = emailCell.getStringCellValue();
+
+                    // Kiểm tra tính hợp lệ của email
+                    if (isValidEmail(email)) {
+                        thanhVien.setEmail(email);
+                    }
+                   
+                }
+                
+                //Check cột mật khẩu, nếu pw trong excel là số thì chuyển sang string và bỏ số thập
+                //phân, còn nếu là số kết hợp với chữ hoặc toàn là chữ là thêm vào database
+                DecimalFormat decimalFormat = new DecimalFormat("#.################");
+                Cell passwordCell = row.getCell(5);
+                if (passwordCell.getCellType() == CellType.NUMERIC) {
+                    double passwordValue = passwordCell.getNumericCellValue();
+
+                    // Format giá trị số và loại bỏ phần thập phân 0 và dấu ".0"
+                    String passwordString = decimalFormat.format(passwordValue);
+                    if (passwordString.endsWith(".0")) {
+                        passwordString = passwordString.substring(0, passwordString.length() - 2);
+                    }
+                    thanhVien.setPassword(passwordString);
+                } else if (passwordCell.getCellType() == CellType.STRING) {
+                    // Nếu ô có định dạng chuỗi, lấy giá trị trực tiếp
+                    thanhVien.setPassword(passwordCell.getStringCellValue());
+                }
+                
                 thanhViens.add(thanhVien);
             }
             // Lưu dữ liệu vào cơ sở dữ liệu
@@ -145,26 +252,44 @@ public class AdminThanhVienController {
             }
 
             // Redirect về trang danh sách thành viên sau khi tải lên thành công
-            return "redirect:/admin/thanhvien";
+            if(Null){
+                model.addAttribute("coViPham", true);
+                model.addAttribute("messages", Collections.singletonList("File excel tồn tại ô trống. Hãy kiểm tra lại"));
+            }
+            if(Exist){
+                model.addAttribute("coViPham", true);
+                model.addAttribute("messages", Collections.singletonList("File excel có thành viên đã tồn tại"));
+            }
+            return "admin/uploadexcel_result";
         } catch (IOException e) {
             e.printStackTrace();
             // Xử lý lỗi tải lên
         }
-        // Redirect về trang upload với thông báo lỗi (nếu cần)
         return "redirect:/admin/uploadexcel";
     }
     
     @GetMapping("/admin/editmember_result")
-    public String editThanhVien(@RequestParam("maTV") int maTV, @ModelAttribute ThanhVienDTO thanhVienDTO) {
-        thanhVienAdminService.updateThanhVien(maTV, thanhVienDTO);
-        return "redirect:/admin/thanhvien";
+    public String editThanhVien(@RequestParam("maTV") int maTV, @ModelAttribute ThanhVienDTO thanhVienDTO, Model model) {
+            boolean success = thanhVienAdminService.updateThanhVien(maTV, thanhVienDTO);
+            if(success){
+                model.addAttribute("coViPham", false);
+            }else{
+                model.addAttribute("coViPham", true);
+                model.addAttribute("messages", Collections.singletonList("Mã thành viên không được phép thay đổi"));
+            }
+            return "/admin/editmember_result";
     }
     
     @GetMapping("/admin/deletemember_result")
-    public String deleteThanhVien(@RequestParam("maTV") int maTV) {
-        thanhVienAdminService.deleteThanhVienByID(maTV);
-        return "redirect:/admin/thanhvien";
-    }
+    public String deleteThanhVien(@RequestParam("maTV") int maTV, Model model) {
+        boolean success = thanhVienAdminService.deleteThanhVienByID(maTV);
+        if(success){
+            model.addAttribute("coViPham", false);
+        }else{
+            model.addAttribute("coViPham", true);
+        }
+        return "/admin/deletemember_result";
+    }    
 
 
     @GetMapping("/admin/kiemtravipham")

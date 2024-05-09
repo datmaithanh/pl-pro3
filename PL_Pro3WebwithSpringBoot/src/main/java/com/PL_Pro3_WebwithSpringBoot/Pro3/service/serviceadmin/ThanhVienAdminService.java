@@ -19,14 +19,18 @@ public interface ThanhVienAdminService {
     ThanhVien AddThanhVien(ThanhVienDTO thanhVienDTO);
 
     ThanhVienDTO getThanhVienDTOById(int thanhVienID);
-
+    
     ThanhVien getThanhVienById(int thanhVienID);
 
     void updateThanhVien(ThanhVienDTO thanhVienDTO);
-    void updateThanhVien(int id, ThanhVienDTO thanhVienDTO);
+    boolean updateThanhVien(int id, ThanhVienDTO thanhVienDTO);
     
-    void deleteThanhVienByID(int thanhVienID);
+    boolean deleteThanhVienByID(int thanhVienID);
     
     List<String> getAllNganh();   
     List<String> getAllKhoa();
+
+    public boolean isMaTVExisting(int maTV);
+    public boolean isExistingEmail(String email);
+    public boolean isExistingSDT(String sdt);
 }

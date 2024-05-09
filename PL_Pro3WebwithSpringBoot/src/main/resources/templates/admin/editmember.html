@@ -21,16 +21,19 @@
   <link rel="stylesheet" href="/static/vendors/ti-icons/css/themify-icons.css" type="text/css">
 
 </head>
-<!--<style>
-/*    #addFormContainer {
-        position: fixed;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        z-index: 9999;
-        width: 400px;
-    }*/
-</style>-->
+<style>
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
+</style>
 <body>
   <div class="container-scroller">
     <div class="row p-0 m-0 proBanner" id="proBanner">
@@ -314,13 +317,13 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="MaTV">Mã thành viên:</label>
-                                <input type="maTV" class="form-control" name="maTV" id="maTV"   placeholder="Mã">
+                                <input type="maTV" class="form-control" th:maxlength="10" pattern="[0-9]*" name="maTV" id="maTV" placeholder="Mã">
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="HoTen">Họ Tên:</label>
-                                <input type="hoTen" class="form-control" name="hoTen" id="hoTen" placeholder="Họ và tên">
+                                <input type="hoTen" class="form-control" pattern="[A-Za-z\s]+" name="hoTen" id="hoTen" placeholder="Họ và tên">
                             </div>
                         </div>
                     </div>
@@ -342,7 +345,7 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="SDT">SDT:</label>
-                                <input type="sdt" class="form-control" name="sdt" id="sdt" placeholder="SDT">
+                                <input type="sdt" class="form-control" th:maxlength="10" pattern="[0-9]*" name="sdt" id="sdt" placeholder="SDT">
                             </div>
                         </div>
                         <div class="col-md-6">

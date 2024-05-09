@@ -39,7 +39,7 @@
           <div class="ps-lg-1">
             <div class="d-flex align-items-center justify-content-between">
               <p class="mb-0 font-weight-medium me-3 buy-now-text">Free 24/7 customer support, updates, and more with this template!</p>
-              <a href="https://www.bootstrapdash.com/product/royalui/?utm_source=organic&utm_medium=banner&utm_campaign=buynow_demo" target="_blank" class="btn me-2 buy-now-btn border-0">Get Pro</a>
+              <a href="https://www.bootstrapdash.com/product/royalui/?utm_source=organic&utm_medium=banner&utm_campai...now_demo" target="_blank" class="btn me-2 buy-now-btn border-0">Get Pro</a>
             </div>
           </div>
           <div class="d-flex align-items-center justify-content-between">
@@ -61,7 +61,7 @@
         <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
           <span class="ti-view-list"></span>
         </button>
-        <ul class="navbar-nav mr-lg-2">
+<ul class="navbar-nav mr-lg-2">
           <li class="nav-item nav-search d-none d-lg-block">
             <div class="input-group">
               <div class="input-group-prepend hover-cursor" id="navbar-search-icon">
@@ -123,7 +123,7 @@
               <i class="ti-bell mx-0"></i>
               <span class="count"></span>
             </a>
-            <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="notificationDropdown">
+<div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="notificationDropdown">
               <p class="mb-0 font-weight-normal float-left dropdown-header">Notifications</p>
               <a class="dropdown-item">
                 <div class="item-thumbnail">
@@ -193,7 +193,7 @@
       <nav class="sidebar sidebar-offcanvas" id="sidebar">
         <ul class="nav">
           <li class="nav-item">
-            <a class="nav-link" href="/admin">
+<a class="nav-link" href="/admin">
               <i class="ti-shield menu-icon"></i>
               <span class="menu-title">Dashboard</span>
             </a>
@@ -238,7 +238,7 @@
               <ul class="nav flex-column sub-menu">
                 <li class="nav-item"> <a class="nav-link" href="/admin/thongke-soluongvaoKHT">Khu học tập</a></li>
                 <li class="nav-item"> <a class="nav-link" href="/admin/thongke-thietbi">Thiết bị</a></li>
-                <li class="nav-item"> <a class="nav-link" href="/admin/thongke-vipham">Vi phạm</a></li>             
+                             
               </ul>
             </div>
           </li>
@@ -252,7 +252,7 @@
                 <div class="col-md-12 grid-margin">
                     <div class="d-flex justify-content-between align-items-center">
                         <div>
-                            <h4 class="font-weight-bold mb-0">Quản lý thành viên</h4>
+<h4 class="font-weight-bold mb-0">Quản lý thành viên</h4>
                         </div>
                         <div>
                             <button id="addButton" type="button" class="btn btn-primary btn-icon-text btn-rounded">
@@ -303,7 +303,7 @@
                         <h2 class="text-center">Thêm thành viên</h2>
                     </div>
                     <div class="col-2">
-                        <div class="close-button position-absolute end-0 top-0" id="closeButton">
+<div class="close-button position-absolute end-0 top-0" id="closeButton">
                             <i class="ti-close cursor-pointer"></i>
                         </div>
                     </div>
@@ -313,13 +313,13 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="MaTV">Mã thành viên:</label>
-                                <input type="maTV" class="form-control" name="maTV" id="maTV" placeholder="Mã">
+                                <input type="maTV" class="form-control" th:maxlength="10" pattern="[0-9]*" name="maTV" id="maTV" placeholder="Mã">
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="HoTen">Họ Tên:</label>
-                                <input type="hoTen" class="form-control" name="hoTen" id="hoTen" placeholder="Họ và tên">
+                                <input type="hoTen" class="form-control" pattern="[A-Za-z\s]+" name="hoTen" id="hoTen" placeholder="Họ và tên">
                             </div>
                         </div>
                     </div>
@@ -341,7 +341,7 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="SDT">SDT:</label>
-                                <input type="sdt" class="form-control" name="sdt" id="sdt" placeholder="SDT">
+                                <input type="sdt" class="form-control" th:maxlength="10" pattern="[0-9]*" name="sdt" id="sdt" placeholder="SDT">
                             </div>
                         </div>
                         <div class="col-md-6">
@@ -425,4 +425,3 @@
     });
 </script>
 </html>
-

@@ -21,16 +21,7 @@
   <link rel="stylesheet" href="/static/vendors/ti-icons/css/themify-icons.css" type="text/css">
 
 </head>
-<!--<style>
-/*    #addFormContainer {
-        position: fixed;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        z-index: 9999;
-        width: 400px;
-    }*/
-</style>-->
+
 <body>
   <div class="container-scroller">
     <div class="row p-0 m-0 proBanner" id="proBanner">
@@ -365,7 +356,7 @@
     var rows = document.querySelectorAll('.table tbody tr');
     rows.forEach(function(row) {
       var maTV = row.querySelector('td:first-child').textContent;
-      var namDangKy = maTV.slice(1, 3);
+      var namDangKy = maTV.slice(2, 4);
       
       var fullNamDangKy = parseInt(namDangKy) + 2000; // Nối chuỗi và chuyển đổi thành số nguyên
         if (!yearList.includes(fullNamDangKy)) {
@@ -389,7 +380,7 @@
         row.classList.remove('d-none'); // Xóa lớp CSS 'd-none' cho tất cả các dòng
 
         var maTV = row.querySelector('td:first-child').textContent;
-        var namDangKy = maTV.slice(1, 3);
+        var namDangKy = maTV.slice(2, 4);
         var fullNamDangKy = parseInt(namDangKy) + 2000; // Nối chuỗi và chuyển đổi thành số nguyên
 
             if (parseInt(selectedYear) !== 0 && fullNamDangKy !== parseInt(selectedYear)) {

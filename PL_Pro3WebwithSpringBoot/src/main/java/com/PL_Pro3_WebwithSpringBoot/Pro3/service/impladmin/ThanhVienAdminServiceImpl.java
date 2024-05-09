@@ -23,13 +23,15 @@ import java.util.Optional;
 public class ThanhVienAdminServiceImpl implements ThanhVienAdminService {
 
     private ThanhVienRepository thanhVienRepository;
-
     @Autowired
-//    @Override
     public ThanhVienAdminServiceImpl(ThanhVienRepository thanhVienRepository) {
         this.thanhVienRepository = thanhVienRepository;
     }
-
+    
+   
+    
+    
+    @Override
     public List<ThanhVienDTO> getAllThanhVien() {
         List<ThanhVien> thanhViens = thanhVienRepository.findAll();
         return thanhViens.stream().map((thanhVien ->mapToThanhVienDTO(thanhVien))).collect(Collectors.toList());
@@ -86,7 +88,7 @@ public class ThanhVienAdminServiceImpl implements ThanhVienAdminService {
     }
 
     @Override
-    public void updateThanhVien(int id, ThanhVienDTO thanhVienDTO) {
+    public boolean updateThanhVien(int id, ThanhVienDTO thanhVienDTO) {
         Optional<ThanhVien> optionalThanhVien = thanhVienRepository.findById(id);
         if (optionalThanhVien.isPresent()) {
             ThanhVien existingThanhVien = optionalThanhVien.get();
@@ -99,16 +101,27 @@ public class ThanhVienAdminServiceImpl implements ThanhVienAdminService {
             existingThanhVien.setEmail(thanhVienDTO.getEmail());
             existingThanhVien.setPassword(thanhVienDTO.getPassword());
 
-            thanhVienRepository.save(existingThanhVien);
+            try {
+                thanhVienRepository.save(existingThanhVien);
+                return true; // Cập nhật thành viên thành công
+            } catch (Exception e) {
+                return false; // Cập nhật thành viên thất bại
+            }
         } else {
-            // Xử lý khi không tìm thấy dòng cần cập nhật
+            return false; // Xử lý khi không tìm thấy dòng cần cập nhật
         }
+        
     }
 
 
     @Override
-    public void deleteThanhVienByID(int thanhVienID) {
-        thanhVienRepository.deleteById(thanhVienID);
+    public boolean deleteThanhVienByID(int thanhVienID) {
+        try {
+            thanhVienRepository.deleteById(thanhVienID);
+            return true; // Xóa thành viên thành công
+        } catch (Exception e) {
+            return false; // Xóa thành viên thất bại
+        }
     }
 
     @Override
@@ -119,6 +132,23 @@ public class ThanhVienAdminServiceImpl implements ThanhVienAdminService {
         } else {
             return null;
         }   
+    }
+    
+    @Override
+    public boolean isMaTVExisting(int maTV) {
+        Optional<ThanhVien> existingThanhVien = thanhVienRepository.findByMaTV(maTV);
+        return existingThanhVien.isPresent();
+    }
+    @Override
+    public boolean isExistingEmail(String email) {
+        List<ThanhVien> existingThanhVienEmail = thanhVienRepository.findByEmail(email);
+        return !existingThanhVienEmail.isEmpty();
+    }
+
+    @Override
+    public boolean isExistingSDT(String sdt) {
+        List<ThanhVien> existingThanhVienSDT = thanhVienRepository.findBySDT(sdt);
+        return !existingThanhVienSDT.isEmpty();
     }
 
     @Override

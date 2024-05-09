@@ -16,8 +16,15 @@ import org.springframework.data.jpa.repository.Query;
  */
 
 public interface ThanhVienRepository extends JpaRepository<ThanhVien, Object>{
-    Optional<ThanhVien> findByMaTV(int url);
-     
+    ThanhVien findByMaTVAndPassword(int maTV, String password);
+    Optional<ThanhVien> findByMaTV(int maTV);
+    
+    @Query("SELECT tv FROM ThanhVien tv WHERE tv.email = :email")
+    List<ThanhVien> findByEmail(String email);
+    
+    @Query("SELECT tv FROM ThanhVien tv WHERE tv.sdt = :sdt")
+    List<ThanhVien> findBySDT(String sdt);
+
     @Query("SELECT DISTINCT nganh FROM ThanhVien")
     List<String> getAllNganh();
     
