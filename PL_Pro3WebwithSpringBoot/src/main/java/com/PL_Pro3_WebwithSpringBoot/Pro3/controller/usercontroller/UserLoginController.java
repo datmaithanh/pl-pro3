@@ -39,12 +39,6 @@ public class UserLoginController {
                 if (us.getEmail().equals(taiKhoan) && us.getPassword().equals(password)) {
                     System.out.println("Đăng nhập thành công !!");
                     userLogin.setMaTV(us.getMaTV());
-                    System.out.println("userLogin: "+us.getMaTV());
-//                    userLogin.setHoTen(us.getHoTen());
-//                    userLogin.set(us.getMaTV());
-//                    userLogin.setHoTen(us.getMaTV());
-//                    userLogin.setMaTV(us.getMaTV());
-//                    userLogin.setHoTen(us.getMaTV());
                     m.addAttribute("username", us.getHoTen());
                     m.addAttribute("maTV", userLogin.getMaTV());
                     return "user/index";

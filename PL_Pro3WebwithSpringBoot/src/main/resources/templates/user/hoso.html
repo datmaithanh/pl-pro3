@@ -23,15 +23,15 @@
             <!-- partial:partials/_navbar.html -->
             <nav class="navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
                 <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
-                    <a class="navbar-brand brand-logo me-5" href="/admin"><img src="/images/logo.svg" class="me-2" alt="logo"/></a>
-                    <a class="navbar-brand brand-logo-mini" href="/admin"><img src="/images/logo-mini.svg" alt="logo"/></a>
+<!--                    <a class="navbar-brand brand-logo me-5" href="/admin"><img src="/images/logo.svg" class="me-2" alt="logo"/></a>
+                    <a class="navbar-brand brand-logo-mini" href="/admin"><img src="/images/logo-mini.svg" alt="logo"/></a>-->
                 </div>
                 <div class="navbar-menu-wrapper d-flex align-items-center justify-content-end">
-                    <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
+<!--                    <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
                         <span class="ti-view-list"></span>
-                    </button>
+                    </button>-->
                     <ul class="navbar-nav mr-lg-2">
-                        <li class="nav-item nav-search d-none d-lg-block">
+<!--                        <li class="nav-item nav-search d-none d-lg-block">
                             <div class="input-group">
                                 <div class="input-group-prepend hover-cursor" id="navbar-search-icon">
                                     <span class="input-group-text" id="search">
@@ -40,11 +40,11 @@
                                 </div>
                                 <input type="text" class="form-control" id="navbar-search-input" placeholder="Search now" aria-label="search" aria-describedby="search">
                             </div>
-                        </li>
+                        </li>-->
                     </ul>
                     <ul class="navbar-nav navbar-nav-right">
                         <li class="nav-item dropdown me-1">
-                            <a class="nav-link count-indicator dropdown-toggle d-flex justify-content-center align-items-center" id="messageDropdown" href="#" data-bs-toggle="dropdown">
+<!--                            <a class="nav-link count-indicator dropdown-toggle d-flex justify-content-center align-items-center" id="messageDropdown" href="#" data-bs-toggle="dropdown">
                                 <i class="ti-email mx-0"></i>
                             </a>
                             <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="messageDropdown">
@@ -85,10 +85,10 @@
                                         </p>
                                     </div>
                                 </a>
-                            </div>
+                            </div>-->
                         </li>
                         <li class="nav-item dropdown">
-                            <a class="nav-link count-indicator dropdown-toggle" id="notificationDropdown" href="#" data-bs-toggle="dropdown">
+<!--                            <a class="nav-link count-indicator dropdown-toggle" id="notificationDropdown" href="#" data-bs-toggle="dropdown">
                                 <i class="ti-bell mx-0"></i>
                                 <span class="count"></span>
                             </a>
@@ -133,7 +133,7 @@
                                         </p>
                                     </div>
                                 </a>
-                            </div>
+                            </div>-->
                         </li>
                         <li class="nav-item nav-profile dropdown">
                             <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" id="profileDropdown">
@@ -144,7 +144,7 @@
                                     <i class="ti-user text-primary"></i>
                                     Hồ sơ
                                 </a>
-                                <a th:href="@{'/userTrangThaiVP?maTV='+${maTV}}" class="dropdown-item">
+<!--                                <a th:href="@{'/userTrangThaiVP?maTV='+${maTV}}" class="dropdown-item">
                                     <i class="ti-alert text-primary"></i>
                                     Xem trạng thái vi phạm
                                 </a>
@@ -155,7 +155,7 @@
                                 <a th:href="@{'/userThietBiDangMuon?maTV=' + ${maTV} + '&maTB=' + ${maTB}}" class="dropdown-item">
                                     <i class="ti-power-off text-primary"></i>
                                     Xem thiết bị đang mượn
-                                </a>
+                                </a>-->
                                 <a class="dropdown-item">
                                     <i class="ti-power-off text-primary"></i>
                                     Đăng xuất
@@ -171,51 +171,29 @@
             <!-- partial -->
             <div class="container-fluid page-body-wrapper">
                 <!-- partial:partials/_sidebar.html -->
-<!--                <nav class="sidebar sidebar-offcanvas" id="sidebar">
+                <nav class="sidebar sidebar-offcanvas" id="sidebar">
                     <ul class="nav">
                         <li class="nav-item">
-                            <a class="nav-link" href="/admin">
-                                <i class="ti-shield menu-icon"></i>
-                                <span class="menu-title">Dashboard</span>
+                            <a th:href="@{'/userTrangThaiVP?maTV='+${maTV}}" class="dropdown-item">
+                                <i class="ti-alert text-primary"></i>
+                                Xem trạng thái vi phạm
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" data-bs-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
-                                <i class="ti-palette menu-icon"></i>
-                                <span class="menu-title">Quản lý thành viên</span>
-                                <i class="menu-arrow"></i>
-                            </a>
-                            <div class="collapse" id="ui-basic">
-                                <ul class="nav flex-column sub-menu">
-                                    <li class="nav-item"> <a class="nav-link" href="/admin/kiemtravipham">Kiểm tra vi phạm</a></li>
-                                    <li class="nav-item"> <a class="nav-link" href="/admin/vaokhuhoctap">Vào khu học tập</a></li>
-                                    <li class="nav-item"> <a class="nav-link" href="/admin/muonthietbi">Mượn thiết bị</a></li>
-                                    <li class="nav-item"> <a class="nav-link" href="/admin/trathietbi">Trả thiết bị</a></li>
-                                    <li class="nav-item"> <a class="nav-link" href="/admin/datchomuonthietbi">Đặt chổ mượn thiết bị</a></li>
-                                </ul>
-                            </div>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="pages/forms/basic_elements.html">
-                                <i class="ti-layout-list-post menu-icon"></i>
-                                <span class="menu-title">Quản lý thiết bị</span>
+                            <a th:href="@{'/userDatChoThietBi?maTB='+${maTB}}" class="dropdown-item">
+                                <i class="ti-flag text-primary"></i>
+                                Xem đặt chỗ thiết bị
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="pages/charts/chartjs.html">
-                                <i class="ti-pie-chart menu-icon"></i>
-                                <span class="menu-title">Xử lý vi phạm</span>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="pages/tables/basic-table.html">
-                                <i class="ti-view-list-alt menu-icon"></i>
-                                <span class="menu-title">Thống kê</span>
+                            <a th:href="@{'/userThietBiDangMuon?maTV=' + ${maTV} + '&maTB=' + ${maTB}}" class="dropdown-item">
+                                <i class="ti-power-off text-primary"></i>
+                                Xem thiết bị đang mượn
                             </a>
                         </li>
 
                     </ul>
-                </nav>-->
+                </nav>
                 <!-- partial -->
                 <div class="main-panel">
                     <div class="content-wrapper">
@@ -233,9 +211,6 @@
                                                 <th scope="col">Ngành</th>
                                                 <th scope="col">Số điện thoại</th>
                                                 <th scope="col">Email</th>
-                                                <th scope="col">Password</th>
-
-
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -246,8 +221,6 @@
                                                 <td th:text="${thanhVien.nganh}"></td>
                                                 <td th:text="${thanhVien.sdt}"></td>
                                                 <td th:text="${thanhVien.email}"></td>
-                                                <td th:text="${thanhVien.password}"></td>
-
 
                                             </tr>            
                                         </tbody>

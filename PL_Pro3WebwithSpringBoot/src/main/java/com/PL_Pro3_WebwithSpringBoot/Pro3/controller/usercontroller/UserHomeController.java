@@ -50,8 +50,6 @@ public class UserHomeController {
         if (user != null) {
             model.addAttribute("thanhVien", tv);
         }
-        System.out.println("userLogin: " + userLogin.getMaTV());
-
         model.addAttribute("maTV", userLogin.getMaTV());
         return "user/hoso";
     }
@@ -68,21 +66,18 @@ public class UserHomeController {
             // Kiểm tra xem thuộc tính soTien có null không trước khi truy cập
             if (xl.getSoTien() != null) {
                 model.addAttribute("xuLy", xl);
-                System.out.println("userLogin: " + userLogin.getMaTV());
-
                 model.addAttribute("maTV", userLogin.getMaTV());
                 return "user/xemtrangthaivp";
             } else {
                 // Xử lý trường hợp soTien là null ở đây
                 xl.setSoTien(0); // Đặt giá trị mặc định cho soTien
                 model.addAttribute("xuLy", xl);
-                System.out.println("userLogin: " + userLogin.getMaTV());
-
                 model.addAttribute("maTV", userLogin.getMaTV());
 
                 return "user/xemtrangthaivp";
             }
         } else {
+            model.addAttribute("maTV", userLogin.getMaTV());
             return "user/khongcothongtin";
         }
     }
@@ -108,6 +103,7 @@ public class UserHomeController {
                 model.addAttribute("maTV", userLogin.getMaTV());
                 model.addAttribute("thongTin", ttsdUser);
             } else {
+                model.addAttribute("maTV", userLogin.getMaTV());
                 return "user/khongcothongtin";
             }
 
@@ -131,12 +127,9 @@ public class UserHomeController {
     public String datchotbpage(Model model) {
         // Lấy danh sách tất cả các thiết bị từ cơ sở dữ liệu
         List<ThietBi> danhSachThietBi = tbService.findAll();
-
         // Truyền danh sách các thiết bị qua model
         model.addAttribute("maTV", userLogin.getMaTV());
-
         model.addAttribute("thietBi", danhSachThietBi);
-
         return "user/xemdatchothietbi";
     }
 
