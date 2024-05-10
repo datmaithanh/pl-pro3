@@ -133,4 +133,8 @@ public class UserHomeController {
         return "user/xemdatchothietbi";
     }
 
+    @GetMapping("/userDangXuat")
+    public String exitpage(Model model) {
+        return "user/login";
+    }
 }

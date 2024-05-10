@@ -15279,7 +15279,6 @@ fieldset:disabled .btn {
   z-index: 1020;
 }
 
-
 @media (min-width: 576px) {
   .sticky-sm-top {
     position: sticky;
@@ -19803,16 +19802,6 @@ address p {
 }
 
 /* Miscellanoeous */
-.my-custom-scrollbar {
-    position: relative;
-    max-height: 300px; /* Đặt chiều cao tối đa của bảng để cuộn */
-    overflow-y: auto; /* Tạo thanh cuộn dọc */
-    
-}
-
-.table-wrapper-scroll-y {
-    display: block;
-}
 body,
 html {
   overflow-x: hidden;
@@ -19848,7 +19837,7 @@ code {
 .footer {
   background: #dddce1;
   color: color(dark);
-/*  padding: 30px 2.45rem;*/
+  padding: 30px 2.45rem;
   transition: all 0.25s ease;
   -moz-transition: all 0.25s ease;
   -webkit-transition: all 0.25s ease;
@@ -21832,6 +21821,7 @@ dl li {
 .page-body-wrapper {
   min-height: calc(100vh - 70px);
   display: -webkit-flex;
+  display: flex;
   -webkit-flex-direction: row;
   flex-direction: row;
   padding-left: 0;
@@ -21847,7 +21837,7 @@ dl li {
 
 .main-panel {
   transition: width 0.25s ease, margin 0.25s ease;
-  width: 100%;
+  width: calc(100% - 237px);
   min-height: calc(100vh - 70px);
   display: -webkit-flex;
   display: flex;
@@ -21879,7 +21869,7 @@ dl li {
 /* Sidebar */
 .sidebar {
   min-height: calc(100vh - 70px);
-  background: white;
+  background: #dddce1;
   font-family: "Roboto", sans-serif;
   font-weight: 500;
   padding: 0;
@@ -21889,7 +21879,6 @@ dl li {
   -webkit-transition: width 0.25s ease, background 0.25s ease;
   -moz-transition: width 0.25s ease, background 0.25s ease;
   -ms-transition: width 0.25s ease, background 0.25s ease;
-  border-right: 2px solid black
 }
 
 .sidebar .nav {
