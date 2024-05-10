@@ -10,10 +10,12 @@ import com.PL_Pro3_WebwithSpringBoot.Pro3.models.XuLy;
 import org.springframework.web.bind.annotation.GetMapping;
 import com.PL_Pro3_WebwithSpringBoot.Pro3.service.serviceadmin.XuLyAdminService;
 import com.PL_Pro3_WebwithSpringBoot.Pro3.service.serviceadmin.ThanhVienAdminService;
+import java.util.ArrayList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import java.util.List;
+import org.springframework.data.repository.query.Param;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -30,7 +32,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class AdminXuLyController {
 
     private XuLyAdminService xuLyAdminService;
- private ThanhVienAdminService thanhVienAdminService;
+    private ThanhVienAdminService thanhVienAdminService;
+
     @Autowired
     public AdminXuLyController(XuLyAdminService xuLyAdminService, ThanhVienAdminService thanhVienAdminService) {
         this.xuLyAdminService = xuLyAdminService;
@@ -41,6 +44,25 @@ public class AdminXuLyController {
     public String index(Model model) {
         List<XuLyDTO> xuLys = xuLyAdminService.getAllXuLy();
         model.addAttribute("xuLys", xuLys);
+        List<ThanhVienDTO> thanhViens = thanhVienAdminService.getAllThanhVien();
+        model.addAttribute("thanhViens", thanhViens);
+        return "/admin/xulyvipham";
+    }
+
+    @RequestMapping("/admin/searchMaTV")
+    public String viewHomePage(Model model, @Param("maTV") int maTV) {
+        if (maTV != 0) {
+            List<XuLy> listXuLy = xuLyAdminService.getXuLyByMaTV(maTV);
+            List<ThanhVienDTO> thanhViens = thanhVienAdminService.getAllThanhVien();
+            model.addAttribute("thanhViens", thanhViens);
+            model.addAttribute("xuLys", listXuLy);
+            model.addAttribute("maTV", maTV);
+        } else {
+            List<XuLyDTO> xuLys = xuLyAdminService.getAllXuLy();
+            model.addAttribute("xuLys", xuLys);
+            List<ThanhVienDTO> thanhViens = thanhVienAdminService.getAllThanhVien();
+            model.addAttribute("thanhViens", thanhViens);
+        }
         return "/admin/xulyvipham";
     }
 
@@ -48,15 +70,22 @@ public class AdminXuLyController {
     public String create(Model model) {
         List<XuLyDTO> xuLys = xuLyAdminService.getAllXuLy();
         model.addAttribute("xuLys", xuLys);
-          List<ThanhVienDTO> thanhViens = thanhVienAdminService.getAllThanhVien();
+        List<ThanhVienDTO> thanhViens = thanhVienAdminService.getAllThanhVien();
         model.addAttribute("thanhViens", thanhViens);
         return "/admin/themxulyvipham";
     }
 
     @GetMapping("/admin/store")
-    public String addXuLy(@ModelAttribute XuLyDTO xuLyDTO, @RequestParam("maTV") int maTV) {
-        xuLyAdminService.AddXuLy(maTV, xuLyDTO);
-        return "redirect:/admin/xulyvipham";
+    public String addXuLy(@ModelAttribute XuLyDTO xuLyDTO, @RequestParam("maTV") int maTV, @RequestParam("maXL") String maXL) {
+        if (maTV != 0 && maXL != "") {
+            xuLyAdminService.AddXuLy(maTV, xuLyDTO);
+            return "redirect:/admin/xulyvipham";
+
+        } else {
+            return "redirect:/admin/themxulyvipham";
+        }
+//        xuLyAdminService.AddXuLy(maTV, xuLyDTO);
+//        return "redirect:/admin/xulyvipham";
     }
 
     @GetMapping("/admin/delete/{id}")
@@ -74,6 +103,6 @@ public class AdminXuLyController {
     @GetMapping("/admin/update/{id}")
     public String update(@ModelAttribute XuLyDTO xuLyDTO, @PathVariable("id") int id) {
         xuLyAdminService.updateXuLy(id, xuLyDTO);
-        return  "redirect:/admin/xulyvipham";
+        return "redirect:/admin/xulyvipham";
     }
 }
