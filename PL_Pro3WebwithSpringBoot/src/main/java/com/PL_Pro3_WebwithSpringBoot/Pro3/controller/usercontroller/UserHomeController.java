@@ -137,4 +137,10 @@ public class UserHomeController {
     public String exitpage(Model model) {
         return "user/login";
     }
+
+    @GetMapping("/userHome")
+    public String homepage(Model model) {
+        model.addAttribute("maTV", userLogin.getMaTV());
+        return "user/index";
+    }
 }
