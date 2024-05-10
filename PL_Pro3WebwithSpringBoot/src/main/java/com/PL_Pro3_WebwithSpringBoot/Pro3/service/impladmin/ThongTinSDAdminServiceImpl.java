@@ -76,5 +76,10 @@ public class ThongTinSDAdminServiceImpl implements ThongTinSDAdminService{
 
         return thongTinSDDTO;
     }
+
+    @Override
+    public void deleteThongTinSDId(int thongTinSDId) {
+        thongTinSDRepository.deleteById(thongTinSDId);
+    }
     
 }

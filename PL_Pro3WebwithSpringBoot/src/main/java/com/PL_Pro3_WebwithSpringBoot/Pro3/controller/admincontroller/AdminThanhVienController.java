@@ -16,7 +16,11 @@ import com.PL_Pro3_WebwithSpringBoot.Pro3.service.serviceadmin.ThietBiAdminServi
 import com.PL_Pro3_WebwithSpringBoot.Pro3.service.serviceadmin.ThongTinSDAdminService;
 import com.PL_Pro3_WebwithSpringBoot.Pro3.service.serviceadmin.XuLyAdminService;
 import jakarta.validation.Valid;
+import java.sql.Time;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -274,6 +278,9 @@ public class AdminThanhVienController {
     
     @GetMapping("/admin/datchomuonthietbi")
     public String datChoMuonThietBi (Model model){
+        model.addAttribute("currentTimeHour", LocalTime.now().getHour());
+        model.addAttribute("currentTimeMinute", LocalTime.now().plusMinutes(1).getMinute());
+        
         List<ThietBiDTO> thietBis = thietBiAdminService.getThietBiNotInThongTinSDs();
         model.addAttribute("thietBis", thietBis);
         List<ThongTinSDDTO> thongTinSDDTOs = thongTinSDAdminService.getThongTinSDDaDatCho();
@@ -282,17 +289,31 @@ public class AdminThanhVienController {
     }
     
     
+   
+
     @GetMapping("/admin/datchomuonthietbi/result")
-    public String datChoMuonThietBiResult(@RequestParam("maThietBi") int maThietBi, Model model) {
+    public String datChoMuonThietBiResult(@RequestParam("maThietBi") int maThietBi,
+                                           @RequestParam("thoiGianMuon") String thoiGianMuon,
+                                           @RequestParam("gioMuon") String gioMuon,
+                                           Model model) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm");
+        LocalDateTime localDateTime = LocalDateTime.parse(thoiGianMuon+"T"+ gioMuon, formatter);
+
+        model.addAttribute("localDateTime" , localDateTime);
+        // Truy vấn thông tin về thiết bị theo ID
         ThietBiDTO thietBiDTO = thietBiAdminService.getThietBiDTOByID(maThietBi);
-        model.addAttribute("thietBi",thietBiDTO);
+
+        // Thêm đối tượng thietBiDTO và localDateTime vào model
+        model.addAttribute("thietBi", thietBiDTO);
+        model.addAttribute("localDateTime", localDateTime);
 
         return "admin/datchomuonthietbiresult";
     }
+
     
     
     @GetMapping("/admin/datchomuonthietbi/resultwithmember")
-    public String datChoMuonThietBiResultCoMaThanhVien(@RequestParam("maThietBi") int maThietBi, @RequestParam("maSoSinhVien") int maSoSinhVien, Model model, @RequestHeader(value = "referer", required = false) String referer) {
+    public String datChoMuonThietBiResultCoMaThanhVien(@RequestParam("maThietBi") int maThietBi, @RequestParam("maSoSinhVien") int maSoSinhVien, @RequestParam("tgDatMuon") String tgDatMuon, Model model, @RequestHeader(value = "referer", required = false) String referer) {
         ThietBiDTO thietBiDTO = thietBiAdminService.getThietBiDTOByID(maThietBi);
         model.addAttribute("thietBi",thietBiDTO);
         ThanhVienDTO thanhVienDTO = thanhVienAdminService.getThanhVienDTOById(maSoSinhVien);
@@ -330,9 +351,10 @@ public class AdminThanhVienController {
                 model.addAttribute("coViPham", exists);
             } else {
                 ThanhVien thanhVien = thanhVienAdminService.getThanhVienById(maSoSinhVien);
-                LocalDateTime timeNow = LocalDateTime.now();
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm");
+                LocalDateTime tgDatMuonFinal = LocalDateTime.parse(tgDatMuon, formatter);
                 ThietBi thietBi = thietBiAdminService.getThietBiByID(maThietBi);
-                ThongTinSDDTO thongTinSDDTO = new ThongTinSDDTO(thanhVien, thietBi, null, null, null, timeNow);
+                ThongTinSDDTO thongTinSDDTO = new ThongTinSDDTO(thanhVien, thietBi, null, null, null, tgDatMuonFinal);
                 thongTinSDAdminService.addThongTinSD(thongTinSDDTO);
                 String message = "Đặt chổ mượn thiết bị thành công!";
                 messages.add(message);
@@ -346,7 +368,7 @@ public class AdminThanhVienController {
     }
     
     @GetMapping("/admin/datchomuonthietbi-laythietbi/result")
-    public String datChoMuonThietBiLayThietBi(@RequestParam("maThietBi") int maThietBi, Model model, @RequestHeader(value = "referer", required = false) String referer) {
+    public String datChoMuonThietBiLayThietBi(@RequestParam("maThietBi") int maThietBi, Model model) {
         ThietBiDTO thietBiDTO = thietBiAdminService.getThietBiDTOByID(maThietBi);
         model.addAttribute("thietBi",thietBiDTO);
         return "admin/datchomuonthietbi_laythietbiresult";
@@ -379,6 +401,40 @@ public class AdminThanhVienController {
             model.addAttribute("maSoSinhVien", maSoSinhVien);
         }
         return "admin/datchomuonthietbi_laythietbiresultwithmember";
+    }
+    
+    
+    @GetMapping("/admin/datchomuonthietbi-huylaythietbi/result")
+    public String datChoMuonThietBiHuyLayThietBi(@RequestParam("maThietBi") int maThietBi, Model model) {
+        ThietBiDTO thietBiDTO = thietBiAdminService.getThietBiDTOByID(maThietBi);
+        model.addAttribute("thietBi",thietBiDTO);
+        return "admin/datchomuonthietbi_huylaythietbiresult";
+    }
+    
+    @GetMapping("/admin/datchomuonthietbi-huylaythietbi/resultwithmember")
+    public String datchomuonThietBiHuyLayThietBiResultCoMaThanhVien(@RequestParam("maThietBi") int maThietBi, @RequestParam("maSoSinhVien") int maSoSinhVien, Model model) {
+        ThongTinSD thongTinSD = thongTinSDAdminService.getThongTinSDByMaTB(maThietBi);
+        model.addAttribute("thongTinSD",thongTinSD);
+        
+        List<String> messages = new ArrayList<>();
+        boolean exists=true;
+        if(maSoSinhVien != thongTinSD.getThanhVien().getMaTV()){
+            exists=true;
+            String message = "Mã số sinh viên " + maSoSinhVien + " không trùng với mã sinh viên đã mượn!";
+            messages.add(message);
+            model.addAttribute("maSoSinhVien", maSoSinhVien);
+            model.addAttribute("coViPham", exists);
+            model.addAttribute("messages", messages);
+        }else{
+            exists = false;
+            String message = "Mã số sinh viên " + maSoSinhVien + " hủy mượn thiết bị thành công!";
+            thongTinSDAdminService.deleteThongTinSDId(thongTinSD.getMaTT());
+            
+            model.addAttribute("coViPham", exists);
+            model.addAttribute("messages", messages);
+            model.addAttribute("maSoSinhVien", maSoSinhVien);
+        }
+        return "admin/datchomuonthietbi_huylaythietbiresultwithmember";
     }
     
     

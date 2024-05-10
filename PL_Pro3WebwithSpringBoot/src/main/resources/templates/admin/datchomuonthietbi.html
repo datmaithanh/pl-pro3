@@ -231,13 +231,17 @@
                                     <td th:text="${thietBi.tenTB}"></td>
                                     <td th:text="${thietBi.moTaTB}"></td>
                                     <td class="text-center">
-                                        <form th:action="@{/admin/datchomuonthietbi/result}" method="get">
+                                        <form th:action="@{/admin/datchomuonthietbi/result}" method="get" th:id="'myForm_' + ${thietBi.maTB}">
                                             <input type="hidden" name="maThietBi" id="maThietBi" th:value="${thietBi.maTB}" />
-                                            <button type="submit" class="btn btn-primary">Đặt chổ mượn</button>
+                                            <label for="thoiGianMuon">Chọn thời gian mượn:</label>
+                                            <input type="date" id="thoiGianMuon" name="thoiGianMuon" th:value="${#temporals.format(#temporals.createToday(), 'yyyy-MM-dd')}" th:min="${#temporals.format(#temporals.createToday(), 'yyyy-MM-dd')}" th:max="${#temporals.format(#temporals.createToday().plusDays(1), 'yyyy-MM-dd')}" required>
+                                            <input type="time" id="gioMuon" name="gioMuon" th:value="${currentTimeHour + ':' + currentTimeMinute}" required>
+
+                                            <button type="submit" class="btn btn-primary" id="submitButton">Đặt chỗ mượn</button>
                                         </form>
                                     </td>
-                                    
-                                </tr>            
+                                </tr>
+            
                             </tbody>
 
                         </table>
@@ -246,7 +250,7 @@
                 </div>
                 <div class="row justify-content-center mt-4">
                     <div class="sticky-top col-md-10 px-4 bg-white pt-3">
-                         <h2 class="text-center  sticky-top  ">Bảng đang được đặt chổ</h2>
+                         <h2 class="text-center  sticky-top  ">Bảng đang được đặt chỗ</h2>
                     </div>
                     <div class="col-md-10 bg-white px-4 table-wrapper-scroll-y my-custom-scrollbar">
                        
@@ -266,12 +270,18 @@
                                     <td th:text="${thongTinSDDTO.thietBi.maTB}"></td>
                                     <td th:text="${thongTinSDDTO.thietBi.tenTB}"></td>
                                     <td th:text="${thongTinSDDTO.thietBi.moTaTB}"></td>
-                                    <td class="text-center">
-                                        <form th:action="@{/admin/datchomuonthietbi-laythietbi/result}" method="get">
-                                            <input type="hidden" name="maThietBi" id="maThietBi" th:value="${thongTinSDDTO.thietBi.maTB}" />
+                                    <td class="text-center d-flex justify-content-center" >
+                                        <form th:action="@{/admin/datchomuonthietbi-laythietbi/result}" method="get" style="margin-right: 10px;">
+                                            <input type="hidden" name="maThietBi" th:value="${thongTinSDDTO.thietBi.maTB}" />
                                             <button type="submit" class="btn btn-success">Lấy thiết bị</button>
                                         </form>
+                                        <form th:action="@{/admin/datchomuonthietbi-huylaythietbi/result}" method="get">
+                                            <input type="hidden" name="maThietBi" th:value="${thongTinSDDTO.thietBi.maTB}" />
+                                            <button type="submit" class="btn btn-danger">Hủy đặt chỗ</button>
+                                        </form>
                                     </td>
+
+
                                     
                                 </tr>            
                             </tbody>
@@ -298,6 +308,38 @@
     <!-- page-body-wrapper ends -->
   </div>
   <!-- container-scroller -->
+  <!--<!-- check time form reque -->>
+<script>
+document.querySelectorAll('form').forEach(function(form) {
+    form.addEventListener('submit', function(e) {
+        var thoiGianMuon = new Date(this.querySelector('[name="thoiGianMuon"]').value);
+        var gioMuonInput = this.querySelector('[name="gioMuon"]');
+        var gioMuonParts = gioMuonInput.value.split(':');
+        var gio = parseInt(gioMuonParts[0]);
+        var phut = parseInt(gioMuonParts[1]);
+        var now = new Date();
+
+        // Kiểm tra nếu thời gian muốn đặt chưa qua
+        if (thoiGianMuon > now) {
+            // Kiểm tra nếu thời gian là từ 7h sáng đến 11h trưa hoặc từ 1h chiều đến 5h chiều
+            if ((gio >= 7 && gio < 11) || (gio >= 13 && gio < 17)) {
+                // Định dạng giờ và phút thành chuỗi 'HH:mm'
+                var formattedGioMuon = gio.toString().padStart(2, '0') + ':' + phut.toString().padStart(2, '0');
+                // Gán lại giá trị của thẻ input 'gioMuon' với giờ và phút đã được định dạng lại
+                gioMuonInput.value = formattedGioMuon;
+            } else {
+                e.preventDefault();
+                alert('Thời gian không hợp lệ! Vui lòng chọn thời gian từ 7h đến 11h hoặc từ 13h chiều đến 17h.');
+            }
+        } else {
+            e.preventDefault();
+            alert('Thời gian đã qua không thể chọn!');
+        }
+    });
+});
+
+</script>
+
 
   <!-- plugins:js -->
   <script src="/vendors/base/vendor.bundle.base.js"></script>

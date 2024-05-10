@@ -20,4 +20,6 @@ public interface ThongTinSDAdminService {
     void updateThongTinSD (ThongTinSD thongTinSD);
     
     List<ThongTinSDDTO> getThongTinSDDaDatCho();
+    
+    void deleteThongTinSDId(int thongTinSDId);
 }
