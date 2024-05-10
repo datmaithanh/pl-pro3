@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package com.PL_Pro3_WebwithSpringBoot.Pro3.models;
 
 import jakarta.persistence.*;
@@ -11,11 +7,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
 
-
 import java.io.Serializable;
 import java.time.LocalDateTime;
-
-
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -25,23 +18,24 @@ import java.time.LocalDateTime;
 public class XuLy implements Serializable {
     @Id
     @Column(name = "MaXL")
-    private int maXL;
-    
+    private Integer maXL;
+
     @ManyToOne
-    @JoinColumn(name = "maTV")
+    @JoinColumn(name = "maTV", nullable = false)
     private ThanhVien thanhVien;
-    
-    @Column(name = "HinhThucXL")
+
+    @Column(name = "hinhthucxl", length = 250)
     private String hinhThucXL;
-    
-    @Column(name = "SoTien")
+
+    @Column(name = "sotien", nullable = false)
     private Integer soTien;
-    
+
     @CreationTimestamp
     @Column(name = "NgayXL")
     private LocalDateTime ngayXL;
-    
-    @Column(name = "TrangThaiXL")
-    private boolean trangThaiXL;
 
+    @Column(name = "trangthaixl")
+    private Boolean trangThaiXL; 
+    
+    
 }

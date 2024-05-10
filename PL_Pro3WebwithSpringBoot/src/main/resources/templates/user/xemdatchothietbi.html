@@ -7,15 +7,15 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <title>Royal Admin</title>
         <!-- plugins:css -->
-        <link rel="stylesheet" href="/vendors/ti-icons/css/themify-icons.css">
-        <link rel="stylesheet" href="/vendors/base/vendor.bundle.base.css">
+        <link rel="stylesheet" href="../../vendors/ti-icons/css/themify-icons.css">
+        <link rel="stylesheet" href="../../vendors/base/vendor.bundle.base.css">
         <!-- endinject -->
         <!-- plugin css for this page -->
         <!-- End plugin css for this page -->
         <!-- inject:css -->
-        <link rel="stylesheet" href="/css/style.css">
+        <link rel="stylesheet" href="../../css/style.css">
         <!-- endinject -->
-        <link rel="shortcut icon" href="/images/favicon.png" />
+        <link rel="shortcut icon" href="../../images/favicon.png" />
     </head>
     <body>
         <div class="container-scroller">
@@ -23,8 +23,8 @@
             <!-- partial:partials/_navbar.html -->
             <nav class="navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
                 <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
-                    <a class="navbar-brand brand-logo me-5" th:href="@{/userHome}"><img src="images/logo.svg" class="me-2" alt="logo"/></a>
-                    <a class="navbar-brand brand-logo-mini" href="/admin"><img src="/images/logo-mini.svg" alt="logo"/></a>
+                    <a class="navbar-brand brand-logo me-5" th:href="@{/userHome}"><img src="../../images/logo.svg" class="me-2" alt="logo"/></a>
+                    <a class="navbar-brand brand-logo-mini" href="/admin"><img src="../../images/logo-mini.svg" alt="logo"/></a>
                 </div>
                 <div class="navbar-menu-wrapper d-flex align-items-center justify-content-end">
                     <!--                    <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
@@ -137,14 +137,14 @@
                         </li>
                         <li class="nav-item nav-profile dropdown">
                             <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" id="profileDropdown">
-                                <img src="images/faces/face28.jpg" alt="profile"/>
+                                <img src="../../images/faces/face28.jpg" alt="profile"/>
                             </a>
                             <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="profileDropdown">
-                                <a th:href="@{'/userHoSo?maTV='+${maTV}}" class="dropdown-item">
+                                <a th:href="@{/user/hoso}" class="dropdown-item">
                                     <i class="ti-user text-primary"></i>
                                     Hồ sơ
                                 </a>
-                                <a class="dropdown-item">
+                                <a th:href="@{/user/doimatkhau}" class="dropdown-item" href>
                                     <i class="ti-key text-primary"></i>
                                     Đổi mật khẩu
                                 </a>
@@ -166,27 +166,26 @@
                 <nav class="sidebar sidebar-offcanvas" id="sidebar">
                     <ul class="nav">
                         <li class="nav-item">
-                            <a class="nav-link" th:href="@{'/userTrangThaiVP?maTV='+${maTV}}">
+                            <a class="nav-link" th:href="@{/user/vipham}">
                                 <i class="ti-alert menu-icon"></i>
                                 <span class="menu-title">Xem trạng thái vi phạm</span>
 
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" th:href="@{'/userDatChoThietBi?maTB='+${maTB}}">
+                            <a class="nav-link" th:href="@{/user/datchothietbi}">
                                 <i class="ti-flag menu-icon"></i>
                                 <span class="menu-title">Xem đặt chỗ thiết bị</span>
 
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" th:href="@{'/userThietBiDangMuon?maTV=' + ${maTV} + '&maTB=' + ${maTB}}">
+                            <a class="nav-link" th:href="@{/user/thietbidangmuon}">
                                 <i class="ti-power-off menu-icon"></i>
                                 <span class="menu-title">Xem thiết bị đang mượn</span>
 
                             </a>
                         </li>
-
                     </ul>
                 </nav>
                 <!-- partial -->
@@ -242,20 +241,20 @@
         <!-- container-scroller -->
 
         <!-- plugins:js -->
-        <script src="/vendors/base/vendor.bundle.base.js"></script>
+        <script src="../../vendors/base/vendor.bundle.base.js"></script>
         <!-- endinject -->
         <!-- Plugin js for this page-->
-        <script src="/vendors/chart.js/Chart.min.js"></script>
-        <script src="/js/jquery.cookie.js" type="text/javascript"></script>
+        <script src="../../vendors/chart.js/Chart.min.js"></script>
+        <script src="../../js/jquery.cookie.js" type="text/javascript"></script>
         <!-- End plugin js for this page-->
         <!-- inject:js -->
-        <script src="/js/off-canvas.js"></script>
-        <script src="/js/hoverable-collapse.js"></script>
-        <script src="/js/template.js"></script>
-        <script src="/js/todolist.js"></script>
+        <script src="../../js/off-canvas.js"></script>
+        <script src="../../js/hoverable-collapse.js"></script>
+        <script src="../../js/template.js"></script>
+        <script src="../../js/todolist.js"></script>
         <!-- endinject -->
         <!-- Custom js for this page-->
-        <script src="/js/dashboard.js"></script>
+        <script src="../../js/dashboard.js"></script>
         <!-- End custom js for this page-->
     </body>
 

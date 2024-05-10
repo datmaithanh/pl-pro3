@@ -1,6 +1,5 @@
 package com.PL_Pro3_WebwithSpringBoot.Pro3.controller.usercontroller;
 
-import static com.PL_Pro3_WebwithSpringBoot.Pro3.controller.usercontroller.UserDangNhapController.userLogin;
 import com.PL_Pro3_WebwithSpringBoot.Pro3.models.ThanhVien;
 import com.PL_Pro3_WebwithSpringBoot.Pro3.models.ThietBi;
 import com.PL_Pro3_WebwithSpringBoot.Pro3.models.ThongTinSD;
@@ -18,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 import java.util.Optional;
+import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
 public class UserHomeController {
@@ -42,24 +42,17 @@ public class UserHomeController {
         return "user/index"; 
     }
 
-    @GetMapping("/userHoSo")
-    public String hosopage(Model model, @RequestParam("maTV") String maTV) {
-        // Lấy thông tin thành viên từ session
-        Optional<ThanhVien> user = tvService.findById(Integer.parseInt(maTV));
-        ThanhVien tv = user.get();
-        // Nếu tìm thấy, truyền thông tin thành viên qua model
-        if (user != null) {
-            model.addAttribute("thanhVien", tv);
-        }
-        model.addAttribute("maTV", userLogin.getMaTV());
+    @GetMapping("/user/hoso")
+    public String trangHoSo(HttpSession session, Model model) {
+        ThanhVien thanhVien = (ThanhVien) session.getAttribute("thanhVien");
+        model.addAttribute("thanhVien", thanhVien);
         return "user/hoso";
     }
 
-    @GetMapping("/userTrangThaiVP")
-    public String trangthaivppage(Model model, @RequestParam("maTV") String maTV) {
-        ThanhVien tv = new ThanhVien();
-        tv.setMaTV(Integer.parseInt(maTV));
-        List<XuLy> user = xlService.findByThanhVien(tv);
+    @GetMapping("/user/vipham")
+    public String trangthaivppage(HttpSession session, Model model) {
+        ThanhVien thanhVien = (ThanhVien) session.getAttribute("thanhVien");
+        List<XuLy> user = xlService.findByThanhVien(thanhVien);
 
         if (!user.isEmpty()) {
             XuLy xl = user.get(0);
@@ -67,32 +60,28 @@ public class UserHomeController {
             // Kiểm tra xem thuộc tính soTien có null không trước khi truy cập
             if (xl.getSoTien() != null) {
                 model.addAttribute("xuLy", xl);
-                model.addAttribute("maTV", userLogin.getMaTV());
+                model.addAttribute("maTV", thanhVien.getMaTV());
                 return "user/xemtrangthaivp";
             } else {
                 // Xử lý trường hợp soTien là null ở đây
                 xl.setSoTien(0); // Đặt giá trị mặc định cho soTien
                 model.addAttribute("xuLy", xl);
-                model.addAttribute("maTV", userLogin.getMaTV());
+                model.addAttribute("maTV", thanhVien.getMaTV());
 
                 return "user/xemtrangthaivp";
             }
         } else {
-            model.addAttribute("maTV", userLogin.getMaTV());
+            model.addAttribute("maTV", thanhVien.getMaTV());
             return "user/khongcothongtin";
         }
     }
 
-    @GetMapping("/userThietBiDangMuon")
-    public String tbdangmuonpage(Model model, @RequestParam("maTV") String maTV) {
-        // Tạo đối tượng ThanhVien và Thiết bị
-        ThanhVien tv = new ThanhVien();
-//        ThietBi tb = new ThietBi();
-        tv.setMaTV(Integer.parseInt(maTV));
-//        tb.getMaTB();
-
+    @GetMapping("/user/thietbidangmuon")
+    public String trangThietBiDangMuon(HttpSession session, Model model) {
+        ThanhVien thanhVien = (ThanhVien) session.getAttribute("thanhVien");
+        
         // Tìm thông tin về việc sử dụng thiết bị của thành viên
-        Optional<ThongTinSD> user = ttService.findByThanhVien(tv);
+        Optional<ThongTinSD> user = ttService.findByThanhVien(thanhVien);
 
         // Tìm thông tin về việc thiết bị đã được sử dụng bởi thành viên
 //        List<ThongTinSD> device = thongTinSDRepository.findByThietBi(tb);
@@ -101,16 +90,12 @@ public class UserHomeController {
             ThongTinSD ttsdUser = user.get();
             if (ttsdUser.getThietBi() != null) {
                 // Thêm thông tin sử dụng thiết bị của thành viên vào model
-                model.addAttribute("maTV", userLogin.getMaTV());
                 model.addAttribute("thongTin", ttsdUser);
             } else {
-                model.addAttribute("maTV", userLogin.getMaTV());
                 return "user/khongcothongtin";
             }
 
         } else {
-            model.addAttribute("maTV", userLogin.getMaTV());
-            // Trả về trang thông báo không có thông tin nếu không tìm thấy
             return "user/khongcothongtin";
         }
         return "user/xemthietbidangmuon";
@@ -124,13 +109,38 @@ public class UserHomeController {
 //        } 
     }
 
-    @GetMapping("/userDatChoThietBi")
+    @GetMapping("/user/datchothietbi")
     public String datchotbpage(Model model) {
         // Lấy danh sách tất cả các thiết bị từ cơ sở dữ liệu
         List<ThietBi> danhSachThietBi = tbService.findAll();
         // Truyền danh sách các thiết bị qua model
-        model.addAttribute("maTV", userLogin.getMaTV());
         model.addAttribute("thietBi", danhSachThietBi);
         return "user/xemdatchothietbi";
+    }
+    
+    @GetMapping("/user/doimatkhau")
+    public String trangDoiMatKhau(HttpSession session, Model model) {
+        ThanhVien thanhVien = (ThanhVien) session.getAttribute("thanhVien");
+        model.addAttribute("thanhVien", thanhVien);
+        return "user/doimatkhau";
+    }
+    
+    @PostMapping("/user/doimatkhau")
+    public String doiMatKhau(
+            @RequestParam(name="matKhauCu") String matKhauCu, 
+            @RequestParam(name="matKhauMoi") String matKhauMoi, 
+            @RequestParam(name="xacNhanMatKhauMoi") String xacNhanMatKhauMoi, 
+            HttpSession session, Model model){
+        
+        ThanhVien thanhVien = (ThanhVien) session.getAttribute("thanhVien");
+        
+        if(!matKhauCu.equals(thanhVien.getPassword())) {
+            model.addAttribute("error", "Mật khẩu hiện tại không chính xác!");
+        } else {
+            thanhVien.setPassword(matKhauMoi);
+            tvService.addOrUpdateThanhVien(thanhVien);
+            model.addAttribute("message", "Đổi mật khẩu thành công.");
+        }
+        return "user/doimatkhau";
     }
 }

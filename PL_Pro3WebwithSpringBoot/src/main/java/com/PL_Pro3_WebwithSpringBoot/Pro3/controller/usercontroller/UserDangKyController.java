@@ -29,7 +29,8 @@ public class UserDangKyController {
     }
     
     @PostMapping("/user/dangky")
-    public String dangKy(@RequestParam("maTV") int maTV, 
+    public String dangKy(
+            @RequestParam("maTV") int maTV, 
             @RequestParam("hoTen") String hoTen, 
             @RequestParam("khoa") String khoa, 
             @RequestParam("nganh") String nganh, 

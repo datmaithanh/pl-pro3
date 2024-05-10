@@ -17,6 +17,7 @@
         <link rel="shortcut icon" href="../../images/favicon.png" />
     </head>
     <body>
+        
         <div class="container-scroller">
             <!-- partial:partials/_navbar.html -->
             <nav class="navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
@@ -138,11 +139,11 @@
                                 <img src="../../images/faces/face28.jpg" alt="profile"/>
                             </a>
                             <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="profileDropdown">
-                                <a th:href="@{'/userHoSo?maTV='+${maTV}}" class="dropdown-item">
+                                <a th:href="@{/user/hoso}" class="dropdown-item">
                                     <i class="ti-user text-primary"></i>
                                     Hồ sơ
                                 </a>
-                                <a class="dropdown-item">
+                                <a th:href="@{/user/doimatkhau}" class="dropdown-item" href>
                                     <i class="ti-key text-primary"></i>
                                     Đổi mật khẩu
                                 </a>
@@ -164,21 +165,21 @@
                 <nav class="sidebar sidebar-offcanvas" id="sidebar">
                     <ul class="nav">
                         <li class="nav-item">
-                            <a class="nav-link" th:href="@{'/userTrangThaiVP?maTV='+${maTV}}">
+                            <a class="nav-link" th:href="@{/user/vipham}">
                                 <i class="ti-alert menu-icon"></i>
                                 <span class="menu-title">Xem trạng thái vi phạm</span>
 
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" th:href="@{'/userDatChoThietBi?maTB='+${maTB}}">
+                            <a class="nav-link" th:href="@{/user/datchothietbi}">
                                 <i class="ti-flag menu-icon"></i>
                                 <span class="menu-title">Xem đặt chỗ thiết bị</span>
 
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" th:href="@{'/userThietBiDangMuon?maTV=' + ${maTV} + '&maTB=' + ${maTB}}">
+                            <a class="nav-link" th:href="@{/user/thietbidangmuon}">
                                 <i class="ti-power-off menu-icon"></i>
                                 <span class="menu-title">Xem thiết bị đang mượn</span>
 
