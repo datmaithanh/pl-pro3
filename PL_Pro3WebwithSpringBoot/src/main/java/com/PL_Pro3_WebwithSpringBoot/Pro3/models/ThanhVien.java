@@ -5,15 +5,21 @@
 package com.PL_Pro3_WebwithSpringBoot.Pro3.models;
 
 import jakarta.persistence.*;
-
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
+import lombok.Getter;
+import lombok.Setter;
+
 
 
 @Data
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
@@ -23,7 +29,7 @@ public class ThanhVien implements Serializable {
     @Id
     @Column(name = "MaTV")
     private int maTV;
-    @Column(name = "HoTen")
+    @Column(name = "hoten")
     private String hoTen;
     @Column(name = "Khoa")
     private String khoa;
@@ -35,5 +41,7 @@ public class ThanhVien implements Serializable {
     private String email;
     @Column(name = "Password")
     private String password;
-
+    
+    @OneToMany(mappedBy = "thanhVien" ,cascade =CascadeType.REMOVE )
+    private Set<XuLy> xuLys = new HashSet<>();
 }

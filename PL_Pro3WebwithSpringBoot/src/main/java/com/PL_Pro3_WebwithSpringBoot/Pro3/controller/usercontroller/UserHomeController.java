@@ -1,11 +1,10 @@
 package com.PL_Pro3_WebwithSpringBoot.Pro3.controller.usercontroller;
 
-import static com.PL_Pro3_WebwithSpringBoot.Pro3.controller.usercontroller.UserLoginController.userLogin;
+import static com.PL_Pro3_WebwithSpringBoot.Pro3.controller.usercontroller.UserDangNhapController.userLogin;
 import com.PL_Pro3_WebwithSpringBoot.Pro3.models.ThanhVien;
 import com.PL_Pro3_WebwithSpringBoot.Pro3.models.ThietBi;
 import com.PL_Pro3_WebwithSpringBoot.Pro3.models.ThongTinSD;
 import com.PL_Pro3_WebwithSpringBoot.Pro3.models.XuLy;
-import com.PL_Pro3_WebwithSpringBoot.Pro3.repository.XuLyRepository;
 import com.PL_Pro3_WebwithSpringBoot.Pro3.service.serviceuser.ThanhVienUserService;
 import com.PL_Pro3_WebwithSpringBoot.Pro3.service.serviceuser.ThietBiUserService;
 import com.PL_Pro3_WebwithSpringBoot.Pro3.service.serviceuser.ThongTinSDUserService;
@@ -36,9 +35,11 @@ public class UserHomeController {
         this.tbService = tbService;
     }
 
-    @GetMapping("/user")
-    public String homepage() {
-        return "user/index";
+    @GetMapping("/user/{maTV}") 
+    public String trangUser(HttpSession session, Model model) {
+        ThanhVien thanhVien = (ThanhVien) session.getAttribute("thanhVien");
+        model.addAttribute("thanhVien", thanhVien);
+        return "user/index"; 
     }
 
     @GetMapping("/userHoSo")
@@ -131,16 +132,5 @@ public class UserHomeController {
         model.addAttribute("maTV", userLogin.getMaTV());
         model.addAttribute("thietBi", danhSachThietBi);
         return "user/xemdatchothietbi";
-    }
-
-    @GetMapping("/userDangXuat")
-    public String exitpage(Model model) {
-        return "user/login";
-    }
-
-    @GetMapping("/userHome")
-    public String homepage(Model model) {
-        model.addAttribute("maTV", userLogin.getMaTV());
-        return "user/index";
     }
 }

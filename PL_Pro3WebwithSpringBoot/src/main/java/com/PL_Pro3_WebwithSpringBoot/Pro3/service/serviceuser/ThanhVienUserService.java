@@ -4,6 +4,7 @@
  */
 package com.PL_Pro3_WebwithSpringBoot.Pro3.service.serviceuser;
 
+import com.PL_Pro3_WebwithSpringBoot.Pro3.dto.ThanhVienDTO;
 import com.PL_Pro3_WebwithSpringBoot.Pro3.models.ThanhVien;
 import com.PL_Pro3_WebwithSpringBoot.Pro3.repository.ThanhVienRepository;
 import java.util.Optional;
@@ -17,4 +18,19 @@ public interface ThanhVienUserService {
 
     public Optional<ThanhVien> findById(Integer id);
     public List<ThanhVien> findAll();
+    
+    boolean kiemTraDangNhap(int maTV, String password);
+    ThanhVien addOrUpdateThanhVien(ThanhVien thanhVien);
+    
+    List<ThanhVienDTO> getAllThanhVien();
+    
+    ThanhVien AddThanhVien(ThanhVienDTO thanhVienDTO);
+
+    ThanhVienDTO getThanhVienDTOById(int thanhVienID);
+    
+    ThanhVien getThanhVienById(int thanhVienID);
+
+    void updateThanhVien(ThanhVienDTO thanhVienDTO);
+    
+    void deleteThanhVienByID(int thanhVienID);
 }

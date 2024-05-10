@@ -14,5 +14,5 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public interface ThanhVienRepository extends JpaRepository<ThanhVien, Integer> {
-
+    ThanhVien findByMaTVAndPassword(int maTV, String password);
 }
