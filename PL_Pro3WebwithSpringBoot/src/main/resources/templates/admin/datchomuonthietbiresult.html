@@ -212,13 +212,16 @@
     <!-- Form xác nhận mượn thiết bị -->
     <div class="col-md-5 bg-white p-4">
         <h2 class="text-center mb-4">Xác nhận đặt chổ mượn thiết bị</h2>
-        <form action="/admin/datchomuonthietbi/resultwithmember" method="GET">
+        <form action="/admin/datchomuonthietbi/resultwithmember" method="GET" th:id="'myForm_' + ${thietBi.maTB}">
             <!-- Input hidden để truyền mã thiết bị -->
-            <input type="hidden" id="tgDatMuon" name="tgDatMuon" th:value="${localDateTime}" />
+           
             <input type="hidden" id="maThietBi" name="maThietBi" th:value="${thietBi.maTB}" />
             <div class="form-group">
                 <label for="maSoSinhVien">Nhập mã số sinh viên:</label>
                 <input type="text" class="form-control" id="maSoSinhVien" name="maSoSinhVien" required pattern="[0-9]*" title="Vui lòng chỉ nhập số">
+                <label for="thoiGianMuon">Chọn thời gian mượn:</label>
+                <input type="date" id="thoiGianMuon" name="thoiGianMuon" th:value="${#temporals.format(#temporals.createToday(), 'yyyy-MM-dd')}" th:min="${#temporals.format(#temporals.createToday(), 'yyyy-MM-dd')}" th:max="${#temporals.format(#temporals.createToday().plusDays(1), 'yyyy-MM-dd')}" required>
+                <input type="time" id="gioMuon" name="gioMuon" th:value="${gioMuon}" required>
             </div>
             <div class="text-center mb-4">
                 <button type="submit" class="btn btn-primary">Xác nhận</button>
@@ -270,7 +273,36 @@
     <!-- page-body-wrapper ends -->
   </div>
   <!-- container-scroller -->
+<script>
+document.querySelectorAll('form').forEach(function(form) {
+    form.addEventListener('submit', function(e) {
+        var thoiGianMuon = new Date(this.querySelector('[name="thoiGianMuon"]').value);
+        var gioMuonInput = this.querySelector('[name="gioMuon"]');
+        var gioMuonParts = gioMuonInput.value.split(':');
+        var gio = parseInt(gioMuonParts[0]);
+        var phut = parseInt(gioMuonParts[1]);
+        var now = new Date();
 
+        // Kiểm tra nếu thời gian muốn đặt chưa qua
+        if (thoiGianMuon > now) {
+            // Kiểm tra nếu thời gian là từ 7h sáng đến 11h trưa hoặc từ 1h chiều đến 5h chiều
+            if ((gio >= 7 && gio < 11) || (gio >= 13 && gio < 17)) {
+                // Định dạng giờ và phút thành chuỗi 'HH:mm'
+                var formattedGioMuon = gio.toString().padStart(2, '0') + ':' + phut.toString().padStart(2, '0');
+                // Gán lại giá trị của thẻ input 'gioMuon' với giờ và phút đã được định dạng lại
+                gioMuonInput.value = formattedGioMuon;
+            } else {
+                e.preventDefault();
+                alert('Thời gian không hợp lệ! Vui lòng chọn thời gian từ 7h đến 11h hoặc từ 13h chiều đến 17h.');
+            }
+        } else {
+            e.preventDefault();
+            alert('Thời gian đã qua không thể chọn!');
+        }
+    });
+});
+
+</script>
   <!-- plugins:js -->
   <script src="/vendors/base/vendor.bundle.base.js"></script>
   <!-- endinject -->

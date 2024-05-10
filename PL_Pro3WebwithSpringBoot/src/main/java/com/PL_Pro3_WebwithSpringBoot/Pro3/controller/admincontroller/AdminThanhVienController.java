@@ -278,8 +278,7 @@ public class AdminThanhVienController {
     
     @GetMapping("/admin/datchomuonthietbi")
     public String datChoMuonThietBi (Model model){
-        model.addAttribute("currentTimeHour", LocalTime.now().getHour());
-        model.addAttribute("currentTimeMinute", LocalTime.now().plusMinutes(1).getMinute());
+        
         
         List<ThietBiDTO> thietBis = thietBiAdminService.getThietBiNotInThongTinSDs();
         model.addAttribute("thietBis", thietBis);
@@ -293,19 +292,22 @@ public class AdminThanhVienController {
 
     @GetMapping("/admin/datchomuonthietbi/result")
     public String datChoMuonThietBiResult(@RequestParam("maThietBi") int maThietBi,
-                                           @RequestParam("thoiGianMuon") String thoiGianMuon,
-                                           @RequestParam("gioMuon") String gioMuon,
-                                           Model model) {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm");
-        LocalDateTime localDateTime = LocalDateTime.parse(thoiGianMuon+"T"+ gioMuon, formatter);
+                                           Model model) {       
+        LocalTime gioMuon = LocalTime.now().plusMinutes(1);
 
-        model.addAttribute("localDateTime" , localDateTime);
-        // Truy vấn thông tin về thiết bị theo ID
+        String gioMuonFormatted = gioMuon.format(DateTimeFormatter.ofPattern("HH:mm"));
+
+        // Thêm giá trị vào input gioMuon
+        model.addAttribute("gioMuon", gioMuonFormatted);
+        
+
+        
+       
         ThietBiDTO thietBiDTO = thietBiAdminService.getThietBiDTOByID(maThietBi);
 
-        // Thêm đối tượng thietBiDTO và localDateTime vào model
+       
         model.addAttribute("thietBi", thietBiDTO);
-        model.addAttribute("localDateTime", localDateTime);
+        
 
         return "admin/datchomuonthietbiresult";
     }
@@ -313,7 +315,7 @@ public class AdminThanhVienController {
     
     
     @GetMapping("/admin/datchomuonthietbi/resultwithmember")
-    public String datChoMuonThietBiResultCoMaThanhVien(@RequestParam("maThietBi") int maThietBi, @RequestParam("maSoSinhVien") int maSoSinhVien, @RequestParam("tgDatMuon") String tgDatMuon, Model model, @RequestHeader(value = "referer", required = false) String referer) {
+    public String datChoMuonThietBiResultCoMaThanhVien(@RequestParam("maThietBi") int maThietBi, @RequestParam("maSoSinhVien") int maSoSinhVien, @RequestParam("thoiGianMuon") String thoiGianMuon, @RequestParam("gioMuon") String gioMuon, Model model, @RequestHeader(value = "referer", required = false) String referer) {
         ThietBiDTO thietBiDTO = thietBiAdminService.getThietBiDTOByID(maThietBi);
         model.addAttribute("thietBi",thietBiDTO);
         ThanhVienDTO thanhVienDTO = thanhVienAdminService.getThanhVienDTOById(maSoSinhVien);
@@ -352,7 +354,7 @@ public class AdminThanhVienController {
             } else {
                 ThanhVien thanhVien = thanhVienAdminService.getThanhVienById(maSoSinhVien);
                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm");
-                LocalDateTime tgDatMuonFinal = LocalDateTime.parse(tgDatMuon, formatter);
+                LocalDateTime tgDatMuonFinal = LocalDateTime.parse(thoiGianMuon+"T"+gioMuon, formatter);
                 ThietBi thietBi = thietBiAdminService.getThietBiByID(maThietBi);
                 ThongTinSDDTO thongTinSDDTO = new ThongTinSDDTO(thanhVien, thietBi, null, null, null, tgDatMuonFinal);
                 thongTinSDAdminService.addThongTinSD(thongTinSDDTO);
