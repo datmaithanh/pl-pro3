@@ -23,7 +23,7 @@ public class ThanhVien implements Serializable {
     @Id
     @Column(name = "MaTV")
     private int maTV;
-    @Column(name = "HoTen")
+    @Column(name = "hoten")
     private String hoTen;
     @Column(name = "Khoa")
     private String khoa;
