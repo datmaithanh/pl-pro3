@@ -4,6 +4,7 @@
  */
 package com.PL_Pro3_WebwithSpringBoot.Pro3.service.serviceuser;
 
+import com.PL_Pro3_WebwithSpringBoot.Pro3.dto.ThietBiDTO;
 import com.PL_Pro3_WebwithSpringBoot.Pro3.models.ThanhVien;
 import com.PL_Pro3_WebwithSpringBoot.Pro3.models.ThietBi;
 import java.util.List;
@@ -16,4 +17,15 @@ import java.util.Optional;
 public interface ThietBiUserService {
     public Optional<ThietBi> findById(Integer id);
     public List<ThietBi> findAll();
+    List<ThietBiDTO> getAllThietBiDTOs();
+    
+    ThietBiDTO getThietBiDTOByID(int thietBiID);
+    
+    List<ThietBiDTO> getThietBiNotInThongTinSDs();
+    
+    ThietBi getThietBiByID(int thietBiID);
+    
+    List<ThietBiDTO> getThietBiDaMuon();
+
+    List<ThietBiDTO> getSearchThietBiChuaMuon(String searchTerm);
 }
