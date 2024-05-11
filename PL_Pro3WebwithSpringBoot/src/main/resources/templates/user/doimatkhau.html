@@ -23,13 +23,13 @@
             <!-- partial:partials/_navbar.html -->
             <nav class="navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
                 <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
-                    <a class="navbar-brand brand-logo me-5" th:href="@{/userHome}"><img src="../../images/logo.svg" class="me-2" alt="logo"/></a>
+                    <a class="navbar-brand brand-logo me-5" th:href="@{/user/{maTV}}"><img src="../../images/logo.svg" class="me-2" alt="logo"/></a>
                     <a class="navbar-brand brand-logo-mini" href="/admin"><img src="/../../images/logo-mini.svg" alt="logo"/></a>
                 </div>
                 <div class="navbar-menu-wrapper d-flex align-items-center justify-content-end">
-                    <!--                    <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
-                                            <span class="ti-view-list"></span>
-                                        </button>-->
+                    <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
+                        <span class="ti-view-list"></span>
+                    </button>
                     <ul class="navbar-nav mr-lg-2">
                         <!--                        <li class="nav-item nav-search d-none d-lg-block">
                                                     <div class="input-group">
@@ -194,29 +194,29 @@
                         <div class="container mx-auto" style="max-width: 700px">
                             <div class="card">
                                 <div class="card-body">
-                                  <h4 class="card-title">Đổi mật khẩu</h4>
-                                  <p class="card-description">
-                                    Thay đổi mật khẩu của bạn
-                                  </p>
-                                  <p th:text="${message != null}? ${message} : ''" style="color:green;"></p>
-                                  <form id="formDoiMatKhau" class="forms-sample" action="#" th:action="@{/user/doimatkhau}" method="post">
-                                    <div class="form-group">
-                                      <label for="matKhauCu">Mật khẩu hiện tại</label>
-                                      <input type="password" class="form-control" id="matKhauCu" name="matKhauCu" placeholder="Mật khẩu hiện tại" required>
-                                      <p th:text="${error != null}? ${error} : ''" style="color:red;"></p>
-                                    </div>
-                                    <div class="form-group">
-                                      <label for="exampleInputEmail1">Mật khẩu mới</label>
-                                      <input type="password" class="form-control" id="matKhauMoi" name="matKhauMoi" placeholder="Mật khẩu mới" required>
-                                    </div>
-                                    <div class="form-group">
-                                      <label for="xacNhanMatKhauMoi">Xác nhận mật khẩu mới</label>
-                                      <input type="password" class="form-control" id="xacNhanMatKhauMoi" name="xacNhanMatKhauMoi" placeholder="Xác nhận mật khẩu mới" required>
-                                    </div>
-                                    <button type="submit" class="btn btn-primary me-2">Lưu</button>
-                                  </form>
+                                    <h4 class="card-title">Đổi mật khẩu</h4>
+                                    <p class="card-description">
+                                        Thay đổi mật khẩu của bạn
+                                    </p>
+                                    <p th:text="${message != null}? ${message} : ''" style="color:green;"></p>
+                                    <form id="formDoiMatKhau" class="forms-sample" action="#" th:action="@{/user/doimatkhau}" method="post">
+                                        <div class="form-group">
+                                            <label for="matKhauCu">Mật khẩu hiện tại</label>
+                                            <input type="password" class="form-control" id="matKhauCu" name="matKhauCu" placeholder="Mật khẩu hiện tại" required>
+                                            <p th:text="${error != null}? ${error} : ''" style="color:red;"></p>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="exampleInputEmail1">Mật khẩu mới</label>
+                                            <input type="password" class="form-control" id="matKhauMoi" name="matKhauMoi" placeholder="Mật khẩu mới" required>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="xacNhanMatKhauMoi">Xác nhận mật khẩu mới</label>
+                                            <input type="password" class="form-control" id="xacNhanMatKhauMoi" name="xacNhanMatKhauMoi" placeholder="Xác nhận mật khẩu mới" required>
+                                        </div>
+                                        <button type="submit" class="btn btn-primary me-2">Lưu</button>
+                                    </form>
                                 </div>
-                              </div>
+                            </div>
                         </div>
                     </div>
                     <!-- content-wrapper ends -->
@@ -241,18 +241,18 @@
                 let matKhauCu = document.getElementById("matKhauCu").value;
                 let matKhauMoi = document.getElementById("matKhauMoi").value;
                 let xacNhanMatKhauMoi = document.getElementById("xacNhanMatKhauMoi").value;
-                
-                if (matKhauMoi !== xacNhanMatKhauMoi) {        
+
+                if (matKhauMoi !== xacNhanMatKhauMoi) {
                     event.preventDefault();
                     alert("Xác nhận mật khẩu mới không chính xác!");
                     return;
-                }    
-                
-                if (matKhauMoi === matKhauCu) {        
+                }
+
+                if (matKhauMoi === matKhauCu) {
                     event.preventDefault();
                     alert("Mật khẩu mới phải khác mật khẩu cũ!");
                     return;
-                }    
+                }
             });
         </script>
         <script src="../../vendors/base/vendor.bundle.base.js"></script>
