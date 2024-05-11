@@ -24,7 +24,7 @@
             <nav class="navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
                 <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
                     <a class="navbar-brand brand-logo me-5" th:href="@{/userHome}"><img src="../../images/logo.svg" class="me-2" alt="logo"/></a>
-                    <a class="navbar-brand brand-logo-mini" href="/admin"><img src="../../images/logo-mini.svg" alt="logo"/></a>
+                    <a class="navbar-brand brand-logo-mini" href="/admin"><img src="/../../images/logo-mini.svg" alt="logo"/></a>
                 </div>
                 <div class="navbar-menu-wrapper d-flex align-items-center justify-content-end">
                     <!--                    <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
@@ -191,38 +191,33 @@
                 <!-- partial -->
                 <div class="main-panel">
                     <div class="content-wrapper">
-                        <div class="container">
-                            <div class="row justify-content-center">
-
-                                <div class="col-md-10 bg-white p-4">
-                                    <h2 class="text-center mb-4">Đặt chỗ thiết bị</h2>
-                                    <table class="table table-bordered mx-auto ">
-                                        <thead>
-                                            <tr>
-                                                <th scope="col">Mã thiết bị</th>
-                                                <th scope="col">Tên thiết bị</th>
-                                                <th scope="col">Mô tả thiết bị</th>
-                                                <th scope="col" class="text-center">Đặt chỗ thiết bị</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr th:each="device : ${thietBi}">
-                                                <td th:text="${device.maTB}"></td>
-                                                <td th:text="${device.tenTB}"></td>
-                                                <td th:text="${device.moTaTB}"></td>
-                                                <td class="text-center">
-                                                    <button type="submit" class="btn btn-primary">Mượn</button>
-                                                </td>
-
-                                            </tr>            
-                                        </tbody>
-
-                                    </table>
+                        <div class="container mx-auto" style="max-width: 700px">
+                            <div class="card">
+                                <div class="card-body">
+                                  <h4 class="card-title">Đổi mật khẩu</h4>
+                                  <p class="card-description">
+                                    Thay đổi mật khẩu của bạn
+                                  </p>
+                                  <p th:text="${message != null}? ${message} : ''" style="color:green;"></p>
+                                  <form id="formDoiMatKhau" class="forms-sample" action="#" th:action="@{/user/doimatkhau}" method="post">
+                                    <div class="form-group">
+                                      <label for="matKhauCu">Mật khẩu hiện tại</label>
+                                      <input type="password" class="form-control" id="matKhauCu" name="matKhauCu" placeholder="Mật khẩu hiện tại" required>
+                                      <p th:text="${error != null}? ${error} : ''" style="color:red;"></p>
+                                    </div>
+                                    <div class="form-group">
+                                      <label for="exampleInputEmail1">Mật khẩu mới</label>
+                                      <input type="password" class="form-control" id="matKhauMoi" name="matKhauMoi" placeholder="Mật khẩu mới" required>
+                                    </div>
+                                    <div class="form-group">
+                                      <label for="xacNhanMatKhauMoi">Xác nhận mật khẩu mới</label>
+                                      <input type="password" class="form-control" id="xacNhanMatKhauMoi" name="xacNhanMatKhauMoi" placeholder="Xác nhận mật khẩu mới" required>
+                                    </div>
+                                    <button type="submit" class="btn btn-primary me-2">Lưu</button>
+                                  </form>
                                 </div>
-
-                            </div>
+                              </div>
                         </div>
-
                     </div>
                     <!-- content-wrapper ends -->
                     <!-- partial:partials/_footer.html -->
@@ -241,6 +236,25 @@
         <!-- container-scroller -->
 
         <!-- plugins:js -->
+        <script>
+            document.getElementById("formDoiMatKhau").addEventListener("submit", function () {
+                let matKhauCu = document.getElementById("matKhauCu").value;
+                let matKhauMoi = document.getElementById("matKhauMoi").value;
+                let xacNhanMatKhauMoi = document.getElementById("xacNhanMatKhauMoi").value;
+                
+                if (matKhauMoi !== xacNhanMatKhauMoi) {        
+                    event.preventDefault();
+                    alert("Xác nhận mật khẩu mới không chính xác!");
+                    return;
+                }    
+                
+                if (matKhauMoi === matKhauCu) {        
+                    event.preventDefault();
+                    alert("Mật khẩu mới phải khác mật khẩu cũ!");
+                    return;
+                }    
+            });
+        </script>
         <script src="../../vendors/base/vendor.bundle.base.js"></script>
         <!-- endinject -->
         <!-- Plugin js for this page-->

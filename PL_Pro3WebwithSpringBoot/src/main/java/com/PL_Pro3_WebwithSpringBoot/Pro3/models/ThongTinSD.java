@@ -13,9 +13,13 @@ import org.hibernate.annotations.CreationTimestamp;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import lombok.Getter;
+import lombok.Setter;
 
 
 @Data
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
@@ -24,23 +28,31 @@ import java.time.LocalDateTime;
 public class ThongTinSD implements Serializable {
     @Id
     @Column(name = "MaTT")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int maTT;
     @ManyToOne
     @JoinColumn(name = "maTV")
     private ThanhVien thanhVien;
+    
+    
     @ManyToOne
     @JoinColumn(name = "maTB")
-    public ThietBi thietBi;
-    @CreationTimestamp
+    private ThietBi thietBi;
+    
     @Column(name = "TGVao")
     private LocalDateTime tgVao;
-    @CreationTimestamp
+    
     @Column(name = "TGMuon")
     private LocalDateTime tgMuon;
-    @CreationTimestamp
+    
     @Column(name = "TGTra")
     private LocalDateTime tgTra;
-    @CreationTimestamp
-    @Column(name = "TGDatCho")
+    
+    @Column(name = "tgdatcho")
     private LocalDateTime tgDatCho;
+
+    
+
+    
+
 }
