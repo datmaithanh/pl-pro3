@@ -34,16 +34,7 @@
           </button>
 
           <ul class="navbar-nav mr-lg-2">
-              <!--                        <li class="nav-item nav-search d-none d-lg-block">
-                                              <div class="input-group">
-                                                  <div class="input-group-prepend hover-cursor" id="navbar-search-icon">
-                                                      <span class="input-group-text" id="search">
-                                                          <i class="ti-search"></i>
-                                                      </span>
-                                                  </div>
-                                                  <input type="text" class="form-control" id="navbar-search-input" placeholder="Search now" aria-label="search" aria-describedby="search">
-                                              </div>
-                                          </li>-->
+
           </ul>
           <ul class="navbar-nav navbar-nav-right">
               <li class="nav-item dropdown me-1">
@@ -178,32 +169,19 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" th:href="@{/user/datchothietbi}">
+                <a class="nav-link" th:href="@{/user/datchomuonthietbi}">
                     <i class="ti-flag menu-icon"></i>
-                    <span class="menu-title">Xem đặt chỗ thiết bị</span>
+                    <span class="menu-title">Đặt chổ mượn thiết bị</span>
 
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" th:href="@{/user/thietbidangmuon}">
-                    <i class="ti-power-off menu-icon"></i>
-                    <span class="menu-title">Xem thiết bị đang mượn</span>
+                <a class="nav-link" th:href="@{/user/xemdatchomuonthietbi}">
+                    <i class="ti-flag-alt menu-icon"></i>
+                    <span class="menu-title">Xem đặt chổ mượn của tôi</span>
 
                 </a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" data-bs-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
-                  <i class="ti-palette menu-icon"></i>
-                  <span class="menu-title">Đặt chổ mượn thiết bị</span>
-                  <i class="menu-arrow"></i>
-                </a>
-                <div class="collapse" id="ui-basic">
-                  <ul class="nav flex-column sub-menu">
-                    <li class="nav-item"> <a class="nav-link" th:href="@{/user/datchomuonthietbi}">Đặt chổ mượn</a></li>
-                    <li class="nav-item"> <a class="nav-link" th:href="@{/user/xemdatchomuonthietbi}">Xem đặt chổ mượn</a></li>
-                  </ul>
-                </div>
-              </li>
         </ul>   
     </nav>
       <!-- partial -->
