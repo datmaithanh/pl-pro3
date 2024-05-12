@@ -21,4 +21,5 @@ public interface XuLyUserService {
     XuLyDTO getXuLyByID(int xuLyID);
     
     List<XuLy> getXuLyByMaTV(int maTV);
+    List<XuLy> findByThanhVienMaTVTrueViPham(int maTV);
 }

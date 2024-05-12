@@ -74,4 +74,10 @@ public class XuLyUserServiceImpl implements XuLyUserService{
         List<XuLy> xuLys = xuLyRepository.findByThanhVien_MaTV(maTV);
         return xuLys;
     }
+
+    @Override
+    public List<XuLy> findByThanhVienMaTVTrueViPham(int maTV) {
+        List<XuLy> xuLys = xuLyRepository.findByThanhVienMaTVTrueViPham(maTV);
+        return xuLys;
+    }
 }

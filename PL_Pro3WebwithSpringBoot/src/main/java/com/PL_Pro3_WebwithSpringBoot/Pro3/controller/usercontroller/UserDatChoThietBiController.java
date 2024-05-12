@@ -24,7 +24,6 @@ import com.PL_Pro3_WebwithSpringBoot.Pro3.models.ThanhVien;
 import com.PL_Pro3_WebwithSpringBoot.Pro3.models.ThietBi;
 import com.PL_Pro3_WebwithSpringBoot.Pro3.models.ThongTinSD;
 import com.PL_Pro3_WebwithSpringBoot.Pro3.models.XuLy;
-import com.PL_Pro3_WebwithSpringBoot.Pro3.service.serviceadmin.ThietBiAdminService;
 import com.PL_Pro3_WebwithSpringBoot.Pro3.service.serviceuser.ThanhVienUserService;
 import com.PL_Pro3_WebwithSpringBoot.Pro3.service.serviceuser.ThietBiUserService;
 import com.PL_Pro3_WebwithSpringBoot.Pro3.service.serviceuser.ThongTinSDUserService;
@@ -86,7 +85,7 @@ public class UserDatChoThietBiController {
         List<String> messages = new ArrayList<>();
         boolean exists = true;
         // Kiểm tra các thông báo về việc xử lý của thành viên
-        List<XuLy> xuLys = xuLyUserService.getXuLyByMaTV(maThanhVien);
+        List<XuLy> xuLys = xuLyUserService.findByThanhVienMaTVTrueViPham(maThanhVien);
         if (xuLys != null && !xuLys.isEmpty()) {
             exists = xuLyUserService.checkMaSoSVTrongXuLy(maThanhVien);
             for (XuLy xuLy : xuLys) {
