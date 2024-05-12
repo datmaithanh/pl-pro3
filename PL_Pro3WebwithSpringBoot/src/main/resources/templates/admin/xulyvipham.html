@@ -1,319 +1,342 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="https://thymeleaf.org">
 
-<head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-    <title>RoyalUI Admin</title>
-    <!-- plugins:css -->
-    <link rel="stylesheet" href="../../vendors/ti-icons/css/themify-icons.css" />
-    <link rel="stylesheet" href="../../vendors/base/vendor.bundle.base.css" />
-    <!-- endinject -->
-    <!-- inject:css -->
-    <link rel="stylesheet" href="../../css/style.css" />
-    <!-- endinject -->
-    <link rel="shortcut icon" href="../../images/favicon.png" />
-</head>
+    <head>
+        <!-- Required meta tags -->
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <title>RoyalUI Admin</title>
+        <!-- plugins:css -->
+        <link rel="stylesheet" href="../../vendors/ti-icons/css/themify-icons.css" />
+        <link rel="stylesheet" href="../../vendors/base/vendor.bundle.base.css" />
+        <!-- endinject -->
+        <!-- inject:css -->
+        <link rel="stylesheet" href="../../css/style.css" />
+        <!-- endinject -->
+        <link rel="shortcut icon" href="../../images/favicon.png" />
+    </head>
 
-<body>
-    <div class="container-scroller">
-        <!-- partial:../../partials/_navbar.html -->
-        <nav class="navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
-            <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
-                <a class="navbar-brand brand-logo me-5" href="../../index.html"><img src="../../images/logo.svg"
-                        class="me-2" alt="logo" /></a>
-                <a class="navbar-brand brand-logo-mini" href="../../index.html"><img src="../../images/logo-mini.svg"
-                        alt="logo" /></a>
-            </div>
-            <div class="navbar-menu-wrapper d-flex align-items-center justify-content-end">
-                <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
-                    <span class="ti-view-list"></span>
-                </button>
-                <ul class="navbar-nav mr-lg-2">
-                    <li class="nav-item nav-search d-none d-lg-block">
-                        <div class="input-group">
-                            <div class="input-group-prepend hover-cursor" id="navbar-search-icon">
-                                <span class="input-group-text" id="search">
-                                    <i class="ti-search"></i>
-                                </span>
+    <body>
+        <div class="container-scroller">
+            <!-- partial:../../partials/_navbar.html -->
+            <nav class="navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
+                <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
+                    <a class="navbar-brand brand-logo me-5" href="../../index.html"><img src="../../images/logo.svg"
+                                                                                         class="me-2" alt="logo" /></a>
+                    <a class="navbar-brand brand-logo-mini" href="../../index.html"><img src="../../images/logo-mini.svg"
+                                                                                         alt="logo" /></a>
+                </div>
+                <div class="navbar-menu-wrapper d-flex align-items-center justify-content-end">
+                    <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
+                        <span class="ti-view-list"></span>
+                    </button>
+                    <ul class="navbar-nav mr-lg-2">
+                        <li class="nav-item nav-search d-none d-lg-block">
+                            <div class="input-group">
+                                <div class="input-group-prepend hover-cursor" id="navbar-search-icon">
+                                    <span class="input-group-text" id="search">
+                                        <i class="ti-search"></i>
+                                    </span>
+                                </div>
+                                <input type="text" class="form-control" id="navbar-search-input" placeholder="Search now"
+                                       aria-label="search" aria-describedby="search" />
                             </div>
-                            <input type="text" class="form-control" id="navbar-search-input" placeholder="Search now"
-                                aria-label="search" aria-describedby="search" />
-                        </div>
-                    </li>
-                </ul>
-                <ul class="navbar-nav navbar-nav-right">
-                    <li class="nav-item dropdown me-1">
-                        <a class="nav-link count-indicator dropdown-toggle d-flex justify-content-center align-items-center"
-                            id="messageDropdown" href="#" data-bs-toggle="dropdown">
-                            <i class="ti-email mx-0"></i>
-                        </a>
-                        <div class="dropdown-menu dropdown-menu-right navbar-dropdown"
-                            aria-labelledby="messageDropdown">
-                            <p class="mb-0 font-weight-normal float-left dropdown-header">
-                                Messages
-                            </p>
-                            <a class="dropdown-item">
-                                <div class="item-thumbnail">
-                                    <img src="../../images/faces/face4.jpg" alt="image" class="profile-pic" />
-                                </div>
-                                <div class="item-content flex-grow">
-                                    <h6 class="ellipsis font-weight-normal">David Grey</h6>
-                                    <p class="font-weight-light small-text text-muted mb-0">
-                                        The meeting is cancelled
-                                    </p>
-                                </div>
+                        </li>
+                    </ul>
+                    <ul class="navbar-nav navbar-nav-right">
+                        <li class="nav-item dropdown me-1">
+                            <a class="nav-link count-indicator dropdown-toggle d-flex justify-content-center align-items-center"
+                               id="messageDropdown" href="#" data-bs-toggle="dropdown">
+                                <i class="ti-email mx-0"></i>
                             </a>
-                            <a class="dropdown-item">
-                                <div class="item-thumbnail">
-                                    <img src="../../images/faces/face2.jpg" alt="image" class="profile-pic" />
-                                </div>
-                                <div class="item-content flex-grow">
-                                    <h6 class="ellipsis font-weight-normal">Tim Cook</h6>
-                                    <p class="font-weight-light small-text text-muted mb-0">
-                                        New product launch
-                                    </p>
-                                </div>
-                            </a>
-                            <a class="dropdown-item">
-                                <div class="item-thumbnail">
-                                    <img src="../../images/faces/face3.jpg" alt="image" class="profile-pic" />
-                                </div>
-                                <div class="item-content flex-grow">
-                                    <h6 class="ellipsis font-weight-normal">Johnson</h6>
-                                    <p class="font-weight-light small-text text-muted mb-0">
-                                        Upcoming board meeting
-                                    </p>
-                                </div>
-                            </a>
-                        </div>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link count-indicator dropdown-toggle" id="notificationDropdown" href="#"
-                            data-bs-toggle="dropdown">
-                            <i class="ti-bell mx-0"></i>
-                            <span class="count"></span>
-                        </a>
-                        <div class="dropdown-menu dropdown-menu-right navbar-dropdown"
-                            aria-labelledby="notificationDropdown">
-                            <p class="mb-0 font-weight-normal float-left dropdown-header">
-                                Notifications
-                            </p>
-                            <a class="dropdown-item">
-                                <div class="item-thumbnail">
-                                    <div class="item-icon bg-success">
-                                        <i class="ti-info-alt mx-0"></i>
+                            <div class="dropdown-menu dropdown-menu-right navbar-dropdown"
+                                 aria-labelledby="messageDropdown">
+                                <p class="mb-0 font-weight-normal float-left dropdown-header">
+                                    Messages
+                                </p>
+                                <a class="dropdown-item">
+                                    <div class="item-thumbnail">
+                                        <img src="../../images/faces/face4.jpg" alt="image" class="profile-pic" />
                                     </div>
-                                </div>
-                                <div class="item-content">
-                                    <h6 class="font-weight-normal">Application Error</h6>
-                                    <p class="font-weight-light small-text mb-0 text-muted">
-                                        Just now
-                                    </p>
-                                </div>
-                            </a>
-                            <a class="dropdown-item">
-                                <div class="item-thumbnail">
-                                    <div class="item-icon bg-warning">
-                                        <i class="ti-settings mx-0"></i>
+                                    <div class="item-content flex-grow">
+                                        <h6 class="ellipsis font-weight-normal">David Grey</h6>
+                                        <p class="font-weight-light small-text text-muted mb-0">
+                                            The meeting is cancelled
+                                        </p>
                                     </div>
-                                </div>
-                                <div class="item-content">
-                                    <h6 class="font-weight-normal">Settings</h6>
-                                    <p class="font-weight-light small-text mb-0 text-muted">
-                                        Private message
-                                    </p>
-                                </div>
-                            </a>
-                            <a class="dropdown-item">
-                                <div class="item-thumbnail">
-                                    <div class="item-icon bg-info">
-                                        <i class="ti-user mx-0"></i>
+                                </a>
+                                <a class="dropdown-item">
+                                    <div class="item-thumbnail">
+                                        <img src="../../images/faces/face2.jpg" alt="image" class="profile-pic" />
                                     </div>
-                                </div>
-                                <div class="item-content">
-                                    <h6 class="font-weight-normal">New user registration</h6>
-                                    <p class="font-weight-light small-text mb-0 text-muted">
-                                        2 days ago
-                                    </p>
-                                </div>
+                                    <div class="item-content flex-grow">
+                                        <h6 class="ellipsis font-weight-normal">Tim Cook</h6>
+                                        <p class="font-weight-light small-text text-muted mb-0">
+                                            New product launch
+                                        </p>
+                                    </div>
+                                </a>
+                                <a class="dropdown-item">
+                                    <div class="item-thumbnail">
+                                        <img src="../../images/faces/face3.jpg" alt="image" class="profile-pic" />
+                                    </div>
+                                    <div class="item-content flex-grow">
+                                        <h6 class="ellipsis font-weight-normal">Johnson</h6>
+                                        <p class="font-weight-light small-text text-muted mb-0">
+                                            Upcoming board meeting
+                                        </p>
+                                    </div>
+                                </a>
+                            </div>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link count-indicator dropdown-toggle" id="notificationDropdown" href="#"
+                               data-bs-toggle="dropdown">
+                                <i class="ti-bell mx-0"></i>
+                                <span class="count"></span>
                             </a>
-                        </div>
-                    </li>
-                    <li class="nav-item nav-profile dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" id="profileDropdown">
-                            <img src="../../images/faces/face28.jpg" alt="profile" />
-                        </a>
-                        <div class="dropdown-menu dropdown-menu-right navbar-dropdown"
-                            aria-labelledby="profileDropdown">
-                            <a class="dropdown-item">
-                                <i class="ti-settings text-primary"></i>
-                                Settings
+                            <div class="dropdown-menu dropdown-menu-right navbar-dropdown"
+                                 aria-labelledby="notificationDropdown">
+                                <p class="mb-0 font-weight-normal float-left dropdown-header">
+                                    Notifications
+                                </p>
+                                <a class="dropdown-item">
+                                    <div class="item-thumbnail">
+                                        <div class="item-icon bg-success">
+                                            <i class="ti-info-alt mx-0"></i>
+                                        </div>
+                                    </div>
+                                    <div class="item-content">
+                                        <h6 class="font-weight-normal">Application Error</h6>
+                                        <p class="font-weight-light small-text mb-0 text-muted">
+                                            Just now
+                                        </p>
+                                    </div>
+                                </a>
+                                <a class="dropdown-item">
+                                    <div class="item-thumbnail">
+                                        <div class="item-icon bg-warning">
+                                            <i class="ti-settings mx-0"></i>
+                                        </div>
+                                    </div>
+                                    <div class="item-content">
+                                        <h6 class="font-weight-normal">Settings</h6>
+                                        <p class="font-weight-light small-text mb-0 text-muted">
+                                            Private message
+                                        </p>
+                                    </div>
+                                </a>
+                                <a class="dropdown-item">
+                                    <div class="item-thumbnail">
+                                        <div class="item-icon bg-info">
+                                            <i class="ti-user mx-0"></i>
+                                        </div>
+                                    </div>
+                                    <div class="item-content">
+                                        <h6 class="font-weight-normal">New user registration</h6>
+                                        <p class="font-weight-light small-text mb-0 text-muted">
+                                            2 days ago
+                                        </p>
+                                    </div>
+                                </a>
+                            </div>
+                        </li>
+                        <li class="nav-item nav-profile dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" id="profileDropdown">
+                                <img src="../../images/faces/face28.jpg" alt="profile" />
                             </a>
-                            <a class="dropdown-item">
-                                <i class="ti-power-off text-primary"></i>
-                                Logout
-                            </a>
-                        </div>
-                    </li>
-                </ul>
-                <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button"
-                    data-toggle="offcanvas">
-                    <span class="ti-view-list"></span>
-                </button>
-            </div>
-        </nav>
-        <!-- partial -->
-        <div class="container-fluid page-body-wrapper">
-            <!-- partial:../../partials/_sidebar.html -->
-            <nav class="sidebar sidebar-offcanvas" id="sidebar">
-                <ul class="nav">
-                    <li class="nav-item active">
-                        <a class="nav-link" href="/admin">
-                            <i class="ti-shield menu-icon"></i>
-                            <span class="menu-title">Dashboard</span>
-                        </a>
-                    </li>
-                    <li class="nav-item active">
-                        <a class="nav-link" data-bs-toggle="collapse" href="#ui-basic" aria-expanded="false"
-                            aria-controls="ui-basic">
-                            <i class="ti-palette menu-icon"></i>
-                            <span class="menu-title">Quản lý thành viên</span>
-                            <i class="menu-arrow"></i>
-                        </a>
-                        <div class="collapse show" id="ui-basic">
-                            <ul class="nav flex-column sub-menu">
-                                <li class="nav-item"> <a class="nav-link active" href="/admin/thanhvien">Quản lý thành
-                                        viên</a></li>
-                                <li class="nav-item"> <a class="nav-link active" href="/admin/kiemtravipham">Kiểm tra vi
-                                        phạm</a></li>
-                                <li class="nav-item"> <a class="nav-link active" href="/admin/vaokhuhoctap">Vào khu học
-                                        tập</a></li>
-                                <li class="nav-item"> <a class="nav-link active" href="/admin/muonthietbi">Mượn thiết
-                                        bị</a></li>
-                                <li class="nav-item"> <a class="nav-link active" href="/admin/trathietbi">Trả thiết
-                                        bị</a></li>
-                                <li class="nav-item"> <a class="nav-link active" href="/admin/datchomuonthietbi">Đặt chổ
-                                        mượn thiết bị</a></li>
-
-                            </ul>
-                        </div>
-                    </li>
-                    <li class="nav-item active">
-                        <a class="nav-link" href="/admin/thietbi">
-                            <i class="ti-layout-list-post menu-icon"></i>
-                            <span class="menu-title" id="QLTV">Quản lý thiết bị</span>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/admin/xulyvipham">
-                            <i class="ti-pie-chart menu-icon"></i>
-                            <span class="menu-title">Xử lý vi phạm</span>
-                        </a>
-                    </li>
-                    <li class="nav-item active">
-                        <a class="nav-link" data-bs-toggle="collapse" href="#ui-basic2" aria-expanded="false"
-                            aria-controls="ui-basic2">
-                            <i class="ti-view-list-alt menu-icon"></i>
-                            <span class="menu-title">Thống kê</span>
-                            <i class="menu-arrow"></i>
-                        </a>
-                        <div class="collapse show" id="ui-basic2">
-                            <ul class="nav flex-column sub-menu">
-                                <li class="nav-item"> <a class="nav-link active" href="/admin/thongke-soluongvaoKHT">Khu
-                                        học tập</a></li>
-                                <li class="nav-item"> <a class="nav-link active" href="/admin/thongke-thietbi">Thiết
-                                        bị</a></li>
-                                <li class="nav-item"> <a class="nav-link active" href="/admin/thongke-vipham">Vi
-                                        phạm</a></li>
-                            </ul>
-                        </div>
-                    </li>
-
-                </ul>
+                            <div class="dropdown-menu dropdown-menu-right navbar-dropdown"
+                                 aria-labelledby="profileDropdown">
+                                <a class="dropdown-item">
+                                    <i class="ti-settings text-primary"></i>
+                                    Settings
+                                </a>
+                                <a class="dropdown-item">
+                                    <i class="ti-power-off text-primary"></i>
+                                    Logout
+                                </a>
+                            </div>
+                        </li>
+                    </ul>
+                    <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button"
+                            data-toggle="offcanvas">
+                        <span class="ti-view-list"></span>
+                    </button>
+                </div>
             </nav>
             <!-- partial -->
-            <div class="main-panel">
-                <div class="content-wrapper">
-                    <div class="row">
+            <div class="container-fluid page-body-wrapper">
+                <!-- partial:../../partials/_sidebar.html -->
+                <nav class="sidebar sidebar-offcanvas" id="sidebar">
+                    <ul class="nav">
+                        <li class="nav-item active">
+                            <a class="nav-link" href="/admin">
+                                <i class="ti-shield menu-icon"></i>
+                                <span class="menu-title">Dashboard</span>
+                            </a>
+                        </li>
+                        <li class="nav-item active">
+                            <a class="nav-link" data-bs-toggle="collapse" href="#ui-basic" aria-expanded="false"
+                               aria-controls="ui-basic">
+                                <i class="ti-palette menu-icon"></i>
+                                <span class="menu-title">Quản lý thành viên</span>
+                                <i class="menu-arrow"></i>
+                            </a>
+                            <div class="collapse show" id="ui-basic">
+                                <ul class="nav flex-column sub-menu">
+                                    <li class="nav-item"> <a class="nav-link active" href="/admin/thanhvien">Quản lý thành
+                                            viên</a></li>
+                                    <li class="nav-item"> <a class="nav-link active" href="/admin/kiemtravipham">Kiểm tra vi
+                                            phạm</a></li>
+                                    <li class="nav-item"> <a class="nav-link active" href="/admin/vaokhuhoctap">Vào khu học
+                                            tập</a></li>
+                                    <li class="nav-item"> <a class="nav-link active" href="/admin/muonthietbi">Mượn thiết
+                                            bị</a></li>
+                                    <li class="nav-item"> <a class="nav-link active" href="/admin/trathietbi">Trả thiết
+                                            bị</a></li>
+                                    <li class="nav-item"> <a class="nav-link active" href="/admin/datchomuonthietbi">Đặt chổ
+                                            mượn thiết bị</a></li>
 
-                        <div class="col-lg-12 grid-margin stretch-card">
-                            <div class="card">
-                                <div class="card-body">
-                                    <h4 class="card-title">Danh Sách Xử Lý</h4>
+                                </ul>
+                            </div>
+                        </li>
+                        <li class="nav-item active">
+                            <a class="nav-link" href="/admin/thietbi">
+                                <i class="ti-layout-list-post menu-icon"></i>
+                                <span class="menu-title" id="QLTV">Quản lý thiết bị</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/admin/xulyvipham">
+                                <i class="ti-pie-chart menu-icon"></i>
+                                <span class="menu-title">Xử lý vi phạm</span>
+                            </a>
+                        </li>
+                        <li class="nav-item active">
+                            <a class="nav-link" data-bs-toggle="collapse" href="#ui-basic2" aria-expanded="false"
+                               aria-controls="ui-basic2">
+                                <i class="ti-view-list-alt menu-icon"></i>
+                                <span class="menu-title">Thống kê</span>
+                                <i class="menu-arrow"></i>
+                            </a>
+                            <div class="collapse show" id="ui-basic2">
+                                <ul class="nav flex-column sub-menu">
+                                    <li class="nav-item"> <a class="nav-link active" href="/admin/thongke-soluongvaoKHT">Khu
+                                            học tập</a></li>
+                                    <li class="nav-item"> <a class="nav-link active" href="/admin/thongke-thietbi">Thiết
+                                            bị</a></li>
+                                    <li class="nav-item"> <a class="nav-link active" href="/admin/thongke-vipham">Vi
+                                            phạm</a></li>
+                                </ul>
+                            </div>
+                        </li>
 
-                                    <a class="btn btn-primary" th:href="@{/admin/themxulyvipham}">Thêm</a>
-                                    <div class="table-responsive">
-                                        <table class="table table-striped">
-                                            <thead>
-                                                <tr>
-                                                    <th>Mã Xử Lý</th>
-                                                    <th>Mã Thành Viên</th>
-                                                    <th>Tên Thành Viên</th>
-                                                    <th>Hình Thức Xử Lý</th>
-                                                    <th>Số Tiền</th>
-                                                    <th>Trạng Thái</th>
-                                                    <th>Action</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr th:each="xuLy : ${xuLys}">
-                                                    <td th:text="${xuLy.maXL}"></td>
-                                                    <td th:text="${xuLy.thanhVien.maTV}"></td>
-                                                    <td th:text="${xuLy.thanhVien.hoTen}"></td>
-                                                    <td th:text="${xuLy.HinhThucXL}"></td>
-                                                    <td th:text="${xuLy.soTien}"></td>
-                                                    <td th:text="${xuLy.trangThaiXL} ? 'Đã xử lý' : 'Chưa xử lý'"></td>
-                                                    <td><a class="btn btn-warning"
-                                                            th:href="@{/admin/chitietvipham/{id}(id=${xuLy.maXL})}">Chi tiết</a>
-                                                        <a onclick="return confirm('Are you sure?')"
-                                                            class="btn btn-danger"
-                                                            th:href="@{/admin/delete/{id}(id=${xuLy.maXL})}">Xóa</a>
-                                                    </td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
+                    </ul>
+                </nav>
+                <!-- partial -->
+                <div class="main-panel">
+                    <div class="content-wrapper">
+                        <div class="row">
+
+                            <div class="col-lg-12 grid-margin stretch-card">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <div class="d-flex justify-content-between align-items-center"> 
+                                            <h4 class="font-weight-bold mb-0">Danh Sách Xử Lý</h4>
+
+                                            <a class="btn btn-primary btn-icon-text btn-rounded" th:href="@{/admin/themxulyvipham}">Thêm</a>
+                                        </div>
+                                        <br>
+                                        
+                                        <form th:action="@{/admin/searchMaTV}" class="col-md-12 grid-margin">
+                                            <div class="form-group"  style="display:flex;">
+
+                                                <select class="form-control form-control-sm" id="exampleFormControlSelect3"
+                                                        name="maTV">
+                                                    <option value="0">Mã thành viên</option>
+                                                    <option th:each="thanhVien : ${thanhViens}" th:value="${thanhVien.maTV}"
+                                                            th:text="${thanhVien.maTV}"></option>
+                                                </select>
+                                                <input type="submit" value="Search" class="btn btn-primary"/>
+                                            </div>
+
+                                        </form>
+
+
+
+
+
+
+                                        <div class="table-responsive">
+                                            <table class="table table-striped">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Mã Xử Lý</th>
+                                                        <th>Mã Thành Viên</th>
+                                                        <th>Tên Thành Viên</th>
+                                                        <th>Hình Thức Xử Lý</th>
+                                                        <th>Số Tiền</th>
+                                                        <th>Trạng Thái</th>
+                                                        <th>Action</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr th:each="xuLy : ${xuLys}">
+                                                        <td th:text="${xuLy.maXL}"></td>
+                                                        <td th:text="${xuLy.thanhVien.maTV}"></td>
+                                                        <td th:text="${xuLy.thanhVien.hoTen}"></td>
+                                                        <td th:text="${xuLy.HinhThucXL}"></td>
+                                                        <td th:text="${xuLy.soTien}"></td>
+                                                        <td th:text="${xuLy.trangThaiXL} ? 'Đã xử lý' : 'Chưa xử lý'"></td>
+                                                        <td><a class="btn btn-warning"
+                                                               th:href="@{/admin/chitietvipham/{id}(id=${xuLy.maXL})}">Chi tiết</a>
+                                                            <a onclick="return confirm('Are you sure?')"
+                                                               class="btn btn-danger"
+                                                               th:href="@{/admin/delete/{id}(id=${xuLy.maXL})}">Xóa</a>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
 
+                        </div>
                     </div>
+                    <!-- content-wrapper ends -->
+                    <!-- partial:../../partials/_footer.html -->
+                    <footer class="footer">
+                        <div class="d-sm-flex justify-content-center justify-content-sm-between">
+                            <span class="text-muted text-center text-sm-left d-block d-sm-inline-block">Copyright ©
+                                <a href="https://www.bootstrapdash.com/" target="_blank">bootstrapdash.com </a>2021</span>
+                            <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center">Only the best
+                                <a href="https://www.bootstrapdash.com/" target="_blank">
+                                    Bootstrap dashboard
+                                </a>
+                                templates</span>
+                        </div>
+                    </footer>
+                    <!-- partial -->
                 </div>
-                <!-- content-wrapper ends -->
-                <!-- partial:../../partials/_footer.html -->
-                <footer class="footer">
-                    <div class="d-sm-flex justify-content-center justify-content-sm-between">
-                        <span class="text-muted text-center text-sm-left d-block d-sm-inline-block">Copyright ©
-                            <a href="https://www.bootstrapdash.com/" target="_blank">bootstrapdash.com </a>2021</span>
-                        <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center">Only the best
-                            <a href="https://www.bootstrapdash.com/" target="_blank">
-                                Bootstrap dashboard
-                            </a>
-                            templates</span>
-                    </div>
-                </footer>
-                <!-- partial -->
+                <!-- main-panel ends -->
             </div>
-            <!-- main-panel ends -->
+            <!-- page-body-wrapper ends -->
         </div>
-        <!-- page-body-wrapper ends -->
-    </div>
-    <!-- container-scroller -->
-    <!-- plugins:js -->
-    <script src="../../vendors/base/vendor.bundle.base.js"></script>
-    <!-- endinject -->
-    <!-- Plugin js for this page-->
-    <!-- End plugin js for this page-->
-    <!-- inject:js -->
-    <script src="../../js/off-canvas.js"></script>
-    <script src="../../js/hoverable-collapse.js"></script>
-    <script src="../../js/template.js"></script>
-    <script src="../../js/todolist.js"></script>
-    <!-- endinject -->
-    <!-- Custom js for this page-->
-    <!-- End custom js for this page-->
-</body>
+        <!-- container-scroller -->
+        <!-- plugins:js -->
+        <script src="../../vendors/base/vendor.bundle.base.js"></script>
+        <!-- endinject -->
+        <!-- Plugin js for this page-->
+        <!-- End plugin js for this page-->
+        <!-- inject:js -->
+        <script src="../../js/off-canvas.js"></script>
+        <script src="../../js/hoverable-collapse.js"></script>
+        <script src="../../js/template.js"></script>
+        <script src="../../js/todolist.js"></script>
+        <!-- endinject -->
+        <!-- Custom js for this page-->
+        <!-- End custom js for this page-->
+    </body>
 
 </html>
