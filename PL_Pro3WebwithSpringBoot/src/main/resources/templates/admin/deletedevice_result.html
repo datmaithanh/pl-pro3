@@ -255,6 +255,9 @@
                             <h4 class="font-weight-bold mb-0">Quản lý thiết bị</h4>
                         </div>
                         <div>
+                            <button type="button" class="btn btn-primary btn-icon-text btn-rounded">
+                    <a href="/admin/thietbi"><i class="ti-check btn-icon-prepend"></i>Hoàn thành</a>
+                </button>
                             <button id="addButton" type="button" class="btn btn-primary btn-icon-text btn-rounded">
                                 <a href="adddevice" class="text-decoration-none link-dark"><i class="ti-plus btn-icon-prepend"></i>Thêm</a>
                             </button>
@@ -325,8 +328,13 @@
 </body>
 <script>
 
+
+     document.querySelector('.btn-hoanthanh').addEventListener('click', function() {
+        window.location.href = '/admin/thietbi'; // Chuyển hướng về trang quản lý thiết bị
+    });
    // Lấy danh sách tất cả các nút "Trash"
     var trashButtons = document.querySelectorAll('.table tbody button');
+
 
     // Xử lý sự kiện khi click vào nút "Trash"
     trashButtons.forEach(function(button) {

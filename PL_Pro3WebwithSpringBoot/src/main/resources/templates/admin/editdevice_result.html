@@ -258,6 +258,9 @@ input[type=number] {
                             <h4 class="font-weight-bold mb-0">Quản lý thiết bị</h4>
                         </div>
                         <div>
+                            <button type="button" class="btn btn-primary btn-icon-text btn-rounded">
+                    <a href="/admin/thietbi"><i class="ti-check btn-icon-prepend"></i>Hoàn thành</a>
+                </button>
                             <button id="addButton" type="button" class="btn btn-primary btn-icon-text btn-rounded">
                                 <a href="adddevice" class="text-decoration-none link-dark"><i class="ti-plus btn-icon-prepend"></i>Thêm</a>
                             </button>
@@ -370,6 +373,9 @@ input[type=number] {
   
 </body>
 <script>
+     document.querySelector('.btn-hoanthanh').addEventListener('click', function() {
+        window.location.href = '/admin/thietbi'; // Chuyển hướng về trang quản lý thiết bị
+    });
     // Lấy các phần tử DOM
     const addButton = document.getElementById('addButton');
     const addFormContainer = document.getElementById('addFormContainer');
