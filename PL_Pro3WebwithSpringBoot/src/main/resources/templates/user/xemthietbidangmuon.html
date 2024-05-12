@@ -34,7 +34,16 @@
           </button>
 
           <ul class="navbar-nav mr-lg-2">
-
+              <!--                        <li class="nav-item nav-search d-none d-lg-block">
+                                              <div class="input-group">
+                                                  <div class="input-group-prepend hover-cursor" id="navbar-search-icon">
+                                                      <span class="input-group-text" id="search">
+                                                          <i class="ti-search"></i>
+                                                      </span>
+                                                  </div>
+                                                  <input type="text" class="form-control" id="navbar-search-input" placeholder="Search now" aria-label="search" aria-describedby="search">
+                                              </div>
+                                          </li>-->
           </ul>
           <ul class="navbar-nav navbar-nav-right">
               <li class="nav-item dropdown me-1">
@@ -195,27 +204,9 @@
       <div class="main-panel">
         <div class="content-wrapper">
             <div class="container">
-                 <div class="row justify-content-center mt-4">
-                  
-                  <div class="col-md-10 px-4 bg-white pt-3">
-                    <form action="/user/datchomuonthietbi/resultSearch" method="GET">
-                      <ul class="navbar-nav mr-lg-2">
-                        <li class="nav-item nav-search d-none d-lg-block">
-                          <div class="input-group">
-                            <div class="input-group-prepend hover-cursor" id="navbar-search-icon">
-                              <span class="input-group-text" id="search">
-                                
-                                <button type="submit"> <i class="ti-search"></i></button>
-                              </span>
-                            </div>
-                            <input type="text"  name="searchTerm" th:value="${searchTerm}" class="form-control" id="navbar-search-input" placeholder="Search now" aria-label="search" aria-describedby="search">
-                          </div>
-                        </li>
-                      </ul>
-                    </form>
-                  </div>
+                 <div class="row justify-content-center mt-4">                 
                     <div class="sticky-top col-md-10 px-4 bg-white pt-3">
-                         <h2 class="text-center  sticky-top  ">Danh sách thiết bị có thể đặt chổ mượn</h2>
+                         <h2 class="text-center  sticky-top  ">Danh sách thiết bị bạn đang mượn</h2>
                     </div>
                     <div class="col-md-10 bg-white px-4 table-wrapper-scroll-y my-custom-scrollbar">
                        
@@ -225,24 +216,21 @@
                                     <th scope="col">Mã thiết bị</th>
                                     <th scope="col">Tên thiết bị</th>
                                     <th scope="col">Mô tả thiết bị</th>
-                                    <th scope="col" class="text-center">Hành động</th>
+                                    <th scope="col">Tên sinh viên mượn thiết bị</th>
+                                    <th scope="col">Thời gian mượn</th>
                                     
                                     
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr th:each="thietBi : ${thietBis}">
-                                    <td th:text="${thietBi.maTB}"></td>
-                                    <td th:text="${thietBi.tenTB}"></td>
-                                    <td th:text="${thietBi.moTaTB}"></td>
-                                    <td class="text-center">
-                                        <form th:action="@{/user/datchomuonthietbi/result}" method="get">
-                                            <input type="hidden" name="maThietBi" id="maThietBi" th:value="${thietBi.maTB}" />
-                                            <button type="submit" class="btn btn-primary">Đặt chổ mượn</button>
-                                        </form>
-                                    </td>
+                                <tr th:each="thongTinSDDTO : ${thanhVienMuonTB}">
+                                    <td th:text="${thongTinSDDTO.thietBi.maTB}"></td>
+                                    <td th:text="${thongTinSDDTO.thietBi.tenTB}"></td>
+                                    <td th:text="${thongTinSDDTO.thietBi.moTaTB}"></td>
+                                    <td th:text="${thongTinSDDTO.thanhVien.hoTen}"></td>
+                                    <td th:text="${thongTinSDDTO.tgMuon}"></td>
                                     
-                                </tr>            
+                                </tr>             
                             </tbody>
 
                         </table>
@@ -291,3 +279,4 @@
 </body>
 
 </html>
+

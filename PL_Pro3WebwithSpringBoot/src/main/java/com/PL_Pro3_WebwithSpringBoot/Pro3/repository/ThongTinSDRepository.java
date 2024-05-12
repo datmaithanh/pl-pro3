@@ -32,15 +32,16 @@ public interface ThongTinSDRepository extends JpaRepository<ThongTinSD, Object>,
     List<ThongTinSD> findThongTinSDDaDatCho();
 
 
-    
-
     @Query("SELECT sd " +
         "FROM ThongTinSD sd " +
         "WHERE (sd.tgDatCho IS NOT NULL AND sd.tgMuon IS NULL AND CURRENT_TIMESTAMP - sd.tgDatCho <= 1 HOUR)" +
         "AND (sd.thanhVien.maTV = :maThanhVien)")
     List<ThongTinSD> findThanhVienDatChoMuonThietBi(int maThanhVien);
-
     
-     
-    List<ThongTinSD> findAll(Specification<ThongTinSD> spec);
+
+    @Query("SELECT sd " +
+        "FROM ThongTinSD sd " +
+        "WHERE (sd.tgMuon IS NOT NULL AND sd.tgTra IS NULL)" +
+        "AND (sd.thanhVien.maTV = :maThanhVien)")
+    List<ThongTinSD> findThanhVienDangMuonThietBi(int maThanhVien);
 }

@@ -68,6 +68,12 @@ public class ThongTinSDUserServiceImpl implements ThongTinSDUserService {
         List<ThongTinSD> thongTinSDs = thongTinSDRepository.findThanhVienDatChoMuonThietBi(maThanhVien);
         return thongTinSDs.stream().map((thongTinSD ->mapToThongTinSD(thongTinSD))).collect(Collectors.toList());
     }
+
+    @Override
+    public List<ThongTinSDDTO> getThongTinSDDangMuonTB(int maThanhVien){
+        List<ThongTinSD> thongTinSDs = thongTinSDRepository.findThanhVienDangMuonThietBi(maThanhVien);
+        return thongTinSDs.stream().map((thongTinSD ->mapToThongTinSD(thongTinSD))).collect(Collectors.toList());
+    }
     
     private  ThongTinSDDTO mapToThongTinSD(ThongTinSD thongTinSD){
         ThongTinSDDTO thongTinSDDTO = ThongTinSDDTO.builder()

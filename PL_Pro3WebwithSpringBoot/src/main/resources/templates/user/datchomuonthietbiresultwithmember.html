@@ -161,27 +161,36 @@
             <!-- partial:partials/_sidebar.html -->
             <nav class="sidebar sidebar-offcanvas" id="sidebar">
                 <ul class="nav">
-                  <li class="nav-item">
-                    <a class="nav-link" href="index.html">
-                      <i class="ti-shield menu-icon"></i>
-                      <span class="menu-title">Dashboard</span>
-                    </a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link" href="user/datchomuonthietbi" >
-                      <span class="menu-title">Đặt chổ mượn thiết bị</span>
-                    </a>
-                  
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link" href="pages/forms/basic_elements.html">
-                      <i class="ti-layout-list-post menu-icon"></i>
-                      <span class="menu-title">Vi phạm</span>
-                    </a>
-                  </li>
-                  
-                </ul>
-              </nav>
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/user/vipham}">
+                            <i class="ti-alert menu-icon"></i>
+                            <span class="menu-title">Xem trạng thái vi phạm</span>
+    
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/user/datchomuonthietbi}">
+                            <i class="ti-flag menu-icon"></i>
+                            <span class="menu-title">Đặt chổ mượn thiết bị</span>
+    
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/user/xemdatchomuonthietbi}">
+                            <i class="ti-flag-alt menu-icon"></i>
+                            <span class="menu-title">Xem đặt chổ mượn của tôi</span>
+    
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/user/xemthietbidangmuon}">
+                            <i class="ti-eye menu-icon"></i>
+                            <span class="menu-title">Xem thiết bị đang mượn</span>
+        
+                        </a>
+                    </li>
+                </ul>   
+            </nav>
       <!-- partial -->
       <div class="main-panel">
         <div class="content-wrapper">

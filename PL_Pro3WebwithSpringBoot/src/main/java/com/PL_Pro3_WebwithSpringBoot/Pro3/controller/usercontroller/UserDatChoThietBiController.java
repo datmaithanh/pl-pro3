@@ -134,8 +134,14 @@ public class UserDatChoThietBiController {
 
         ThanhVien thanhViens = (ThanhVien) session.getAttribute("thanhVien");
         List<ThongTinSDDTO> thanhVienthongTinSDDTOs = thongTinSDUserService.getThanhVienSDDaDatCho(thanhViens.getMaTV());
-        model.addAttribute("thanhVienthongTinSDDTO", thanhVienthongTinSDDTOs);
-        return "user/xemdatchomuonthietbi";
+
+        if(thanhVienthongTinSDDTOs.isEmpty()){
+            return "user/khongcothongtin";
+        }
+        else {
+            model.addAttribute("thanhVienthongTinSDDTO", thanhVienthongTinSDDTOs);
+            return "user/xemdatchomuonthietbi";
+        }
     }
 
     @GetMapping("/user/xemdatchomuonthietbiresult")
@@ -166,6 +172,21 @@ public class UserDatChoThietBiController {
         model.addAttribute("maThanhVien", maThanhVien);
 
         return "user/xemdatchomuonthietbiresultfinal";
+    }
+
+    @GetMapping("/user/xemthietbidangmuon")
+    public String xemThietBiDangMuon(HttpSession session, Model model) {
+        
+        ThanhVien thanhViens = (ThanhVien) session.getAttribute("thanhVien");
+        List<ThongTinSDDTO> thanhVienMuonTBs = thongTinSDUserService.getThongTinSDDangMuonTB(thanhViens.getMaTV());
+
+        if(thanhVienMuonTBs.isEmpty()){
+            return "user/khongcothongtin";
+        }
+        else {
+            model.addAttribute("thanhVienMuonTB", thanhVienMuonTBs);
+            return "user/xemthietbidangmuon";
+        }  
     }
 
 }
