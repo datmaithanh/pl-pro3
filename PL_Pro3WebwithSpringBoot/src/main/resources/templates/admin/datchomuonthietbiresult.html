@@ -276,11 +276,12 @@
 <script>
 document.querySelectorAll('form').forEach(function(form) {
     form.addEventListener('submit', function(e) {
-        var thoiGianMuon = new Date(this.querySelector('[name="thoiGianMuon"]').value);
+        var thoiGianMuonString = this.querySelector('[name="thoiGianMuon"]').value;
         var gioMuonInput = this.querySelector('[name="gioMuon"]');
         var gioMuonParts = gioMuonInput.value.split(':');
         var gio = parseInt(gioMuonParts[0]);
         var phut = parseInt(gioMuonParts[1]);
+        var thoiGianMuon = new Date(thoiGianMuonString + 'T' + gioMuonInput.value + ':00'); // Tạo đối tượng Date từ ngày và giờ
         var now = new Date();
 
         // Kiểm tra nếu thời gian muốn đặt chưa qua
@@ -297,12 +298,12 @@ document.querySelectorAll('form').forEach(function(form) {
             }
         } else {
             e.preventDefault();
-            alert('Thời gian đã qua không thể chọn!');
+            alert('Quá thời gian đặt chổ, thời gian đã qua!');
         }
     });
 });
-
 </script>
+
   <!-- plugins:js -->
   <script src="/vendors/base/vendor.bundle.base.js"></script>
   <!-- endinject -->
