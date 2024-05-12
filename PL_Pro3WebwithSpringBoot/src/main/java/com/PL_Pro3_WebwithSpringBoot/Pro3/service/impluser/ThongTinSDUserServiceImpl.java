@@ -15,14 +15,13 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class ThongTinSDUserServiceImpl implements ThongTinSDUserService {
-    @Autowired
-    ThongTinSDRepository repository;
+    private ThongTinSDRepository thongTinSDRepository;
 
     @Override
     public Optional<ThongTinSD> findByThanhVien(ThanhVien thanhVien) {
-        return repository.findByThanhVien(thanhVien);
+        return thongTinSDRepository.findByThanhVien(thanhVien);
     }
-    private ThongTinSDRepository thongTinSDRepository;
+    
     
     @Autowired
     public ThongTinSDUserServiceImpl(ThongTinSDRepository thongTinSDRepository) {
@@ -68,6 +67,12 @@ public class ThongTinSDUserServiceImpl implements ThongTinSDUserService {
     @Override
     public List<ThongTinSDDTO> getThanhVienSDDaDatCho(int maThanhVien) {
         List<ThongTinSD> thongTinSDs = thongTinSDRepository.findThanhVienDatChoMuonThietBi(maThanhVien);
+        return thongTinSDs.stream().map((thongTinSD ->mapToThongTinSD(thongTinSD))).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<ThongTinSDDTO> getThongTinSDDangMuonTB(int maThanhVien){
+        List<ThongTinSD> thongTinSDs = thongTinSDRepository.findThanhVienDangMuonThietBi(maThanhVien);
         return thongTinSDs.stream().map((thongTinSD ->mapToThongTinSD(thongTinSD))).collect(Collectors.toList());
     }
     

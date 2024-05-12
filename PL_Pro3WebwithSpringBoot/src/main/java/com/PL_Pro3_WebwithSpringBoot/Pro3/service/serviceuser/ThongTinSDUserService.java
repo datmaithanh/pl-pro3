@@ -26,6 +26,8 @@ public interface ThongTinSDUserService {
 
     List<ThongTinSDDTO> getThanhVienSDDaDatCho(int maThanhVien);
 
+    List<ThongTinSDDTO> getThongTinSDDangMuonTB(int maThanhVien);
+
     void deleteThongTinSDId(int thongTinSDId);
 
 }

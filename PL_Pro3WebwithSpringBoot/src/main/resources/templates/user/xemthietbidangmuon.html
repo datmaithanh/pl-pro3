@@ -204,55 +204,43 @@
       <div class="main-panel">
         <div class="content-wrapper">
             <div class="container">
-                <div class="row justify-content-center">
-    <!-- Form xác nhận mượn thiết bị -->
-    <div class="col-md-5 bg-white p-4">
-        
-        <h2 class="text-center mb-4">Xác nhận hủy đặt chổ mượn thiết bị</h2>
-        <form action="/user/xemdatchomuonthietbiresultfinal" method="GET">
-            <!-- Input hidden để truyền mã thiết bị và mã thành viên-->
-            <input type="hidden" id="maThietBi" name="maThietBi" th:value="${thietBi.maTB}" />
-            <input type="hidden" id="maThanhVien" name="maThanhVien" th:value="${thanhVien.maTV}" />
-            
-            <div class="text-center mb-4">
-                <a href="/user/huydatchomuonthietbi" class="btn btn-primary">Hủy</a>
-                <button type="submit" class="btn btn-primary">Xác nhận</button>  
-            </div>
-        </form>
+                 <div class="row justify-content-center mt-4">                 
+                    <div class="sticky-top col-md-10 px-4 bg-white pt-3">
+                         <h2 class="text-center  sticky-top  ">Danh sách thiết bị bạn đang mượn</h2>
+                    </div>
+                    <div class="col-md-10 bg-white px-4 table-wrapper-scroll-y my-custom-scrollbar">
+                       
+                        <table class="table table-bordered mx-auto ">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Mã thiết bị</th>
+                                    <th scope="col">Tên thiết bị</th>
+                                    <th scope="col">Mô tả thiết bị</th>
+                                    <th scope="col">Tên sinh viên mượn thiết bị</th>
+                                    <th scope="col">Thời gian mượn</th>
+                                    
+                                    
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr th:each="thongTinSDDTO : ${thanhVienMuonTB}">
+                                    <td th:text="${thongTinSDDTO.thietBi.maTB}"></td>
+                                    <td th:text="${thongTinSDDTO.thietBi.tenTB}"></td>
+                                    <td th:text="${thongTinSDDTO.thietBi.moTaTB}"></td>
+                                    <td th:text="${thongTinSDDTO.thanhVien.hoTen}"></td>
+                                    <td th:text="${thongTinSDDTO.tgMuon}"></td>
+                                    
+                                </tr>             
+                            </tbody>
 
-        <!-- Thông báo vi phạm (nếu có) -->
-        
-    </div>
-    <!-- Thông tin chi tiết của thiết bị cần mượn -->
-    <div class="col-md-7 bg-white p-4">
-        <h2 class="text-center mb-4">Thông tin thiết bị đã đặt chổ mượn</h2>
-        <table class="table table-bordered mx-auto ">
-            <thead>
-                <tr>
-                    <th scope="col">Mã thiết bị</th>
-                    <th scope="col">Tên thiết bị</th>
-                    <th scope="col">Mô tả thiết bị</th>
-                    <th scope="col">Tên sinh viên đặt chổ mượn</th>
-                    <th scope="col">Thời gian mượn</th>
-                </tr>
-            </thead>
-            <tbody>
-                <!-- Hiển thị thông tin chi tiết của thiết bị cần mượn -->
-                <tr>
-                    <td th:text="${thietBi.maTB}"></td>
-                    <td th:text="${thietBi.tenTB}"></td>
-                    <td th:text="${thietBi.moTaTB}"></td>
-                    <td th:text="${thanhVien.hoTen}"></td>
-                    <td th:text="${thoiGianMuon}"></td>
-                </tr>            
-            </tbody>
-        </table>
-        
-    </div>
-</div>
-
-            </div>
-
+                        </table>
+                    </div>
+                    <div class="text-center mb-4 mt-4" >
+                      <a href="/user/huydatchomuonthietbi"><button  class="btn btn-primary">Trở về</button></a>
+                    </div>
+                </div>
+                    
+                </div>
         </div>
         <!-- content-wrapper ends -->
         <!-- partial:partials/_footer.html -->
@@ -263,6 +251,8 @@
           </div>
         </footer>
         <!-- partial -->
+      </div>
+        
       </div>
       <!-- main-panel ends -->
     </div>
