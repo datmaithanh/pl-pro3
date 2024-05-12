@@ -21,6 +21,7 @@ import lombok.Setter;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
+
 public class ThietBiDTO {
     @NotEmpty(message = "MaTB không thể bỏ trống")
     private int maTB;

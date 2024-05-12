@@ -30,13 +30,7 @@ public interface ThongTinSDRepository extends JpaRepository<ThongTinSD, Integer>
     List<ThongTinSD> findThongTinSDDaDatCho();
 
 
-    // @Query("SELECT tv " +
-    //         "FROM ThanhVien tv " +
-    //         "WHERE tv.maTV IN (" +
-    //                         "SELECT sd.thanhVien.maTV " +
-    //                         "FROM ThongTinSD sd " +
-    //                         "WHERE (sd.tgDatCho IS NOT NULL AND sd.tgMuon IS NULL AND CURRENT_TIMESTAMP - sd.tgDatCho <= 1 HOUR))" +
-    //                         "AND (tv.maTV LIKE :maThanhVien)")
+    
 
     @Query("SELECT sd " +
         "FROM ThongTinSD sd " +
@@ -44,4 +38,5 @@ public interface ThongTinSDRepository extends JpaRepository<ThongTinSD, Integer>
         "AND (sd.thanhVien.maTV = :maThanhVien)")
     List<ThongTinSD> findThanhVienDatChoMuonThietBi(int maThanhVien);
 
+    
 }

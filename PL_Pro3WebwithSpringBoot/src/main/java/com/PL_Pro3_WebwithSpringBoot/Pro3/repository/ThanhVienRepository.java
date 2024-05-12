@@ -6,13 +6,14 @@ package com.PL_Pro3_WebwithSpringBoot.Pro3.repository;
 
 import com.PL_Pro3_WebwithSpringBoot.Pro3.models.ThanhVien;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Repository;
+import java.util.Optional;
+
 
 /**
  *
  * @author Lenovo
  */
-@Repository
-public interface ThanhVienRepository extends JpaRepository<ThanhVien, Integer> {
-    ThanhVien findByMaTVAndPassword(int maTV, String password);
+public interface ThanhVienRepository extends JpaRepository<ThanhVien, Object>{
+     Optional<ThanhVien> findByMaTV(int url);
+     ThanhVien findByMaTVAndPassword(int maTV, String password);
 }

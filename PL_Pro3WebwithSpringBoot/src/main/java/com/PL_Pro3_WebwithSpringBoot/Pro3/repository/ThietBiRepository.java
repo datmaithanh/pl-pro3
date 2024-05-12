@@ -1,28 +1,25 @@
 /*
-     * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
-     * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Interface.java to edit this template
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Interface.java to edit this template
  */
 package com.PL_Pro3_WebwithSpringBoot.Pro3.repository;
 
-import com.PL_Pro3_WebwithSpringBoot.Pro3.models.ThietBi;
 
+
+import com.PL_Pro3_WebwithSpringBoot.Pro3.models.ThietBi;
 import java.util.List;
 import java.util.Optional;
-
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
-import org.springframework.stereotype.Repository;
 
 /**
  *
  * @author Lenovo
  */
-@Repository
-public interface ThietBiRepository extends JpaRepository<ThietBi, Integer> {
-    Optional<ThietBi> findByTenTB(String url);
+public interface ThietBiRepository extends JpaRepository<ThietBi, Integer>{
+     Optional<ThietBi> findByTenTB(String url);
   
-     
-     
+
     @Query("SELECT tb " +
        "FROM ThietBi tb " +
        "WHERE tb.maTB NOT IN (" +
@@ -31,7 +28,7 @@ public interface ThietBiRepository extends JpaRepository<ThietBi, Integer> {
            "WHERE (tts.tgMuon IS NOT NULL AND tts.tgTra IS NULL) OR " +
                  "(tts.tgMuon IS NULL AND tts.tgTra IS NULL AND tts.tgDatCho IS NOT NULL AND CURRENT_TIMESTAMP - tts.tgDatCho <= 1 HOUR)" +
        ")")
-List<ThietBi> findThietBiNotInThongTinSD();
+    List<ThietBi> findThietBiNotInThongTinSD();
 
 
 
