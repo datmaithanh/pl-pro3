@@ -61,14 +61,6 @@ public class AdminThanhVienController {
     private ThongTinSDAdminService thongTinSDAdminService;
     private ThietBiAdminService thietBiAdminService;
 
-//    @Autowired    
-//    public AdminThanhVienController(ThanhVienAdminService thanhVienAdminService, XuLyAdminService xuLyAdminService,ThongTinSDAdminService thongTinSDAdminService, ThietBiAdminService thietBiAdminService ){
-//        this.thanhVienAdminService = thanhVienAdminService;
-//        this.xuLyAdminService = xuLyAdminService;
-//        this.thongTinSDAdminService = thongTinSDAdminService;
-//        this.thietBiAdminService = thietBiAdminService;
-//        
-//    }
 
     @Autowired
     public AdminThanhVienController(ThanhVienAdminService thanhVienAdminService, ThanhVienRepository thanhVienRepository, XuLyAdminService xuLyAdminService, ThongTinSDAdminService thongTinSDAdminService, ThietBiAdminService thietBiAdminService) {
