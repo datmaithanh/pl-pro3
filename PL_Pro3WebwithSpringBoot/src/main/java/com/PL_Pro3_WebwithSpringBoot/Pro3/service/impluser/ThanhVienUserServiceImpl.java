@@ -20,8 +20,11 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class ThanhVienUserServiceImpl implements ThanhVienUserService {
+    private ThanhVienRepository thanhVienRepository;
     @Autowired
-    ThanhVienRepository thanhVienRepository;
+    public ThanhVienUserServiceImpl(ThanhVienRepository thanhVienRepository) {
+        this.thanhVienRepository = thanhVienRepository;
+    }
 
     @Override
     public Optional<ThanhVien> findById(Integer id) {
@@ -40,7 +43,6 @@ public class ThanhVienUserServiceImpl implements ThanhVienUserService {
             return true;
         return false;
     }
-    
     
     @Override
     public List<ThanhVienDTO> getAllThanhVien() {

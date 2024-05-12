@@ -13,15 +13,23 @@ import java.util.List;
  * @author Lenovo
  */
 public interface ThietBiAdminService {
+    
+
     List<ThietBiDTO> getAllThietBiDTOs();
     
+    ThietBi AddThietBi(ThietBiDTO thietBiDTO);
+
     ThietBiDTO getThietBiDTOByID(int thietBiID);
+    ThietBi getThietBiByID(int thietBiID);
+
+    void updateThietBi(ThietBiDTO thietBiDTO);
+    boolean updateThietBi(int id, ThietBiDTO thietBiDTO);
+    List<ThietBiDTO> getAllThietBi();
     
+    boolean deleteThietBiByID(int thietBiID);
+    
+    boolean isMaTBExisting(int maTB);
     List<ThietBiDTO> getThietBiNotInThongTinSDs();
     
-    ThietBi getThietBiByID(int thietBiID);
-    
     List<ThietBiDTO> getThietBiDaMuon();
-    
-    
 }

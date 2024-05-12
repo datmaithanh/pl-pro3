@@ -25,19 +25,16 @@ public class XuLyUserServiceImpl implements XuLyUserService{
     private XuLyRepository xuLyRepository;
     private ThanhVienRepository thanhVienRepository;
     
-    @Autowired
-    XuLyRepository repository;
 
-    @Override
-    public List<XuLy> findByThanhVien(ThanhVien tv) {
-        return repository.findByThanhVien(tv);
-    }
-    
-    
     @Autowired
     public XuLyUserServiceImpl(XuLyRepository xuLyRepository, ThanhVienRepository thanhVienRepository) {
         this.xuLyRepository = xuLyRepository;
         this.thanhVienRepository = thanhVienRepository;
+    }
+
+    @Override
+    public List<XuLy> findByThanhVien(ThanhVien tv) {
+        return xuLyRepository.findByThanhVien(tv);
     }
     
     

@@ -29,7 +29,6 @@ import com.PL_Pro3_WebwithSpringBoot.Pro3.service.serviceuser.ThanhVienUserServi
 import com.PL_Pro3_WebwithSpringBoot.Pro3.service.serviceuser.ThietBiUserService;
 import com.PL_Pro3_WebwithSpringBoot.Pro3.service.serviceuser.ThongTinSDUserService;
 import com.PL_Pro3_WebwithSpringBoot.Pro3.service.serviceuser.XuLyUserService;
-
 import jakarta.servlet.http.HttpSession;
 
 /**
@@ -38,7 +37,6 @@ import jakarta.servlet.http.HttpSession;
  */
 @Controller
 public class UserDatChoThietBiController {
-
     private ThietBiUserService thietBiUserService;
     private ThanhVienUserService thanhVienUserService;
     private ThongTinSDUserService thongTinSDUserService;

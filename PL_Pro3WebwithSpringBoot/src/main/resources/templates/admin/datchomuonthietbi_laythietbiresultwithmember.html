@@ -175,31 +175,41 @@
             </a>
             <div class="collapse" id="ui-basic">
               <ul class="nav flex-column sub-menu">
+                <li class="nav-item"> <a class="nav-link" href="/admin/thanhvien">Quản lý thành viên</a></li>
                 <li class="nav-item"> <a class="nav-link" href="/admin/kiemtravipham">Kiểm tra vi phạm</a></li>
                 <li class="nav-item"> <a class="nav-link" href="/admin/vaokhuhoctap">Vào khu học tập</a></li>
                 <li class="nav-item"> <a class="nav-link" href="/admin/muonthietbi">Mượn thiết bị</a></li>
                 <li class="nav-item"> <a class="nav-link" href="/admin/trathietbi">Trả thiết bị</a></li>
                 <li class="nav-item"> <a class="nav-link" href="/admin/datchomuonthietbi">Đặt chổ mượn thiết bị</a></li>
+                
               </ul>
             </div>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="pages/forms/basic_elements.html">
+            <a class="nav-link" href="/admin/thietbi">
               <i class="ti-layout-list-post menu-icon"></i>
-              <span class="menu-title">Quản lý thiết bị</span>
+              <span class="menu-title" id="QLTV">Quản lý thiết bị</span>
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="pages/charts/chartjs.html">
+            <a class="nav-link" href="/admin/xulyvipham">
               <i class="ti-pie-chart menu-icon"></i>
               <span class="menu-title">Xử lý vi phạm</span>
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="pages/tables/basic-table.html">
+            <a class="nav-link" data-bs-toggle="collapse" href="#ui-basic2" aria-expanded="false" aria-controls="ui-basic2">
               <i class="ti-view-list-alt menu-icon"></i>
               <span class="menu-title">Thống kê</span>
+              <i class="menu-arrow"></i>
             </a>
+            <div class="collapse" id="ui-basic2">
+              <ul class="nav flex-column sub-menu">
+                <li class="nav-item"> <a class="nav-link" href="/admin/thongke-soluongvaoKHT">Khu học tập</a></li>
+                <li class="nav-item"> <a class="nav-link" href="/admin/thongke-thietbi">Thiết bị</a></li>
+                <li class="nav-item"> <a class="nav-link" href="/admin/thongke-vipham">Vi phạm</a></li>             
+              </ul>
+            </div>
           </li>
           
         </ul>
@@ -232,13 +242,13 @@
         </div>
         
             <div th:if="${coViPham}" class="alert alert-danger col-md-6 mt-4" role="alert">
-                <strong>Thông báo: Trả thiết bị không thành công</strong>
+                <strong>Thông báo: Lấy thiết bị không thành công</strong>
                 <ul>
                     <li th:each="msg : ${messages}" th:text="${msg}"></li>
                 </ul>
             </div>
             <div th:unless="${coViPham}" class="alert alert-success col-md-7 mt-4" role="alert">
-                <strong>Thông báo: Trả thiết bị thành công </strong>
+                <strong>Thông báo: Lấy thiết bị thành công </strong>
                 <ul>
                     <li th:each="msg : ${messages}" th:text="${msg}"></li>
                 </ul>

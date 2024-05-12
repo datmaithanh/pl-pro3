@@ -2,19 +2,21 @@ package com.PL_Pro3_WebwithSpringBoot.Pro3.repository;
 
 import com.PL_Pro3_WebwithSpringBoot.Pro3.models.ThanhVien;
 import com.PL_Pro3_WebwithSpringBoot.Pro3.models.ThongTinSD;
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
-import org.springframework.stereotype.Repository;
-
 import java.util.List;
-import java.util.Optional; 
+import java.util.Optional;
+import org.springframework.data.jpa.domain.Specification;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
+import org.springframework.data.jpa.repository.Query;
+
+
+
 
 /**
  *
  * @author Lenovo
  */
-@Repository
-public interface ThongTinSDRepository extends JpaRepository<ThongTinSD, Integer> {
+public interface ThongTinSDRepository extends JpaRepository<ThongTinSD, Object>, JpaSpecificationExecutor<ThongTinSD>{
     Optional<ThongTinSD> findByThanhVien(ThanhVien thanhVien);
     Optional<ThongTinSD> findByMaTT(int maTT);
      
@@ -39,4 +41,6 @@ public interface ThongTinSDRepository extends JpaRepository<ThongTinSD, Integer>
     List<ThongTinSD> findThanhVienDatChoMuonThietBi(int maThanhVien);
 
     
+     
+    List<ThongTinSD> findAll(Specification<ThongTinSD> spec);
 }

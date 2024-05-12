@@ -13,6 +13,7 @@ import java.util.List;
  * @author Lenovo
  */
 public interface ThanhVienAdminService {
+    
     List<ThanhVienDTO> getAllThanhVien();
     
     ThanhVien AddThanhVien(ThanhVienDTO thanhVienDTO);
@@ -22,6 +23,14 @@ public interface ThanhVienAdminService {
     ThanhVien getThanhVienById(int thanhVienID);
 
     void updateThanhVien(ThanhVienDTO thanhVienDTO);
+    boolean updateThanhVien(int id, ThanhVienDTO thanhVienDTO);
     
-    void deleteThanhVienByID(int thanhVienID);
+    boolean deleteThanhVienByID(int thanhVienID);
+    
+    List<String> getAllNganh();   
+    List<String> getAllKhoa();
+
+    public boolean isMaTVExisting(int maTV);
+    public boolean isExistingEmail(String email);
+    public boolean isExistingSDT(String sdt);
 }

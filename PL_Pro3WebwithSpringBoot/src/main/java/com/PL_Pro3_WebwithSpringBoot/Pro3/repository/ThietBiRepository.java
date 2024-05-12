@@ -5,9 +5,8 @@
 package com.PL_Pro3_WebwithSpringBoot.Pro3.repository;
 
 
-
 import com.PL_Pro3_WebwithSpringBoot.Pro3.models.ThietBi;
-import java.util.List;
+import java.util.List; 
 import java.util.Optional;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -16,10 +15,12 @@ import org.springframework.data.jpa.repository.Query;
  *
  * @author Lenovo
  */
+
 public interface ThietBiRepository extends JpaRepository<ThietBi, Integer>{
      Optional<ThietBi> findByTenTB(String url);
-  
-
+     Optional<ThietBi> findByMaTB(int maTB);
+     
+     
     @Query("SELECT tb " +
        "FROM ThietBi tb " +
        "WHERE tb.maTB NOT IN (" +
@@ -64,6 +65,4 @@ public interface ThietBiRepository extends JpaRepository<ThietBi, Integer>{
     )
 
    List<ThietBi> searchThietBiNotInThongTinSD(String searchTerm);
-    
-
 }

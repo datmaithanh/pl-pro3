@@ -17,6 +17,7 @@ import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+
 /**
  *
  * @author Lenovo
@@ -59,6 +60,27 @@ public class XuLyAdminServiceImpl implements XuLyAdminService{
     }
 
     @Override
+    public List<ThanhVienDTO> getAllThanhVien() {
+        List<ThanhVien> thanhViens = thanhVienRepository.findAll();
+
+        return thanhViens.stream().map((club -> mapToThanhVienDTO(club))).collect(Collectors.toList());
+    }
+
+    private ThanhVienDTO mapToThanhVienDTO(ThanhVien thanhVien) {
+        ThanhVienDTO thanhVienDTO = ThanhVienDTO.builder()
+                .maTV(thanhVien.getMaTV())
+                .hoTen(thanhVien.getHoTen())
+                .khoa(thanhVien.getKhoa())
+                .nganh(thanhVien.getNganh())
+                .sdt(thanhVien.getSdt())
+                .email(thanhVien.getEmail())
+                .password(thanhVien.getPassword())
+                .build();
+
+        return thanhVienDTO;
+    }
+
+    @Override
     public XuLyDTO getXuLyByID(int xuLyID) {
         XuLy xuLy = xuLyRepository.findById(xuLyID).get();
         return mapToXuLyDTO(xuLy);
@@ -68,6 +90,46 @@ public class XuLyAdminServiceImpl implements XuLyAdminService{
     public List<XuLy> getXuLyByMaTV(int maTV) {
         List<XuLy> xuLys = xuLyRepository.findByThanhVien_MaTV(maTV);
         return xuLys;
+    }
+
+    private XuLy mapToXuLy(int maTV, XuLyDTO xuLyDTO) {
+
+        ThanhVien thanhVien = thanhVienRepository.findById(maTV).get();
+
+        XuLy xuLy = XuLy.builder()
+                .maXL(xuLyDTO.getMaXL())
+                .thanhVien(thanhVien)
+                .hinhThucXL(xuLyDTO.getHinhThucXL())
+                .soTien(xuLyDTO.getSoTien())
+                .ngayXL(xuLyDTO.getNgayXL())
+                .trangThaiXL(xuLyDTO.getTrangThaiXL())
+                .build();
+        return xuLy;
+    }
+
+    public XuLy AddXuLy(int maTV, XuLyDTO xuLyDTO) {
+        XuLy xuLy = mapToXuLy(maTV, xuLyDTO);
+        return xuLyRepository.save(xuLy);
+
+    }
+
+    @Override
+    public void deleteXuLyByID(int xuLyID) {
+        xuLyRepository.deleteById(xuLyID);
+    }
+
+    @Override
+    public void updateXuLy(int id, XuLyDTO xuLyDTO) {
+        Optional<XuLy> optionalXuLy = xuLyRepository.findById(id);
+        if (optionalXuLy.isPresent()) {
+            XuLy existingXuLy = optionalXuLy.get();
+            existingXuLy.setSoTien(xuLyDTO.getSoTien());
+            existingXuLy.setHinhThucXL(xuLyDTO.getHinhThucXL());
+            existingXuLy.setNgayXL(xuLyDTO.getNgayXL());
+            existingXuLy.setTrangThaiXL(xuLyDTO.getTrangThaiXL());
+            xuLyRepository.save(existingXuLy);
+
+        }
     }
     
     

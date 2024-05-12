@@ -7,13 +7,27 @@ package com.PL_Pro3_WebwithSpringBoot.Pro3.repository;
 import com.PL_Pro3_WebwithSpringBoot.Pro3.models.ThanhVien;
 import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.Optional;
-
+import java.util.List;
+import org.springframework.data.jpa.repository.Query;
 
 /**
  *
  * @author Lenovo
  */
+
 public interface ThanhVienRepository extends JpaRepository<ThanhVien, Object>{
-     Optional<ThanhVien> findByMaTV(int url);
-     ThanhVien findByMaTVAndPassword(int maTV, String password);
+    ThanhVien findByMaTVAndPassword(int maTV, String password);
+    Optional<ThanhVien> findByMaTV(int maTV);
+    
+    @Query("SELECT tv FROM ThanhVien tv WHERE tv.email = :email")
+    List<ThanhVien> findByEmail(String email);
+    
+    @Query("SELECT tv FROM ThanhVien tv WHERE tv.sdt = :sdt")
+    List<ThanhVien> findBySDT(String sdt);
+
+    @Query("SELECT DISTINCT nganh FROM ThanhVien")
+    List<String> getAllNganh();
+    
+    @Query("SELECT DISTINCT khoa FROM ThanhVien")
+    List<String> getAllKhoa();
 }

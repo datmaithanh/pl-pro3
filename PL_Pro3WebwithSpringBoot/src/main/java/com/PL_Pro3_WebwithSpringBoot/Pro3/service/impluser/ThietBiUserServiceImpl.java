@@ -1,4 +1,4 @@
-/*
+    /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
@@ -22,6 +22,7 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class ThietBiUserServiceImpl implements ThietBiUserService{
+    private ThietBiRepository thietBiRepository;
     
     @Autowired
     ThietBiRepository repository;
@@ -34,12 +35,6 @@ public class ThietBiUserServiceImpl implements ThietBiUserService{
     @Override
     public List<ThietBi> findAll() {
         return repository.findAll();
-    }
-    private ThietBiRepository thietBiRepository;
-    
-    @Autowired
-    public ThietBiUserServiceImpl(ThietBiRepository thietBiRepository) {
-        this.thietBiRepository = thietBiRepository;
     }
     
     

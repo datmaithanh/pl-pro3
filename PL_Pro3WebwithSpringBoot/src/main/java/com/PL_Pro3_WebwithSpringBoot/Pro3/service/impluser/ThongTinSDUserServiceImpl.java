@@ -5,7 +5,6 @@ import com.PL_Pro3_WebwithSpringBoot.Pro3.models.ThanhVien;
 import com.PL_Pro3_WebwithSpringBoot.Pro3.models.ThongTinSD;
 import com.PL_Pro3_WebwithSpringBoot.Pro3.repository.ThongTinSDRepository;
 import com.PL_Pro3_WebwithSpringBoot.Pro3.service.serviceuser.ThongTinSDUserService;
-
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -15,19 +14,18 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class ThongTinSDUserServiceImpl implements ThongTinSDUserService {
-    @Autowired
-    ThongTinSDRepository repository;
-
-    @Override
-    public Optional<ThongTinSD> findByThanhVien(ThanhVien thanhVien) {
-        return repository.findByThanhVien(thanhVien);
-    }
     private ThongTinSDRepository thongTinSDRepository;
     
     @Autowired
     public ThongTinSDUserServiceImpl(ThongTinSDRepository thongTinSDRepository) {
         this.thongTinSDRepository = thongTinSDRepository;
     }
+
+    @Override
+    public Optional<ThongTinSD> findByThanhVien(ThanhVien thanhVien) {
+        return thongTinSDRepository.findByThanhVien(thanhVien);
+    }
+    
     
     
     @Override

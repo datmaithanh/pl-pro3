@@ -2,269 +2,532 @@
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 
 <head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Royal Admin</title>
-    <!--plugins:css -->
-    <link rel="stylesheet" href="../../vendors/ti-icons/css/themify-icons.css">
-    <link rel="stylesheet" href="../../vendors/base/vendor.bundle.base.css">
-    <!-- endinject -->
-    <!-- plugin css for this page -->
-    <!-- End plugin css for this page -->
-    <!-- inject:css -->
-    <link rel="stylesheet" th:href="@{../../css/style.css}">
-    <!-- endinject -->
-    <link rel="shortcut icon" href="../../images/favicon.png" />
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>Royal Admin</title>
+  <!-- plugins:css -->
+  <link rel="stylesheet" href="vendors/ti-icons/css/themify-icons.css">
+  <link rel="stylesheet" href="vendors/base/vendor.bundle.base.css">
+  <!-- endinject -->
+  <!-- plugin css for this page -->
+  <!-- End plugin css for this page -->
+  <!-- inject:css -->
+  <link rel="stylesheet" href="css/style.css">
+  <!-- endinject -->
+  <link rel="shortcut icon" href="images/favicon.png" />
 </head>
 
 <body>
-
-    <div class="container-scroller">
-        <!-- partial:partials/_navbar.html -->
-        <nav class="navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
-            <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
-                <a class="navbar-brand brand-logo me-5" th:href="@{/user/{maTV}}"><img src="../../images/logo.svg"
-                        class="me-2" alt="logo" /></a>
-                <a class="navbar-brand brand-logo-mini" href="index.html"><img src="../../images/logo-mini.svg"
-                        alt="logo" /></a>
+  <div class="container-scroller">
+    <div class="row p-0 m-0 proBanner" id="proBanner">
+      <div class="col-md-12 p-0 m-0">
+        <div class="card-body card-body-padding d-flex align-items-center justify-content-between">
+          <div class="ps-lg-1">
+            <div class="d-flex align-items-center justify-content-between">
+              <p class="mb-0 font-weight-medium me-3 buy-now-text">Free 24/7 customer support, updates, and more with this template!</p>
+              <a href="https://www.bootstrapdash.com/product/royalui/?utm_source=organic&utm_medium=banner&utm_campaign=buynow_demo" target="_blank" class="btn me-2 buy-now-btn border-0">Get Pro</a>
             </div>
-            <div class="navbar-menu-wrapper d-flex align-items-center justify-content-end bg-white">
-                <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
-                    <span class="ti-view-list"></span>
-                </button>
-
-                <ul class="navbar-nav mr-lg-2">
-                    
-                </ul>
-                <ul class="navbar-nav navbar-nav-right">
-                    <li class="nav-item dropdown me-1">
-                        
-                    </li>
-                    <li class="nav-item dropdown">
-                        
-                    </li>
-                    <li class="nav-item nav-profile dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" id="profileDropdown">
-                            <img src="../../images/faces/face28.jpg" alt="profile" />
-                        </a>
-                        <div class="dropdown-menu dropdown-menu-right navbar-dropdown"
-                            aria-labelledby="profileDropdown">
-                            <a th:href="@{/user/hoso}" class="dropdown-item">
-                                <i class="ti-user text-primary"></i>
-                                Hồ sơ
-                            </a>
-                            <a th:href="@{/user/doimatkhau}" class="dropdown-item" href>
-                                <i class="ti-key text-primary"></i>
-                                Đổi mật khẩu
-                            </a>
-                            <a th:href="@{/user/dangnhap}" class="dropdown-item">
-                                <i class="ti-power-off text-primary"></i>
-                                Đăng xuất
-                            </a>
-                        </div>
-                    </li>
-                </ul>
-                <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button"
-                    data-toggle="offcanvas">
-                    <span class="ti-view-list"></span>
-                </button>
+          </div>
+          <div class="d-flex align-items-center justify-content-between">
+            <a href="https://www.bootstrapdash.com/product/royalui/"><i class="ti-home me-3 text-white"></i></a>
+            <button id="bannerClose" class="btn border-0 p-0">
+              <i class="ti-close text-white me-0"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- partial:partials/_navbar.html -->
+    <nav class="navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
+      <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
+        <a class="navbar-brand brand-logo me-5" href="index.html"><img src="images/logo.svg" class="me-2" alt="logo"/></a>
+        <a class="navbar-brand brand-logo-mini" href="index.html"><img src="images/logo-mini.svg" alt="logo"/></a>
+      </div>
+      <div class="navbar-menu-wrapper d-flex align-items-center justify-content-end">
+        <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
+          <span class="ti-view-list"></span>
+        </button>
+        <ul class="navbar-nav mr-lg-2">
+          <li class="nav-item nav-search d-none d-lg-block">
+            <div class="input-group">
+              <div class="input-group-prepend hover-cursor" id="navbar-search-icon">
+                <span class="input-group-text" id="search">
+                  <i class="ti-search"></i>
+                </span>
+              </div>
+              <input type="text" class="form-control" id="navbar-search-input" placeholder="Search now" aria-label="search" aria-describedby="search">
             </div>
-        </nav>
-        <!-- partial -->
-        <div class="container-fluid page-body-wrapper">
-            <!-- partial:partials/_sidebar.html -->
-            <nav class="sidebar sidebar-offcanvas" id="sidebar">
-                <ul class="nav">
-                    <li class="nav-item">
-                        <a class="nav-link" th:href="@{/user/vipham}">
-                            <i class="ti-alert menu-icon"></i>
-                            <span class="menu-title">Xem trạng thái vi phạm</span>
-    
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" th:href="@{/user/datchomuonthietbi}">
-                            <i class="ti-flag menu-icon"></i>
-                            <span class="menu-title">Đặt chổ mượn thiết bị</span>
-    
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" th:href="@{/user/xemdatchomuonthietbi}">
-                            <i class="ti-flag-alt menu-icon"></i>
-                            <span class="menu-title">Xem đặt chổ mượn của tôi</span>
-    
-                        </a>
-                    </li>
-                </ul>   
-            </nav>
-            <!-- partial -->
-            <div class="main-panel">
-                <div class="content-wrapper">
-                    <div class="row">
-                        <div class="col-lg-12 ">
-                            <div _ngcontent-gbl-c78="" class="card shadow-lg mb-2">
-                                <div _ngcontent-gbl-c78=""
-                                    class="card-header clickable text-white text-uppercase bg-primary clickable"><i
-                                        _ngcontent-gbl-c78="" class="pr-2"></i> Thông báo </div>
-                                <div _ngcontent-gbl-c78="" class="container-fluid w-100 mx-0 pb-2 ng-star-inserted">
-                                    <div _ngcontent-gbl-c78="" class="row m-0 p-0">
-                                        <div _ngcontent-gbl-c78=""
-                                            class="px-0 mx-0 align-items-sm-center clickable col-lg-4 col-sm-12">
-                                            <div _ngcontent-gbl-c78="" class="col-lg-12 pl-0 pr-2 mx-0"><img
-                                                    _ngcontent-gbl-c78="" alt="image slide"
-                                                    onerror="this.src='assets/images/no_img.png'"
-                                                    class="p-1 d-block img_detail_tt ng-star-inserted"
-                                                    src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAWgAAADwCAIAAACixWkYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAB4ASURBVHhe7Z1faFVXvsePqb3WhsSUqbTXPBy5xLGRob5Eb1FIIYXStCKFgXkonPYtPjhtZRjfpsK1fXModTrzYN5qwIdeCiK2KYUGGqh4NfNgGRodw5DzkCCkM40eUnVM9X73WTvn7LXP3muvtf+d/ef7IaR7a032Xmetz/79fmvtvTdVzt6qEEKINo9qz/TYm4QQog3FQQgxhuIghBhDcRBCjKE4CCHGUByEEGMoDkKIMRQHIcQYioMQYgzFQQgxhuIghBhDcRBCjKE4CCHGUByEEGMoDkKIMRQHIcQYioMQYgzFQQgxhuIghBhDcRBCjKE4csC2J3s8v+y/JiR1+JTzboLBP9Brjf/q05sHeh8TG/gu/lBfDbd/eri69hAbqz9Z3+srD6w/+elhfWW9+feExMmj2jMUR0oIRwhB4Ht1uyWIdIBEFlfW8R1CERv2XxASCoojQWCKvdX/qG5/fOf2zVlLK67V/43v39Xviw1CjKA4YkbIYm91C4KLrMlCAfQBiTC1IZpQHPEAWTxf3ZLByCIEQiKMRIgCiiM8cARMMTq8Nc1qRZowDCF+UBxhQHxRYF94wjCEOKE4DIAp4AtYw94vH7d/enhhbo36IBRHMEhJXtxj+aIA9Yu4YABScigOFTDF4ZHeLIQYnisvsiAyuGNqtmHvkNJAcXiTpjIghdU1a5Vnc+Nn63tTE2IlqKcyOsEBD/T2DDRVgu3q9sexkdosD/QxO3+XNdTyQHG4gSygjITGm3BE/Yf1a/X72NCUQnSEAZOeMGb+Uh4ojjYYUbFHGVDD4so6hlOmFnq3PJJESMXkpQxQHBbxKiObslCAE49dInAHQ48CQ3FUaqN9sYwZOAJD5Zvv7+ZCFn7EKJH6yvqFv66x8FFISi0ODI/o5QxoArKAMnLti07iMsiFubXZ+Xv2DikKJRVH9NykGPGFDtENwqpH8SijODAGogQaGAblnHqMYhA019nZRnTJ4lMb6O3ZW93S3t34HF2PPhK/y/lwI4A/FBPefChJREonjigVDSgDgXfJO1zodfdoN7jDVLgQAX5XQo8+wgeK79/xRj5zSiQOdLs3R/tCBBro8bxBo5NwCg4seQhTdOXpRyISydF0WBcpiziQm4wOP2HvaENlBIJWRdvaO3pAHGhVe6dJF2WhAJ8717P5UXxxoCO+M77NtDtSGUaYRh9oWFEuxb/K/gMKaJBOCi6OcNZAF4E1GKwaAQUYlZzRvKafS9dBx+AtOYIiiwPXsbdf2Wbv6BFX8b+0hEsJ8wUDEFBYcYSwBldJx0KIqkceKXkyW0xxIGxG1m3vaICPn7lJjISewMoj5bzeFFAcprEGA40kgDXgjoxXPWOkbL2oaOJAf9WvhrKikTRJlDzweS2urNdXHohtfPd87pHoA2I5aev5Rvie3KQvulN5buormjgQa2he5ZCb8OarFIhe8sBQrP+wvrr2My7pMVoe/QRCeb66Bd9jjIxwkGKmudgUShyaqwnQ+f40fTvGLkjUmJac8NGkv4ITMQgikVhuCMYxh1hcny+KIw7NKxut0RUwLANTSHwoGXlAgZCIkew6KXZIWxBxaBZEaY3u4plI4uOALLL5gAJEH1FikAKnLQURx3u/fiqw3IXQ8eMvb9s7pEu0yqXQBDKRvCzEhDtw5IF9rJOi9roiiEOntMFYIztAHCLKsPfzQ7gABO4o3uRd7sWBT1EnF4X1i12sIqkRQh/Fu25BHPFPaKeJTkEUeSatQeJCVC7wpS8Cndpw7sjxySDoDfwwZufv5TEqJhkHner9z368ID9YREHx3JHjMwkMNxBo6H+0hJiCyxL0oRnPwhpvRpvizRR5FYdOaeMsH65NEgYJy8df3tZcslGNvDwkO+RVHIHVKaMslJAoILDVjG3Rb8WEdN7JpTgCtY0UlKUNkiYIOjSXe4VbEpI1cnkCgeHG7Pxde4uQtMC1SnO5l85sYMbJnzgCIz18fpx/JV0BHU/HHbjyxXhLblfInzgCba0ZMRKSBJruePuVfM/O5uzQA5MUljZI19FcB5DrlR05O+7nN94b6gcXbpAsoLPyENbIrztydq+K+kZYfFTMU0hGCOGF29ZrsR8232X7ANuZfRll/m5y+2PtF/aWF7AGUxWSHZBZR1/xhcQHKsnUS21zJo7Aj+H3U/+0twjJBjoPizECl0boAyFJF6+RObs7Vl3gYKxBMkjsN9Tj8jk6/ASuoIi+8T1wuiAhclmY8QSxnL1FSGaANZJ7GIeIwbtikDyJQ9004v0ahGQN4Q57JxnSN0hxIg6uFiWZBe7QXI0ekZZBktZHPsSxLda35hCSPporSuMi6QAko7Mq0ET16c0DvY81v/e06tIrd37e3v+Y2HaS8qdCSDjQsY3ebRwL1+r/jveB8lmZjoUXYIe91S0uTeiDpuHSL5ILRoefwBVRdPKBZs8P0eFDgDFyYW4tljJtN8WBxkIQFddLgGfn73GxOck1GAWQSPNdto9jO6GXY8cyUrogDrTFi3u2QhnxNgrXjJJCgtRGvBw7Xo9EHC/piQPnfHikNyGJgo/55hRSAnDFDfFSKE+iFD4SFwc0AVmk8Kw0LjYnpSIugyBt0XzSspMExYEQa3TYSkns/YShOEg5iW6QEBMLiYgD55Dy41g5F0tIFIPc/unhWZMXHsYsjtHhJ17cszU1ZeBsF1fW6ysP6j/gOwschNjFxHD60E9bYhNHClEGNLG69rDpiAeZfcAJIRkBV3EMSXtHG013xCCOKIZT0NLE6trPze8PaQpCTMHYDHwrgAudhR5RxRHOap4IU1yr36cmCImREJf2wKJheHHElZvgEGfn7zL1ICRRTAeseqolpDii33KHw/qufj/K2jVCiClGmYsiZzEWB4wV5YHuIr6gLwjpFrjk48Jv7wThVys1E4fRr3SCNASy+Ob7u8xHCOk6uPC/Odqn+YAbz5s5DMQRLj2BKSAthhiEZA3NEY0h3PnMVF1xvP3KNk0/tfD8fYSQ7KBZ8sAofv+zH+2dJhBHcLXC1Br4NVOzDfwmWoOQLINsIHDJBkBq01mjCBCHqTWQlSDQYG5CSC6Ynb+ns1QUSY3LAypxGFlDxDOINRhoEJIj/KZOXLwpBx2+4jCyBnMTQvIL3BF4mygSFmcx1Vsc+tYQgQZzE0JyzVmNXOGw4/4SD3HUtOd44YviBxr9M1+89Oyj1ze+Xjo+Yf8FCeDA8PGbrXZ7/fhEv/3npaN/0tmFvhhctP88S2AUB75uDkFHywxucSAa0VyvgfDG9MFB+QPWGHtj3Jnc9U2doTs0ODB86NvdU0P23sj01aOTd+ydctE/eXPsRKsLLSyf+2Bpp72TMeCOwBE9OrxVbEji8Jx38USzoJJvhDXsnZHpGycXxCbcgeun2CZeNK0xZ+9URk7PXHw1q6MlWawudGLDnpWFG5d3XRm7ZO9lEeQQ6gQCUQUsgQ1JHK7CqR/ls0Zl+urFV+cndl2t2fsVusOXA4PH29Zo1I6cv3isnLFGRb7wXL28az4H9jwbFHTsbGYrbXF0TtV6UgprVBY/2uf8yG+9utTcXDp18GrNjjvgjpcmD9jbZIP+yU/2TYlNhOUHvz41KXZKx+JHL210IdgzPzFXPegZF6JE2l5yrjOTUg5rEJIiiG1xlRKxPhSTAdUGLkWfqGy2Iw6dcIPWICR++qbb1fe++T0ZmHv65vu79pYPf608tCOOwHDjWvJvdZ7Y/+yZHfa2Lo2TB7+euCTy6o0IuVJBZHjKu4bvrlxcVgaQiwcGv/rDcxd2VeaGHMWfhcbIzcbh89dfnrzj/2/7J7/Y166lA8Ttb/kUxpylxKBDAosTw1+9vsPjqCqN4c+Xxj9dMim/OS93nTRGFirDn18/+unSTr2fifj8hXeln2ZVRk1qHBHa3JeZL5A1yOe4sHzyrStWz1FzYPj4J+25oSbBQUHzFAYv7Orr/IAOf7708jHX5zt4/FG7646c/tvh137VqqeOnL568ZhIk9NFLYQdlU2WOBBuqCdTkPO8L98elwQfvfSs3Od0qB05b32KnWV8787anBuTqtze9arFif2/PbOj9QN9aNROXz/q7gdN5OOx8ft1TmP6H5IY5B+O9wUdlfaosJB6rYKR6at/Ds7SPX/a8rlNV8bsbRVR29wPz8/CIvDAfBpH3W2O75iTROOB3JjSb6kduVo54/il7fpaugQ6wUpVnq9uETt+IEmxt8oAxudLLwT3YNA39e6+F24O667nGdr9l9ATMej9j6wVJRpHhV+048Qn2kelx9z4vhe+GLR3/JgY9HLQjungs06szVXs+PAjVV6w+NFzXqfjx8YpBFkDWI15c/+MqKxLjdbY9Td7q8sErgW31p/jy97zAuFGOivKvw+RCcXf0M1cxiTwGdqt34+njofq8RP7fa6Z/gz1/cPeio/xfeoZ6JnXvTPNqdcDjJNomyuYe02xiLP/q9cMDsn8FHa88S3c0T953NFoC8svG6SZCaOeW7HeoG9v+pBauDF55dam8/JXe92EBcI29//QLHDEh2MKbQOE/UdmLrd/48zlI8sj9t9tMLT7t6prl1UpsBna8ZXpDC5ijY5L8Yj7qM5fPjhz7vSN1lRxSKQWxpnecJ2psnQ3ON1uukZt2nEZGB+csbc8SKbNfalNL9tbQPFxHBi80I4dlmvT9pY3E/s1TqHz04E7HIlzpXHyrSwt9FhdU4ojI+FGJhj8i6vIYi3auTIhFeTu7Jy8cnHTzMYqUhvltatx+PPWKOo78YeggF+if/ITV6zRQI+86D6qys5Ld8aOzZ/adf7WwasnMWgXGv9l/01ocKbzF484hhlO85f+F1VnyL2wfPQD51BXJAUJtbk/55ccV6O+C7/xPrDF3zhkPb3k0oLM4HFXUb+5QrTjFPDpzJzzFdBGmT8vSCtHOylVdcOVouPj9y0H3pl4S74aK+sXQ8eutzvr+HMGy8YmnnNckUCze6lv+ri0NPHq17fiWqT4t4b7Uu+DM08Z+Xxp56Wlw45x7jvIE2tzf5bGHaPX58AkndXOK8uT7srO8jnfxr8z9qocRIOFG+eOzMQeOydOgDhKFG64U/TaKeXYuzT/O/nqoQzjnZ3VIOhwHdLI6atpd69fSeVY/yEk5SmHP4Xa7rzcjrN8k4Ik29yXsfNB2YrkguVx5eRrx2d0XTlTs3T0tFzLu3lnLI+3/6nEUSZryF0fBHQXIPU/dRiP//kDx9VSN+hwH9Lv0r3pY3Fi/yFnEL5w46hfm8h5iqjw7fzUma14JgXJtrkvk1K20ulxyQXTS+opW/kUhDRVyM1SqezqD5NwpYB6YZdKHN/V79tbOWPu3bH24w+kL2ctSuZA/7y91USnRuAK49U9QLpa+qbWEq5DCujBcTC+z9lc0vyocoGJc2rAylPEVmC2knSb+yJlKx21W8kFAXmKm8ZQYEh46c6wvdUkifmvFFCJY7XYT+hJG2fQMffuc4qJBk9G/u6arh487hjkrq9DgWsujFhYPnnKf82VNAHhvORqZStdQY5c5JUmUvTkH2QJQrgvF4h75xUoxaGcjyGmSEFHwOojC7m+4MbVZWXmlDOgxgztOHFm7NnWmiUZaQJCXomgka10CSlbca408Ymeyoa4d94PJIgqcahXgBBzIgYdXUasWbJ3WkgLpdwjzZWtZOiUfbIV3+ipZKiXd/1nZVNAQJJPRk7PbCy8cX251wJEwhUR3NS4/0oOOgLWYsv5vLsQ6EqVY8G1xM5aVOZaedURKAWMNDlb0Vp+riREm/sglas3DkwRPZUL9fKu3ZWeQoojDOYlq8U9YUr6zv4asALddUju7GPplHOQx+tEgbWo7Ip7DZhc45RGWqXvxLfuaovrZllp+Xlabe6NHA01D0wZPXkSotLpXrqSvbKI2hoClTgCCySForFLGnjB18Z/yCGAbvndGXQELGEyPqREkMsB8tgwu6HDQtJfWm3ujRwNjT83KS2308xTjE/Bve4jg2UU52sQPPmlOlUZ6C2TOO4M3bS3BAG3Zh0Y/tBwDUILKehQ/RZXnF+ZOtNZYkgB19hw4F7YqoNzaKXX5p64arcnnItWpq/rrbXr+IzUUaT7FLJXRkG4oY4YxPKuMqkhANfiosr4vkN+Ex/S83ibGC2ycAYduNDtsTc72elcq26x4w2fqY0EcdnBEVq7Lp6aOO2QXpt7ImcrTvRjGdk+VhTpf/ddx51HGSyjBIYbYnmXShytdyiUhMnr7tuo3h07ZA1URz840D/z0f5DjqeNNVk+Z/i0FUfQ0XfhtT6p50ksnZJLDM2pjdcPfTGMo3Jc2foXJwZvGl/8A8GPlRePgnY9Ul406XHvcutLvkHDuXA2xTb3wh0vbGASy3TYx1p/2DyF9geEbbRkx/rDgCX26VMb7QsMN4IjDvVcbgHpuI0KncAaqI51qN+OvfGusxxoUTui9YQrCUfQMTekXK8xeeWc8xb1JnPju3FUL7SO6tHYC2d2y+MqFPLK0eaPdZ1s4+QHG8NVLvIpL9Hy3Ke0oCPFNvfCHS8IzGIZj1No+t3xAWG789kIp2ey9Qh4JCmBZdHWanKVOOCectVHrfF8sfPRDyqsJ9+H+/jl6UAVY69+fdl1Z1QgidTqrcdttjJ/OU8JuES77zFxTs2k2OYeeGUrxjVXnMJB3U9TYPoo1sSpbt8c+DK2+sp66/61HvUqr8CEp3hMXrlovTxFY6Da7w0J+/Ffmv+ztg52Hvv6luOVLkE0arHX6t0vSXHlKUGXaPfUjLz8PLU296AzWwlVc7Xc0XwSSiDNZ/xk7iVVOi9jm51vP/28Z1H5evsuZytSPX/k7/aGF9J0+vD39kYnUhn/ps+Hd2np1C4MVGv5E3qzfCVpjCw0aqevXj54/pbqdX6O4/EfDzuPXZXTEOWAt47q/K1N4klfjqeKNcFRjUwv2we26etTuv2yMa7s69bJTt8413myUoG2cTL4Er007rLkr+z/2sTQ5n7cGW63VWOXvdHGqkA7u5nnffHOG4X8u431JBTvU2i25Gm7JdVPVNHu8/Hx9ivbAnMLZ7gBNu395l/qEGVqtuH8B4SQIqHzJjbw/mc/trKTR7VnegKlUMJshZCSoGkNRA+umoYVn6jdgRhG/T44QkgeQaqhYw34oVMRljgCHyyKoKNs0yuEFBgM5/d+/ZTOPSn1lXXPVzhaOkAQEngH/Tvj2+wtQkiegS9gDc1Q4KzPi1/tfxwYdODXBE7zEkIyDkax/kD++MvbfiGFLQ7kMIFBB0TFQikhOaW6fbNmeiJAMIE8xd7poB2u+MUkTkaHn2ChlJB8IdIFncUaLWCN2fl79o4X7R8Eu6j/VwGCDrqDkLyA0WoUaIBAawDJQPgHgQkLoDsIyT6iCGpaXtCxBnCHLn+avm1vKaE7CMksQhlIT/RzE8HUbEPHGmBT5ewte3MDGEHTUtfq/9YMUgghSQNNQBkv7tlq6guAUYygQXMsP6o94yEOYBRQ8GYWQroLfDE6vFVnGagnGL+eq7z88BUHMHIHwhuEHvYOISQVYAr4wqjw2UmIC79KHEDzBhgBgpyzsw3FxC8hJBaEL3Zu3xwiJXGC0YoxG6LUECAOYOQOwNCDkCQQ9Yu91S2h8xEXUYZqsDiAqTuA5owOIcQTaGKgF6bYUn16MzYiRhYuos9paIkDhHAHDgsHx6IpKQmi0LDaHI3ibe06I1MYAWoYeLKnuv3xJDThJLoyBLriAKEXbjB5IYUHl1VcXO2dTBLvhdxAHABOhT7C6RBH/F39PgMQUjwybo0kYn8zcQhqo32hp3+oD1IwcB1979dP2TsZI7nhFkYcQH9pqR80CCkAsMY74wa3nKYDQoxvvr+LwRW9luFHSHEANNabeg8sVCMMIjbEnxCSFxBrZMca0MTiynostc9AwotDELpi6kl9ZX31p4fwCM4/hZMnJAohphqTQPhidv5ummsvo4oDwLjQR8RFr56IGAQegU24IJVkiq5bA77AALlWv9+VoRGDOAQQx/PVLUnowwkaa3XtoZgqF7tiY3XtZ2mXoiFJEm+grY8ILrIQkscmDkE6+ggEbfr+Zz/aO4TEisIaCAEGnuzZ3v/Yk1s22X8UAXRj/EBcFOs/rON62V1TuIhZHIIs6MP5ujpC4kJ/PhHdT7Nuiv9TrDRtCiKLmugkEXG0iLLiIyJcrkpiR98aH395u9jJMsSR4GTS1Gzj91P/xPf0G7Hr6RIpGOhRtIaTxGehkaehKVN+ShiixOxMsJO8U92+WfMlRohzS1KYTzBV8URUQJr3AiY7m8VshcQCOqrmrSjobyV5mkSyNY5AEpXIbc6tkMggbtVcVF6qC1WXxeFEVCXgkegPRGtRkmyTJASt4UeGxOGi5RF8D1TJ/y3c/+8h6/90cc3w2c2EONFcHlrCbpZdcXgiPkWkNmIXNqluf1woxhNmKyQ0mtZASIvA1t4pDclOx8YOPiR8QfDiC/GhuLPWj6ZZki3BZhOcuMKnJJCa3p3f5bSGIE/i6AT6sLd8GB3eam+VAygDnV68/k9z3QFxgXbT0S7i2dJaA+RbHEDtjlZeU3haymh1+tHhJxBv48/FLtEB1tC5gQ3W0HzLclHJfa+anb9rb5UYyMKpjBaItz3/nHgC8+pYA+i/ZrWo8HKUb4Qy0OPtfS+YtgSCuEzfsMhQSm4NQHHklZYydJIRkbbYO0RGtKRmTsfFQQKKI3+gi8MCmspoIdKWck4z+YEGRDOq4zUn5bkVJRCKI0+Ijh56/AvjaKbxhUcEGprpCSjPrSg6UBz5oKUM/Y7ux+GRXv1rbCERwZdRI9AaLiiOHGB6bQwEP+qPtV/E+APzgvCv6Sw1rdEJxZFphDISChDiCmFyQeiQjdbwJE/3qniCsFMxX5DfRcHo38gpjC6MoUErzc5b7/6y94sF2lBzMWgnKT+AKi/k7CY3T4onjigdHaCj11cehFu4gX+LC2xhFimgDUM/N1usDeV6DU8ojmwRURno5Rj24gqpbhY1+Anf5fnNvmjGF/dsRTOGjtdw7nwggwKKIyvEqIwW+JkR3++bL4PgfNGAe6tbopyyZ0sSFxRHJkB3hzXCXR4DOzp+cvSFG1k2CNotYnzRAifIQEMHiqPLRFEGQEfXKUngt8Q1L4P2zMKLwWMJLpzgXM524z0eOYXi6BrpKKMFflGUVMgPEYOk4BFhioHex6pPb45LFgIcNnMTUyiOLhBxDJsqwwl+6ejw1ngHnhMx/OorD3B4IV79LTQ60NsDOzQ3LE1gN7ReA8EBMzcJAcWRKhGVEde1EQcQJdgJR8t04j2pThJVgx9R/EsojpTIiDKc4GBCr3HIL2hJZFVURkQojjSIeIVPdPEiWg/JSxn0kYR8SwvFkSwRlZFmOF3gAATNODt/17TgQhRQHEmRI2U4KZI+RIjR3WnjokJxxE/EcgYO+Oxso+t9Pb8GQQNea65Voy+Sg+KIkwxWQKOD08F5qd+Y13XQdGi3+sqDrLVeUaE4YqM22lcwZXSCph54sgeRSIwvBg9NSxZMRtKH4ogB+CJKOQPKyOlzYoQoU/OIMMXq2s/4TlN0F4ojEhGVgQHQlQpoQgiPiLwGG+FsgtYQK8TqP6zDEfiObfwJTZEpKI6Q4Je+afh2AicFU4YOrbYa6HU3mjAF1ZAjKA5jMAAKMGlCSBQgjpDXzBICZUR5ui9kMTXbgMVoDVIAKA4toivj/c9+RIZi/xEhOYfiCACyiPIOgQtza1QGKR4Uhy9CGYg1whVBIQsog6/kIIWE4vCguvGKwCjKQHrCcgYpKhSHhKiAvm34isAWMAWVQcoAxWETy6QJrEFlkDJAcVgcHunlpAkh+pRdHKICGvrNI7Pz96gMUkLKK45YJk0uzK3Z+4SUiTKKA6bgpAkhUSiXOFoV0HDKgCmoDEJAWcTRUgYnTQiJTinEwUkTQuKl+OKAMjhpQki8FFwc1bBPteOkCSEKylLj0IeTJoQEQnG0gSk+/vI2lUFIIBSHRasCWueLAgnRoOzi4KQJISEotThEOYPKIMSUkoqjVQG19wkhJpROHJw0ISQ6JRIHJ00IiYtSiIOTJoTES8HFwUkTQpKgyOLgpAkhCVFMcXDShJBEKZo4OGlCSAoURxyinEFlEJICRRBH4x4roISkShHE8T//S2UQkiq5FweXZhCSPkUrjhJCUoDiIIQYQ3EQQoyhOAghxlAchBBjKA5CiDEUByHEGIqDEGIMxUEIMYbiIIQYQ3EQQgypVP4fRKpgQ8rMKMoAAAAASUVORK5CYII="><!----><!----><!---->
-                                                <div _ngcontent-gbl-c78="" class="text-right"><small
-                                                        _ngcontent-gbl-c78="" class="font-italic"
-                                                        style="font-size: small;"> 03/05/2024 09:54 </small></div>
-                                                <h6 _ngcontent-gbl-c78="" class="mt-0 mb-1 ishover"
-                                                    style="font-weight: 600;"><a _ngcontent-gbl-c78=""
-                                                        class="card-link tieude">Đăng ký môn học HK phụ,
-                                                        2023-2024</a><!----></h6>
-                                                <p _ngcontent-gbl-c78=""
-                                                    class="card-subtitle noidung text-muted text-justify has-text-grey-lighter ishover mt-2">
-                                                    Một số điểm cần lưu ý khi ĐKMH HK phụ, 2023-2024 (cập nhật
-                                                    07/05/2024)
-                                                    (cập nhật ngày 08/05/2024)</p>
-                                            </div>
-                                        </div>
-                                        <div _ngcontent-gbl-c78=""
-                                            class="border-start col-lg-8 col-sm-12 mt-2 mt-md-2 px-0">
-                                            <div _ngcontent-gbl-c78="" class="row m-0 p-0 ng-star-inserted">
-                                                <div _ngcontent-gbl-c78="" class="col-lg-12 px-0 mx-0">
-                                                    <table _ngcontent-gbl-c78=""
-                                                        class="w-100 table-sm table-borderless">
-                                                        <tr _ngcontent-gbl-c78="" class="border-bottom my-1 my-md-1">
-                                                            <td _ngcontent-gbl-c78=""
-                                                                class="clickable ishover text-justify pr-1 my-1"><i
-                                                                    _ngcontent-gbl-c78=""
-                                                                    class="fas fa-angle-double-right mr-1 text-primary"></i><span
-                                                                    _ngcontent-gbl-c78="" class="lh-sm">Thông báo đăng
-                                                                    ký môn học Học kỳ phụ, năm học 2023-2024</span><!---->
-                                                            </td>
-                                                            <td _ngcontent-gbl-c78=""
-                                                                class="ishide font-italic text-right text-nowrap text-muted align-top td-cus"
-                                                                style="width: 9%;"><small _ngcontent-gbl-c78=""
-                                                                    style="font-size: small;">20/03/2024 10:11</small>
-                                                            </td>
-                                                        </tr>
-                                                    </table>
-                                                </div>
-                                            </div>
-                                            <div _ngcontent-gbl-c78="" class="row m-0 p-0 ng-star-inserted">
-                                                <div _ngcontent-gbl-c78="" class="col-lg-12 px-0 mx-0">
-                                                    <table _ngcontent-gbl-c78=""
-                                                        class="w-100 table-sm table-borderless">
-                                                        <tr _ngcontent-gbl-c78="" class="border-bottom my-1 my-md-1">
-                                                            <td _ngcontent-gbl-c78=""
-                                                                class="clickable ishover text-justify pr-1 my-1"><i
-                                                                    _ngcontent-gbl-c78=""
-                                                                    class="fas fa-angle-double-right mr-1 text-primary"></i><span
-                                                                    _ngcontent-gbl-c78="" class="lh-sm">Quy định về học
-                                                                    cùng lúc hai chương trình đối với sinh viên đại học
-                                                                    chính quy</span><!---->
-                                                            </td>
-                                                            <td _ngcontent-gbl-c78=""
-                                                                class="ishide font-italic text-right text-nowrap text-muted align-top td-cus"
-                                                                style="width: 9%;"><small _ngcontent-gbl-c78=""
-                                                                    style="font-size: small;">15/04/2024 16:23</small>
-                                                            </td>
-                                                        </tr>
-                                                    </table>
-                                                </div>
-                                            </div><!---->
-                                        </div>
-                                    </div>
-                                </div><!----><!---->
-                            </div>
-                            <div _ngcontent-gbl-c78="" class="card shadow-lg mb-2 ng-star-inserted">
-                                <div _ngcontent-gbl-c78=""
-                                    class="card-header clickable text-white text-uppercase bg-primary clickable"><i
-                                        _ngcontent-gbl-c78="" class="pr-2"></i> Hướng dẫn </div>
-                                <div _ngcontent-gbl-c78="" class="card-body m-0 p-0">
-                                    <table _ngcontent-gbl-c78="" class="w-100 table-sm table-borderless table_cus">
-                                        <tr _ngcontent-gbl-c78="" class="ng-star-inserted">
-                                            <td _ngcontent-gbl-c78="" class="clickable ishover text-justify td-cus"><i
-                                                    _ngcontent-gbl-c78=""
-                                                    class="fas fa-angle-double-right mr-1 text-primary"></i><span
-                                                    _ngcontent-gbl-c78="" class="lh-sm">Hướng dẫn ĐKMH trực
-                                                    tuyến</span><!----></td>
-                                            <td _ngcontent-gbl-c78=""
-                                                class="ishide font-italic text-right text-nowrap text-muted align-top td-cus"
-                                                style="width: 9%;"><small _ngcontent-gbl-c78=""
-                                                    style="font-size: small;">21/11/2023 11:22 </small></td>
-                                        </tr>
-                                        <tr _ngcontent-gbl-c78="" class="ng-star-inserted">
-                                            <td _ngcontent-gbl-c78="" class="clickable ishover text-justify td-cus"><i
-                                                    _ngcontent-gbl-c78=""
-                                                    class="fas fa-angle-double-right mr-1 text-primary"></i><span
-                                                    _ngcontent-gbl-c78="" class="lh-sm">Những điểm cần lưu ý khi
-                                                    ĐKMH</span><!----></td>
-                                            <td _ngcontent-gbl-c78=""
-                                                class="ishide font-italic text-right text-nowrap text-muted align-top td-cus"
-                                                style="width: 9%;"><small _ngcontent-gbl-c78=""
-                                                    style="font-size: small;">16/11/2023 13:54 </small></td>
-                                        </tr><!---->
-                                    </table>
-                                </div>
-                            </div>
-                            <div _ngcontent-gbl-c78="" class="card shadow-lg mb-2 ng-star-inserted">
-                                <div _ngcontent-gbl-c78=""
-                                    class="card-header clickable text-white text-uppercase bg-primary clickable"><i
-                                        _ngcontent-gbl-c78="" class="pr-2"></i> Biễu mẫu </div>
-                                <div _ngcontent-gbl-c78="" class="card-body m-0 p-0">
-                                    <table _ngcontent-gbl-c78="" class="w-100 table-sm table-borderless table_cus">
-                                        <tr _ngcontent-gbl-c78="" class="ng-star-inserted">
-                                            <td _ngcontent-gbl-c78="" class="clickable ishover text-justify td-cus"><i
-                                                    _ngcontent-gbl-c78=""
-                                                    class="fas fa-angle-double-right mr-1 text-primary"></i><span
-                                                    _ngcontent-gbl-c78="" class="lh-sm">Đơn xin rút môn
-                                                    học</span><!----></td>
-                                            <td _ngcontent-gbl-c78=""
-                                                class="ishide font-italic text-right text-nowrap text-muted align-top td-cus"
-                                                style="width: 9%;"><small _ngcontent-gbl-c78=""
-                                                    style="font-size: small;">24/01/2024 08:47</small></td>
-                                        </tr>
-                                        <tr _ngcontent-gbl-c78="" class="ng-star-inserted">
-                                            <td _ngcontent-gbl-c78="" class="clickable ishover text-justify td-cus"><i
-                                                    _ngcontent-gbl-c78=""
-                                                    class="fas fa-angle-double-right mr-1 text-primary"></i><span
-                                                    _ngcontent-gbl-c78="" class="lh-sm">Đơn học cải thiện bằng học phần
-                                                    (tự chọn) tương đương</span><!----></td>
-                                            <td _ngcontent-gbl-c78=""
-                                                class="ishide font-italic text-right text-nowrap text-muted align-top td-cus"
-                                                style="width: 9%;"><small _ngcontent-gbl-c78=""
-                                                    style="font-size: small;">16/11/2023 13:45</small></td>
-                                        </tr>
-                                        <tr _ngcontent-gbl-c78="" class="ng-star-inserted">
-                                            <td _ngcontent-gbl-c78="" class="clickable ishover text-justify td-cus"><i
-                                                    _ngcontent-gbl-c78=""
-                                                    class="fas fa-angle-double-right mr-1 text-primary"></i><span
-                                                    _ngcontent-gbl-c78="" class="lh-sm">Đơn quy đổi mã học
-                                                    phần</span><!----></td>
-                                            <td _ngcontent-gbl-c78=""
-                                                class="ishide font-italic text-right text-nowrap text-muted align-top td-cus"
-                                                style="width: 9%;"><small _ngcontent-gbl-c78=""
-                                                    style="font-size: small;">16/11/2023 13:43</small></td>
-                                        </tr>
-                                        <tr _ngcontent-gbl-c78="" class="ng-star-inserted">
-                                            <td _ngcontent-gbl-c78="" class="clickable ishover text-justify td-cus"><i
-                                                    _ngcontent-gbl-c78=""
-                                                    class="fas fa-angle-double-right mr-1 text-primary"></i><span
-                                                    _ngcontent-gbl-c78="" class="lh-sm">Đơn xin phúc khảo bài
-                                                    thi</span><!----></td>
-                                            <td _ngcontent-gbl-c78=""
-                                                class="ishide font-italic text-right text-nowrap text-muted align-top td-cus"
-                                                style="width: 9%;"><small _ngcontent-gbl-c78=""
-                                                    style="font-size: small;">05/09/2023 00:00</small></td>
-                                        </tr><!---->
-                                    </table>
-                                </div>
-                            </div>
+          </li>
+        </ul>
+        <ul class="navbar-nav navbar-nav-right">
+          <li class="nav-item dropdown me-1">
+            <a class="nav-link count-indicator dropdown-toggle d-flex justify-content-center align-items-center" id="messageDropdown" href="#" data-bs-toggle="dropdown">
+              <i class="ti-email mx-0"></i>
+            </a>
+            <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="messageDropdown">
+              <p class="mb-0 font-weight-normal float-left dropdown-header">Messages</p>
+              <a class="dropdown-item">
+                <div class="item-thumbnail">
+                    <img src="images/faces/face4.jpg" alt="image" class="profile-pic">
+                </div>
+                <div class="item-content flex-grow">
+                  <h6 class="ellipsis font-weight-normal">David Grey
+                  </h6>
+                  <p class="font-weight-light small-text text-muted mb-0">
+                    The meeting is cancelled
+                  </p>
+                </div>
+              </a>
+              <a class="dropdown-item">
+                <div class="item-thumbnail">
+                    <img src="images/faces/face2.jpg" alt="image" class="profile-pic">
+                </div>
+                <div class="item-content flex-grow">
+                  <h6 class="ellipsis font-weight-normal">Tim Cook
+                  </h6>
+                  <p class="font-weight-light small-text text-muted mb-0">
+                    New product launch
+                  </p>
+                </div>
+              </a>
+              <a class="dropdown-item">
+                <div class="item-thumbnail">
+                    <img src="images/faces/face3.jpg" alt="image" class="profile-pic">
+                </div>
+                <div class="item-content flex-grow">
+                  <h6 class="ellipsis font-weight-normal"> Johnson
+                  </h6>
+                  <p class="font-weight-light small-text text-muted mb-0">
+                    Upcoming board meeting
+                  </p>
+                </div>
+              </a>
+            </div>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link count-indicator dropdown-toggle" id="notificationDropdown" href="#" data-bs-toggle="dropdown">
+              <i class="ti-bell mx-0"></i>
+              <span class="count"></span>
+            </a>
+            <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="notificationDropdown">
+              <p class="mb-0 font-weight-normal float-left dropdown-header">Notifications</p>
+              <a class="dropdown-item">
+                <div class="item-thumbnail">
+                  <div class="item-icon bg-success">
+                    <i class="ti-info-alt mx-0"></i>
+                  </div>
+                </div>
+                <div class="item-content">
+                  <h6 class="font-weight-normal">Application Error</h6>
+                  <p class="font-weight-light small-text mb-0 text-muted">
+                    Just now
+                  </p>
+                </div>
+              </a>
+              <a class="dropdown-item">
+                <div class="item-thumbnail">
+                  <div class="item-icon bg-warning">
+                    <i class="ti-settings mx-0"></i>
+                  </div>
+                </div>
+                <div class="item-content">
+                  <h6 class="font-weight-normal">Settings</h6>
+                  <p class="font-weight-light small-text mb-0 text-muted">
+                    Private message
+                  </p>
+                </div>
+              </a>
+              <a class="dropdown-item">
+                <div class="item-thumbnail">
+                  <div class="item-icon bg-info">
+                    <i class="ti-user mx-0"></i>
+                  </div>
+                </div>
+                <div class="item-content">
+                  <h6 class="font-weight-normal">New user registration</h6>
+                  <p class="font-weight-light small-text mb-0 text-muted">
+                    2 days ago
+                  </p>
+                </div>
+              </a>
+            </div>
+          </li>
+          <li class="nav-item nav-profile dropdown">
+            <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" id="profileDropdown">
+              <img src="images/faces/face28.jpg" alt="profile"/>
+            </a>
+            <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="profileDropdown">
+              <a class="dropdown-item">
+                <i class="ti-settings text-primary"></i>
+                Settings
+              </a>
+              <a class="dropdown-item">
+                <i class="ti-power-off text-primary"></i>
+                Logout
+              </a>
+            </div>
+          </li>
+        </ul>
+        <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button" data-toggle="offcanvas">
+          <span class="ti-view-list"></span>
+        </button>
+      </div>
+    </nav>
+    <!-- partial -->
+    <div class="container-fluid page-body-wrapper">
+      <!-- partial:partials/_sidebar.html -->
+      <nav class="sidebar sidebar-offcanvas" id="sidebar">
+        <ul class="nav">
+          <li class="nav-item">
+            <a class="nav-link" href="index.html">
+              <i class="ti-shield menu-icon"></i>
+              <span class="menu-title">Dashboard</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" data-bs-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
+              <i class="ti-palette menu-icon"></i>
+              <span class="menu-title">Đặt chổ mượn thiết bị</span>
+              <i class="menu-arrow"></i>
+            </a>
+            <div class="collapse" id="ui-basic">
+              <ul class="nav flex-column sub-menu">
+                <li class="nav-item"> <a class="nav-link" href="pages/ui-features/buttons.html">Buttons</a></li>
+                <li class="nav-item"> <a class="nav-link" href="pages/ui-features/typography.html">Typography</a></li>
+              </ul>
+            </div>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="pages/forms/basic_elements.html">
+              <i class="ti-layout-list-post menu-icon"></i>
+              <span class="menu-title">Vi phạm</span>
+            </a>
+          </li>
+          
+        </ul>
+      </nav>
+      <!-- partial -->
+      <div class="main-panel">
+        <div class="content-wrapper">
+          <div class="row">
+            <div class="col-md-12 grid-margin">
+              <div class="d-flex justify-content-between align-items-center">
+                <div>
+                  <h4 class="font-weight-bold mb-0">RoyalUI Dashboard</h4>
+                </div>
+                <div>
+                    <button type="button" class="btn btn-primary btn-icon-text btn-rounded">
+                      <i class="ti-clipboard btn-icon-prepend"></i>Report
+                    </button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-3 grid-margin stretch-card">
+              <div class="card">
+                <div class="card-body">
+                  <p class="card-title text-md-center text-xl-left">Sales</p>
+                  <div class="d-flex flex-wrap justify-content-between justify-content-md-center justify-content-xl-between align-items-center">
+                    <h3 class="mb-0 mb-md-2 mb-xl-0 order-md-1 order-xl-0">34040</h3>
+                    <i class="ti-calendar icon-md text-muted mb-0 mb-md-3 mb-xl-0"></i>
+                  </div>  
+                  <p class="mb-0 mt-2 text-danger">0.12% <span class="text-black ms-1"><small>(30 days)</small></span></p>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-3 grid-margin stretch-card">
+              <div class="card">
+                <div class="card-body">
+                  <p class="card-title text-md-center text-xl-left">Revenue</p>
+                  <div class="d-flex flex-wrap justify-content-between justify-content-md-center justify-content-xl-between align-items-center">
+                    <h3 class="mb-0 mb-md-2 mb-xl-0 order-md-1 order-xl-0">47033</h3>
+                    <i class="ti-user icon-md text-muted mb-0 mb-md-3 mb-xl-0"></i>
+                  </div>  
+                  <p class="mb-0 mt-2 text-danger">0.47% <span class="text-black ms-1"><small>(30 days)</small></span></p>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-3 grid-margin stretch-card">
+              <div class="card">
+                <div class="card-body">
+                  <p class="card-title text-md-center text-xl-left">Downloads</p>
+                  <div class="d-flex flex-wrap justify-content-between justify-content-md-center justify-content-xl-between align-items-center">
+                    <h3 class="mb-0 mb-md-2 mb-xl-0 order-md-1 order-xl-0">40016</h3>
+                    <i class="ti-agenda icon-md text-muted mb-0 mb-md-3 mb-xl-0"></i>
+                  </div>  
+                  <p class="mb-0 mt-2 text-success">64.00%<span class="text-black ms-1"><small>(30 days)</small></span></p>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-3 grid-margin stretch-card">
+              <div class="card">
+                <div class="card-body">
+                  <p class="card-title text-md-center text-xl-left">Returns</p>
+                  <div class="d-flex flex-wrap justify-content-between justify-content-md-center justify-content-xl-between align-items-center">
+                    <h3 class="mb-0 mb-md-2 mb-xl-0 order-md-1 order-xl-0">61344</h3>
+                    <i class="ti-layers-alt icon-md text-muted mb-0 mb-md-3 mb-xl-0"></i>
+                  </div>  
+                  <p class="mb-0 mt-2 text-success">23.00%<span class="text-black ms-1"><small>(30 days)</small></span></p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6 grid-margin stretch-card">
+              <div class="card">
+                <div class="card-body">
+                  <p class="card-title">Sales details</p>
+                  <p class="text-muted font-weight-light">Received overcame oh sensible so at an. Formed do change merely to county it. Am separate contempt domestic to to oh. On relation my so addition branched.</p>
+                  <div id="sales-legend" class="chartjs-legend mt-4 mb-2"></div>
+                  <canvas id="sales-chart"></canvas>
+                </div>
+                <div class="card border-right-0 border-left-0 border-bottom-0">
+                  <div class="d-flex justify-content-center justify-content-md-end">
+                    <div class="dropdown flex-md-grow-1 flex-xl-grow-0">
+                      <button class="btn btn-lg btn-outline-light dropdown-toggle rounded-0 border-top-0 border-bottom-0" type="button" id="dropdownMenuDate2" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                        Today
+                      </button>
+                      <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuDate2">
+                        <a class="dropdown-item" href="#">January - March</a>
+                        <a class="dropdown-item" href="#">March - June</a>
+                        <a class="dropdown-item" href="#">June - August</a>
+                        <a class="dropdown-item" href="#">August - November</a>
+                      </div>
+                    </div>
+                    <button class="btn btn-lg btn-outline-light text-primary rounded-0 border-0 d-none d-md-block" type="button"> View all </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6 grid-margin stretch-card">
+              <div class="card border-bottom-0">
+                <div class="card-body pb-0">
+                  <p class="card-title">Purchases</p>
+                  <p class="text-muted font-weight-light">The argument in favor of using filler text goes something like this: If you use real content in the design process, anytime you reach a review</p>
+                  <div class="d-flex flex-wrap mb-5">
+                    <div class="me-5 mt-3">
+                      <p class="text-muted">Status</p>
+                      <h3>362</h3>
+                    </div>
+                    <div class="me-5 mt-3">
+                      <p class="text-muted">New users</p>
+                      <h3>187</h3>
+                    </div>
+                    <div class="me-5 mt-3">
+                      <p class="text-muted">Chats</p>
+                      <h3>524</h3>
+                    </div>
+                    <div class="mt-3">
+                      <p class="text-muted">Feedbacks</p>
+                      <h3>509</h3>
+                    </div> 
+                  </div>
+                </div>
+                <canvas id="order-chart" class="w-100"></canvas>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-7 grid-margin stretch-card">
+              <div class="card">
+                <div class="card-body">
+                  <p class="card-title mb-0">Top Products</p>
+                  <div class="table-responsive">
+                    <table class="table table-hover">
+                      <thead>
+                        <tr>
+                          <th>User</th>
+                          <th>Product</th>
+                          <th>Sale</th>
+                          <th>Status</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td>Jacob</td>
+                          <td>Photoshop</td>
+                          <td class="text-danger"> 28.76% <i class="ti-arrow-down"></i></td>
+                          <td><label class="badge badge-danger">Pending</label></td>
+                        </tr>
+                        <tr>
+                          <td>Messsy</td>
+                          <td>Flash</td>
+                          <td class="text-danger"> 21.06% <i class="ti-arrow-down"></i></td>
+                          <td><label class="badge badge-warning">In progress</label></td>
+                        </tr>
+                        <tr>
+                          <td>John</td>
+                          <td>Premier</td>
+                          <td class="text-danger"> 35.00% <i class="ti-arrow-down"></i></td>
+                          <td><label class="badge badge-info">Fixed</label></td>
+                        </tr>
+                        <tr>
+                          <td>Peter</td>
+                          <td>After effects</td>
+                          <td class="text-success"> 82.00% <i class="ti-arrow-up"></i></td>
+                          <td><label class="badge badge-success">Completed</label></td>
+                        </tr>
+                        <tr>
+                          <td>Dave</td>
+                          <td>53275535</td>
+                          <td class="text-success"> 98.05% <i class="ti-arrow-up"></i></td>
+                          <td><label class="badge badge-warning">In progress</label></td>
+                        </tr>
+                        <tr>
+                          <td>Messsy</td>
+                          <td>Flash</td>
+                          <td class="text-danger"> 21.06% <i class="ti-arrow-down"></i></td>
+                          <td><label class="badge badge-info">Fixed</label></td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-5 grid-margin stretch-card">
+							<div class="card">
+								<div class="card-body">
+									<h4 class="card-title">To Do Lists</h4>
+									<div class="list-wrapper pt-2">
+										<ul class="d-flex flex-column-reverse todo-list todo-list-custom">
+											<li>
+												<div class="form-check form-check-flat">
+													<label class="form-check-label">
+														<input class="checkbox" type="checkbox">
+														Become A Travel Pro In One Easy Lesson
+													</label>
+												</div>
+												<i class="remove ti-trash"></i>
+											</li>
+											<li class="completed">
+												<div class="form-check form-check-flat">
+													<label class="form-check-label">
+														<input class="checkbox" type="checkbox" checked>
+														See The Unmatched Beauty Of The Great Lakes
+													</label>
+												</div>
+												<i class="remove ti-trash"></i>
+											</li>
+											<li>
+												<div class="form-check form-check-flat">
+													<label class="form-check-label">
+														<input class="checkbox" type="checkbox">
+														Copper Canyon
+													</label>
+												</div>
+												<i class="remove ti-trash"></i>
+											</li>
+											<li class="completed">
+												<div class="form-check form-check-flat">
+													<label class="form-check-label">
+														<input class="checkbox" type="checkbox" checked>
+														Top Things To See During A Holiday In Hong Kong
+													</label>
+												</div>
+												<i class="remove ti-trash"></i>
+											</li>
+											<li>
+												<div class="form-check form-check-flat">
+													<label class="form-check-label">
+														<input class="checkbox" type="checkbox">
+														Travelagent India
+													</label>
+												</div>
+												<i class="remove ti-trash"></i>
+											</li>
+										</ul>
+                  </div>
+                  <div class="add-items d-flex mb-0 mt-4">
+										<input type="text" class="form-control todo-list-input me-2"  placeholder="Add new task">
+										<button class="add btn btn-icon text-primary todo-list-add-btn bg-transparent"><i class="ti-location-arrow"></i></button>
+									</div>
+								</div>
+							</div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12 grid-margin stretch-card">
+              <div class="card position-relative">
+                <div class="card-body">
+                  <p class="card-title">Detailed Reports</p>
+                  <div class="row">
+                    <div class="col-md-12 col-xl-3 d-flex flex-column justify-content-center">
+                      <div class="ml-xl-4">
+                        <h1>33500</h1>
+                        <h3 class="font-weight-light mb-xl-4">Sales</h3>
+                        <p class="text-muted mb-2 mb-xl-0">The total number of sessions within the date range. It is the period time a user is actively engaged with your website, page or app, etc</p>
+                      </div>  
+                    </div>
+                    <div class="col-md-12 col-xl-9">
+                      <div class="row">
+                        <div class="col-md-6 mt-3 col-xl-5">
+                          <canvas id="north-america-chart"></canvas>
+                          <div id="north-america-legend"></div>
                         </div>
+                        <div class="col-md-6 col-xl-7">
+                          <div class="table-responsive mb-3 mb-md-0">
+                            <table class="table table-borderless report-table">
+                              <tr>
+                                <td class="text-muted">Illinois</td>
+                                <td class="w-100 px-0">
+                                  <div class="progress progress-md mx-4">
+                                    <div class="progress-bar bg-primary" role="progressbar" style="width: 70%" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100"></div>
+                                  </div>
+                                </td>
+                                <td><h5 class="font-weight-bold mb-0">524</h5></td>
+                              </tr>
+                              <tr>
+                                <td class="text-muted">Washington</td>
+                                <td class="w-100 px-0">
+                                  <div class="progress progress-md mx-4">
+                                    <div class="progress-bar bg-primary" role="progressbar" style="width: 30%" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100"></div>
+                                  </div>
+                                </td>
+                                <td><h5 class="font-weight-bold mb-0">722</h5></td>
+                              </tr>
+                              <tr>
+                                <td class="text-muted">Mississippi</td>
+                                <td class="w-100 px-0">
+                                  <div class="progress progress-md mx-4">
+                                    <div class="progress-bar bg-primary" role="progressbar" style="width: 95%" aria-valuenow="95" aria-valuemin="0" aria-valuemax="100"></div>
+                                  </div>
+                                </td>
+                                <td><h5 class="font-weight-bold mb-0">173</h5></td>
+                              </tr>
+                              <tr>
+                                <td class="text-muted">California</td>
+                                <td class="w-100 px-0">
+                                  <div class="progress progress-md mx-4">
+                                    <div class="progress-bar bg-primary" role="progressbar" style="width: 60%" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"></div>
+                                  </div>
+                                </td>
+                                <td><h5 class="font-weight-bold mb-0">945</h5></td>
+                              </tr>
+                              <tr>
+                                <td class="text-muted">Maryland</td>
+                                <td class="w-100 px-0">
+                                  <div class="progress progress-md mx-4">
+                                    <div class="progress-bar bg-primary" role="progressbar" style="width: 40%" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100"></div>
+                                  </div>
+                                </td>
+                                <td><h5 class="font-weight-bold mb-0">553</h5></td>
+                              </tr>
+                              <tr>
+                                <td class="text-muted">Alaska</td>
+                                <td class="w-100 px-0">
+                                  <div class="progress progress-md mx-4">
+                                    <div class="progress-bar bg-primary" role="progressbar" style="width: 75%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
+                                  </div>
+                                </td>
+                                <td><h5 class="font-weight-bold mb-0">912</h5></td>
+                              </tr>
+                            </table>
+                          </div>
+                        </div>
+                      </div>
                     </div>
 
 
@@ -288,22 +551,22 @@
         </div>
         <!-- container-scroller -->
 
-        <!-- plugins:js -->
-        <script src="../../vendors/base/vendor.bundle.base.js"></script>
-        <!-- endinject -->
-        <!-- Plugin js for this page-->
-        <script src="../../vendors/chart.js/Chart.min.js"></script>
-        <script src="../../js/jquery.cookie.js" type="text/javascript"></script>
-        <!-- End plugin js for this page-->
-        <!-- inject:js -->
-        <script src="../../js/off-canvas.js"></script>
-        <script src="../../js/hoverable-collapse.js"></script>
-        <script src="../../js/template.js"></script>
-        <script src="../../js/todolist.js"></script>
-        <!-- endinject -->
-        <!-- Custom js for this page-->
-        <script src="../../js/dashboard.js"></script>
-        <!-- End custom js for this page-->
+  <!-- plugins:js -->
+  <script src="vendors/base/vendor.bundle.base.js"></script>
+  <!-- endinject -->
+  <!-- Plugin js for this page-->
+  <script src="vendors/chart.js/Chart.min.js"></script>
+  <script src="js/jquery.cookie.js" type="text/javascript"></script>
+  <!-- End plugin js for this page-->
+  <!-- inject:js -->
+  <script src="js/off-canvas.js"></script>
+  <script src="js/hoverable-collapse.js"></script>
+  <script src="js/template.js"></script>
+  <script src="js/todolist.js"></script>
+  <!-- endinject -->
+  <!-- Custom js for this page-->
+  <script src="js/dashboard.js"></script>
+  <!-- End custom js for this page-->
 </body>
 
 </html>
