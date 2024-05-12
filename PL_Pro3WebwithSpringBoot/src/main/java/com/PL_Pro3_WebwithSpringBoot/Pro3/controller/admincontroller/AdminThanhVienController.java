@@ -459,8 +459,8 @@ public class AdminThanhVienController {
     
     @GetMapping("/admin/trathietbi")
     public String traThietBi (Model model){
-        List<ThietBiDTO> thietBis = thietBiAdminService.getThietBiDaMuon();
-        model.addAttribute("thietBis", thietBis);
+        List<ThongTinSDDTO> thongTinTraThietBis = thongTinSDAdminService.getThongTinThietbiCanTra();
+        model.addAttribute("thongTinTraThietBis", thongTinTraThietBis);
         return "admin/trathietbi";
     }
     

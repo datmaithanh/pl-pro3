@@ -221,6 +221,14 @@
                 <div class="row justify-content-center">
                     
                     <div class="col-md-10 bg-white p-4">
+                      <div class="col-md-12 grid-margin">
+                        <div class="input-group">
+                            <input type="text" class="form-control" id="searchInput" placeholder="Search...">
+                            <div class="input-group-append">
+                                <button class="btn btn-primary" type="button" id="searchButton">Search</button>
+                            </div>
+                        </div>
+                    </div>
                         <h2 class="text-center mb-4">Bảng thiết bị còn trống</h2>
                         <table class="table table-bordered mx-auto ">
                             <thead>
@@ -287,6 +295,29 @@
   <!-- Custom js for this page-->
   <script src="/js/dashboard.js"></script>
   <!-- End custom js for this page-->
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+        document.getElementById('searchButton').addEventListener('click', function () {
+          var searchText = document.getElementById('searchInput').value.toLowerCase();
+          var rows = document.querySelectorAll('tbody tr');
+    
+          rows.forEach(function (row) {
+            var maTB = row.querySelector('td:nth-child(1)').textContent.toLowerCase(); // Lấy nội dung cột maTB
+            var tenTB = row.querySelector('td:nth-child(2)').textContent.toLowerCase(); // Lấy nội dung cột tenTB
+            var moTaTB = row.querySelector('td:nth-child(3)').textContent.toLowerCase(); // Lấy nội dung cột moTaTB
+            
+            // Kiểm tra nếu searchText xuất hiện trong bất kỳ cột nào
+            if (maTB.includes(searchText) || tenTB.includes(searchText) || moTaTB.includes(searchText)) {
+              row.style.display = '';
+            } else {
+              row.style.display = 'none';
+            }
+          });
+        });
+      });
+    </script>
+
 </body>
 
 </html>

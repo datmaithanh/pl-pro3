@@ -63,6 +63,12 @@ public class ThongTinSDAdminServiceImpl implements ThongTinSDAdminService{
         List<ThongTinSD> thongTinSDs = thongTinSDRepository.findThongTinSDDaDatCho();
         return thongTinSDs.stream().map((thongTinSD ->mapToThongTinSDDTO(thongTinSD))).collect(Collectors.toList());
     }
+
+    @Override
+    public List<ThongTinSDDTO> getThongTinThietbiCanTra() {
+        List<ThongTinSD> thongTinSDs = thongTinSDRepository.findThietBiCanTra();
+        return thongTinSDs.stream().map((thongTinSD ->mapToThongTinSDDTO(thongTinSD))).collect(Collectors.toList());
+    }
     
     private  ThongTinSDDTO mapToThongTinSDDTO(ThongTinSD thongTinSD){
         ThongTinSDDTO thongTinSDDTO = ThongTinSDDTO.builder()

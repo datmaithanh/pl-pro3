@@ -219,6 +219,14 @@
         <div class="content-wrapper" style="flex:1; display: flex; flex-direction: column; align-items: center; justify-content: center;">
             <div class="container bg-white rounded" style="width: 90%; margin: 0 auto; padding: 20px;">
               <div class="text-center mt-4">
+                <div class="col-md-12 grid-margin">
+                  <div class="input-group">
+                      <input type="text" class="form-control" id="searchInput" placeholder="Search...">
+                      <div class="input-group-append">
+                          <button class="btn btn-primary" type="button" id="searchButton">Search</button>
+                      </div>
+                  </div>
+              </div>
                 <h2 style="text-align: center;">Lịch sử vi phạm</h2>
                 <label for="trangthai" style="font-weight: bold; font-size: 18px; margin-right: 10px;">Trạng thái:</label>
                 <input type="checkbox" id="trangthai1" name="trangthai" value="xuly" onchange="filterData(this)">
@@ -333,7 +341,34 @@
   }
   
   </script>
-  
+  <div class="col-md-12 grid-margin">
+                    <div class="input-group">
+                        <input type="text" class="form-control" id="searchInput" placeholder="Search...">
+                        <div class="input-group-append">
+                            <button class="btn btn-primary" type="button" id="searchButton">Search</button>
+                        </div>
+                    </div>
+                </div><script>
+                  document.addEventListener('DOMContentLoaded', function () {
+                      document.getElementById('searchButton').addEventListener('click', function () {
+                        var searchText = document.getElementById('searchInput').value.toLowerCase();
+                        var rows = document.querySelectorAll('tbody tr');
+                  
+                        rows.forEach(function (row) {
+                          var maTB = row.querySelector('td:nth-child(1)').textContent.toLowerCase(); // Lấy nội dung cột maTB
+                          var tenTB = row.querySelector('td:nth-child(2)').textContent.toLowerCase(); // Lấy nội dung cột tenTB
+                          var moTaTB = row.querySelector('td:nth-child(3)').textContent.toLowerCase(); // Lấy nội dung cột moTaTB
+                          var motafaqke = row.querySelector('td:nth-child(4)').textContent.toLowerCase(); // Lấy nội dung cột moTaTB
+                          // Kiểm tra nếu searchText xuất hiện trong bất kỳ cột nào
+                          if (maTB.includes(searchText) || tenTB.includes(searchText) || moTaTB.includes(searchText) || motafaqke.includes(searchText)) {
+                            row.style.display = '';
+                          } else {
+                            row.style.display = 'none';
+                          }
+                        });
+                      });
+                    });
+                  </script>
 
   <style>
     /* Điều chỉnh kích thước của checkbox */

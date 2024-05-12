@@ -26,4 +26,6 @@ public interface ThongTinSDAdminService {
     List<ThongTinSDDTO> getAllThongTinSD();
     List<ThongTinSDDTO> filterVaoKHT(LocalDate ngayBatDau, LocalDate ngayKetThuc, String khoa, String nganh);
     List<ThongTinSDDTO> filterMuonTB(String tenThietBi, LocalDate tgMuonTu, LocalDate tgMuonDen);
+
+    List<ThongTinSDDTO> getThongTinThietbiCanTra();
 }

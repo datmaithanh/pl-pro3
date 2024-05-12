@@ -121,14 +121,6 @@ public class UserDatChoThietBiController {
 
     }
 
-    @GetMapping("/user/datchomuonthietbi/resultSearch")
-    public String timKiemThietBi(@RequestParam("searchTerm") String searchTerm, Model model) {
-        List<ThietBiDTO> thietBiDTOs = thietBiUserService.getSearchThietBiChuaMuon(searchTerm);
-        model.addAttribute("searchTerm", searchTerm);
-        model.addAttribute("thietBis", thietBiDTOs);
-        return "user/datchomuonthietbiresultSearch";
-    }
-
     @GetMapping("/user/xemdatchomuonthietbi")
     public String xemDatChoMuon(HttpSession session, Model model) {
 

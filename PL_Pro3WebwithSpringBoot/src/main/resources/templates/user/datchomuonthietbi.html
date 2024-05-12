@@ -197,23 +197,14 @@
             <div class="container">
                  <div class="row justify-content-center mt-4">
                   
-                  <div class="col-md-10 px-4 bg-white pt-3">
-                    <form action="/user/datchomuonthietbi/resultSearch" method="GET">
-                      <ul class="navbar-nav mr-lg-2">
-                        <li class="nav-item nav-search d-none d-lg-block">
-                          <div class="input-group">
-                            <div class="input-group-prepend hover-cursor" id="navbar-search-icon">
-                              <span class="input-group-text" id="search">
-                                
-                                <button type="submit"> <i class="ti-search"></i></button>
-                              </span>
+                    <div class="col-md-12 grid-margin">
+                        <div class="input-group">
+                            <input type="text" class="form-control" id="searchInput" placeholder="Search...">
+                            <div class="input-group-append">
+                                <button class="btn btn-primary ti-search" type="button" id="searchButton"></button>
                             </div>
-                            <input type="text"  name="searchTerm" th:value="${searchTerm}" class="form-control" id="navbar-search-input" placeholder="Search now" aria-label="search" aria-describedby="search">
-                          </div>
-                        </li>
-                      </ul>
-                    </form>
-                  </div>
+                        </div>
+                    </div>
                     <div class="sticky-top col-md-10 px-4 bg-white pt-3">
                          <h2 class="text-center  sticky-top  ">Danh sách thiết bị có thể đặt chổ mượn</h2>
                     </div>
@@ -288,6 +279,28 @@
   <!-- Custom js for this page-->
   <script src="/js/dashboard.js"></script>
   <!-- End custom js for this page-->
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+        document.getElementById('searchButton').addEventListener('click', function () {
+          var searchText = document.getElementById('searchInput').value.toLowerCase();
+          var rows = document.querySelectorAll('tbody tr');
+    
+          rows.forEach(function (row) {
+            var maTB = row.querySelector('td:nth-child(1)').textContent.toLowerCase(); // Lấy nội dung cột maTB
+            var tenTB = row.querySelector('td:nth-child(2)').textContent.toLowerCase(); // Lấy nội dung cột tenTB
+            var moTaTB = row.querySelector('td:nth-child(3)').textContent.toLowerCase(); // Lấy nội dung cột moTaTB
+            
+            // Kiểm tra nếu searchText xuất hiện trong bất kỳ cột nào
+            if (maTB.includes(searchText) || tenTB.includes(searchText) || moTaTB.includes(searchText)) {
+              row.style.display = '';
+            } else {
+              row.style.display = 'none';
+            }
+          });
+        });
+      });
+    </script>
 </body>
 
 </html>

@@ -44,4 +44,9 @@ public interface ThongTinSDRepository extends JpaRepository<ThongTinSD, Object>,
         "WHERE (sd.tgMuon IS NOT NULL AND sd.tgTra IS NULL)" +
         "AND (sd.thanhVien.maTV = :maThanhVien)")
     List<ThongTinSD> findThanhVienDangMuonThietBi(int maThanhVien);
+    
+    @Query("SELECT sd " +
+        "FROM ThongTinSD sd " +
+        "WHERE (sd.tgMuon IS NOT NULL AND sd.tgTra IS NULL)")
+    List<ThongTinSD> findThietBiCanTra();
 }

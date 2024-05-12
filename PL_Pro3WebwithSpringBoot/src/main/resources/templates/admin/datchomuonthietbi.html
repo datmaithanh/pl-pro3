@@ -219,7 +219,16 @@
         <div class="content-wrapper">
             <div class="container">
                  <div class="row justify-content-center mt-4">
+                  
                     <div class="sticky-top col-md-10 px-4 bg-white pt-3">
+                      <div class="col-md-12 grid-margin">
+                        <div class="input-group">
+                            <input type="text" class="form-control" id="searchInput" placeholder="Search...">
+                            <div class="input-group-append">
+                                <button class="btn btn-primary" type="button" id="searchButton">Search</button>
+                            </div>
+                        </div>
+                    </div>
                          <h2 class="text-center  sticky-top  ">Bảng thiết bị còn trống</h2>
                     </div>
                     <div class="col-md-10 bg-white px-4 table-wrapper-scroll-y my-custom-scrollbar">
@@ -268,6 +277,7 @@
                                     <th scope="col">Mã thiết bị</th>
                                     <th scope="col">Tên thiết bị</th>
                                     <th scope="col">Mô tả thiết bị</th>
+                                    <th scope="col">Tên sinh viên đặt chổ</th>
                                     <th scope="col" class="text-center">Hành động</th>
                                     
                                     
@@ -278,6 +288,7 @@
                                     <td th:text="${thongTinSDDTO.thietBi.maTB}"></td>
                                     <td th:text="${thongTinSDDTO.thietBi.tenTB}"></td>
                                     <td th:text="${thongTinSDDTO.thietBi.moTaTB}"></td>
+                                    <td th:text="${thongTinSDDTO.thanhVien.hoTen}"></td>
                                     <td class="text-center d-flex justify-content-center" >
                                         <form th:action="@{/admin/datchomuonthietbi-laythietbi/result}" method="get" style="margin-right: 10px;">
                                             <input type="hidden" name="maThietBi" th:value="${thongTinSDDTO.thietBi.maTB}" />
@@ -319,6 +330,29 @@
   <!--<!-- check time form reque -->>
 
 
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+        document.getElementById('searchButton').addEventListener('click', function () {
+          var searchText = document.getElementById('searchInput').value.toLowerCase();
+          var rows = document.querySelectorAll('tbody tr');
+    
+          rows.forEach(function (row) {
+            var maTB = row.querySelector('td:nth-child(1)').textContent.toLowerCase(); // Lấy nội dung cột maTB
+            var tenTB = row.querySelector('td:nth-child(2)').textContent.toLowerCase(); // Lấy nội dung cột tenTB
+            var moTaTB = row.querySelector('td:nth-child(3)').textContent.toLowerCase(); // Lấy nội dung cột moTaTB
+            var moTaTB2 = row.querySelector('td:nth-child(4)').textContent.toLowerCase(); // Lấy nội dung cột moTaTB
+            
+            
+            // Kiểm tra nếu searchText xuất hiện trong bất kỳ cột nào
+            if (maTB.includes(searchText) || tenTB.includes(searchText) || moTaTB.includes(searchText) || moTaTB2.includes(searchText)) {
+              row.style.display = '';
+            } else {
+              row.style.display = 'none';
+            }
+          });
+        });
+      });
+    </script>
 
   <!-- plugins:js -->
   <script src="/vendors/base/vendor.bundle.base.js"></script>
