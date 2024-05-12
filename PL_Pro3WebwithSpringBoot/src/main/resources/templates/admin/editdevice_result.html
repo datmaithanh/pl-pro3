@@ -34,6 +34,27 @@ input[type=number] {
   -moz-appearance: textfield;
 }
 </style>
+<style>
+   .btn-dark {
+        background-color: transparent;
+        color: #000;
+        border-color: #000;
+    }
+
+    .btn-dark:hover {
+        background-color: #333;
+        border-color: #333;
+    }
+
+    .btn-dark:focus {
+        box-shadow: 0 0 0 0.2rem rgba(0, 0, 0, 0.5);
+    }
+
+    .btn-dark a {
+        color: inherit; /* Đảm bảo màu chữ kế thừa từ phần tử cha */
+        text-decoration: none; /* Loại bỏ gạch chân mặc định */
+    }
+</style>
 <body>
   <div class="container-scroller">
     <div class="row p-0 m-0 proBanner" id="proBanner">
@@ -258,21 +279,23 @@ input[type=number] {
                             <h4 class="font-weight-bold mb-0">Quản lý thiết bị</h4>
                         </div>
                         <div>
-                            <button type="button" class="btn btn-primary btn-icon-text btn-rounded">
-                    <a href="/admin/thietbi"><i class="ti-check btn-icon-prepend"></i>Hoàn thành</a>
+                            <button type="button" class="btn btn-dark btn-icon-text btn-rounded">
+                    <a href="/admin/thietbi"><i class="ti-check btn-icon-prepend"></i><span class="font-weight-bold">Hoàn thành</span></a>
                 </button>
-                            <button id="addButton" type="button" class="btn btn-primary btn-icon-text btn-rounded">
-                                <a href="adddevice" class="text-decoration-none link-dark"><i class="ti-plus btn-icon-prepend"></i>Thêm</a>
-                            </button>
-                            <button id="excelButton" type="button" class="btn btn-primary btn-icon-text btn-rounded">
-                                 <a href="exportexcel" class="text-decoration-none link-dark"><i class="ti-plus btn-icon-prepend"></i>Excel</a>
-                            </button>
-                            <button type="button" class="btn btn-primary btn-icon-text btn-rounded">
-                                <a href="editdevice" class="text-decoration-none link-dark"><i class="ti-pencil btn-icon-prepend"></i>Sửa</a>
-                            </button>
-                            <button type="button" class="btn btn-primary btn-icon-text btn-rounded">
-                                <a href="deletedevice" class="text-decoration-none link-dark"><i class="ti-trash btn-icon-prepend"></i>Xóa</a>
-                            </button>
+                          <button type="button" class="btn btn-dark btn-icon-text btn-rounded">
+                    <a href="adddevice"><i class="ti-plus btn-icon-prepend"></i>Thêm</a>
+                </button>
+                <!-- Nút Hoàn thành -->
+                
+                <button id="excelButton" type="button" class="btn btn-dark btn-icon-text btn-rounded">
+                    <a href="exportexcel"><i class="ti-plus btn-icon-prepend"></i><span class="font-weight-bold">Excel</span></a>
+                </button>
+                <button type="button" class="btn btn-dark btn-icon-text btn-rounded">
+                    <a href="editdevice"><i class="ti-pencil btn-icon-prepend"></i><span class="font-weight-bold">Sửa</span></a>
+                </button>
+                <button type="button" class="btn btn-dark btn-icon-text btn-rounded">
+                    <a href="deletedevice"><i class="ti-minus btn-icon-prepend"></i><span class="font-weight-bold">Xóa</span></a>
+                </button>
                         </div>
                     </div>
                 </div>
