@@ -9,6 +9,7 @@ import com.PL_Pro3_WebwithSpringBoot.Pro3.models.XuLy;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 
 /**
  *
@@ -18,4 +19,7 @@ public interface XuLyRepository extends JpaRepository<XuLy, Object>{
     Optional<XuLy> findByMaXL(int maXL);
     List<XuLy> findByThanhVien_MaTV(int maTV);
     List<XuLy> findByThanhVien(ThanhVien tv);
+    
+    @Query("SELECT x FROM XuLy x WHERE x.thanhVien.maTV = :maTV AND x.trangThaiXL = false")
+    List<XuLy> findByThanhVienMaTVTrueViPham(int maTV);
 }

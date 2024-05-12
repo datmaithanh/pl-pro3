@@ -31,4 +31,6 @@ public interface XuLyAdminService {
 
     void updateXuLy(int id, XuLyDTO xuLyDTO);
     
+    List<XuLy> findByThanhVienMaTVTrueViPham(int maTV);
+    
 }

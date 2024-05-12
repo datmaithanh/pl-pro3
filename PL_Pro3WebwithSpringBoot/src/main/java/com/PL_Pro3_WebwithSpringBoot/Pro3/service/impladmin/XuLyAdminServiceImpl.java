@@ -137,4 +137,10 @@ public class XuLyAdminServiceImpl implements XuLyAdminService {
         }
     }
 
+    @Override
+    public List<XuLy> findByThanhVienMaTVTrueViPham(int maTV) {
+        List<XuLy> xuLys = xuLyRepository.findByThanhVienMaTVTrueViPham(maTV);
+        return xuLys;
+    }
+
 }

@@ -290,7 +290,7 @@ public class AdminThanhVienController {
         // Kiểm tra xem service có tồn tại không
         if (xuLyAdminService != null) {
             boolean exists = xuLyAdminService.checkMaSoSVTrongXuLy(maSoSinhVien);
-            List<XuLy> xuLys = xuLyAdminService.getXuLyByMaTV(maSoSinhVien);
+            List<XuLy> xuLys = xuLyAdminService.findByThanhVienMaTVTrueViPham(maSoSinhVien);
             ThanhVienDTO thanhVienDTO = thanhVienAdminService.getThanhVienDTOById(maSoSinhVien);
 
             // Kiểm tra xem sinh viên có phải là thành viên không
@@ -349,7 +349,7 @@ public class AdminThanhVienController {
             model.addAttribute("messages", messages);
         } else {
             // Thành viên tồn tại, kiểm tra các thông báo về việc xử lý của thành viên
-            List<XuLy> xuLys = xuLyAdminService.getXuLyByMaTV(maSoSinhVien);
+            List<XuLy> xuLys = xuLyAdminService.findByThanhVienMaTVTrueViPham(maSoSinhVien);
             if (xuLys != null && !xuLys.isEmpty()) {
                 boolean exists = xuLyAdminService.checkMaSoSVTrongXuLy(maSoSinhVien);
                 for (XuLy xuLy : xuLys) {
@@ -421,7 +421,7 @@ public class AdminThanhVienController {
             model.addAttribute("messages", messages);
         } else {
             // Thành viên tồn tại, kiểm tra các thông báo về việc xử lý của thành viên
-            List<XuLy> xuLys = xuLyAdminService.getXuLyByMaTV(maSoSinhVien);
+            List<XuLy> xuLys = xuLyAdminService.findByThanhVienMaTVTrueViPham(maSoSinhVien);
             if (xuLys != null && !xuLys.isEmpty()) {
                 exists = xuLyAdminService.checkMaSoSVTrongXuLy(maSoSinhVien);
                 for (XuLy xuLy : xuLys) {
@@ -560,7 +560,7 @@ public class AdminThanhVienController {
             model.addAttribute("messages", messages);
         } else {
             // Thành viên tồn tại, kiểm tra các thông báo về việc xử lý của thành viên
-            List<XuLy> xuLys = xuLyAdminService.getXuLyByMaTV(maSoSinhVien);
+            List<XuLy> xuLys = xuLyAdminService.findByThanhVienMaTVTrueViPham(maSoSinhVien);
             if (xuLys != null && !xuLys.isEmpty()) {
                 exists = xuLyAdminService.checkMaSoSVTrongXuLy(maSoSinhVien);
                 for (XuLy xuLy : xuLys) {
