@@ -69,12 +69,6 @@ public class ThanhVienAdminServiceImpl implements ThanhVienAdminService{
         return thanhVien;
     }
     @Override
-    public ThanhVienDTO getThanhVienById(int thanhVienID) {
-         ThanhVien thanhVien = thanhVienRepository.findById(thanhVienID).get();
-        return mapToThanhVienDTO(thanhVien);
-    }
-   
-    @Override
     public ThanhVienDTO getThanhVienDTOById(int thanhVienID) {
         ThanhVien thanhVien = thanhVienRepository.findById(thanhVienID).orElse(null);
         if (thanhVien != null) {

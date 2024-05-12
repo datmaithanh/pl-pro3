@@ -38,14 +38,13 @@ import jakarta.servlet.http.HttpSession;
  */
 @Controller
 public class UserDatChoThietBiController {
+
     private ThietBiUserService thietBiUserService;
     private ThanhVienUserService thanhVienUserService;
     private ThongTinSDUserService thongTinSDUserService;
     private XuLyUserService xuLyUserService;
-    @Autowired
-    
 
-    
+    @Autowired
 
     public UserDatChoThietBiController(ThietBiUserService thietBiUserService, ThanhVienUserService thanhVienUserService,
             ThongTinSDUserService thongTinSDUserService, XuLyUserService xuLyUserService) {
@@ -55,43 +54,39 @@ public class UserDatChoThietBiController {
         this.xuLyUserService = xuLyUserService;
     }
 
-
-
     @GetMapping("/user/datchomuonthietbi")
-    public String datChoMuonThietBi (Model model){
+    public String datChoMuonThietBi(Model model) {
         List<ThietBiDTO> thietBis = thietBiUserService.getThietBiNotInThongTinSDs();
         model.addAttribute("thietBis", thietBis);
         return "user/datchomuonthietbi";
     }
 
     @GetMapping("/user/huydatchomuonthietbi")
-    public String datChoMuonThietBiTroVe (){
+    public String datChoMuonThietBiTroVe() {
         return "user/index";
     }
 
     @GetMapping("/user/datchomuonthietbi/result")
-    public String datChoMuonThietBiResult(@RequestParam("maThietBi") int maThietBi, Model model,HttpSession session) {
+    public String datChoMuonThietBiResult(@RequestParam("maThietBi") int maThietBi, Model model, HttpSession session) {
         model.addAttribute("currentTimeHour", LocalTime.now().getHour());
         model.addAttribute("currentTimeMinute", LocalTime.now().plusMinutes(1).getMinute());
         ThietBiDTO thietBiDTO = thietBiUserService.getThietBiDTOByID(maThietBi);
         ThanhVien thanhVien = (ThanhVien) session.getAttribute("thanhVien");
         model.addAttribute("thanhVien", thanhVien);
-        model.addAttribute("thietBi",thietBiDTO);
+        model.addAttribute("thietBi", thietBiDTO);
         return "user/datchomuonthietbiresult";
     }
 
     @GetMapping("/user/datchomuonthietbi/resultwithmember")
-    public String datChoMuonThietBiResultCoMaThanhVien(@RequestParam("maThietBi") int maThietBi,@RequestParam("thoiGianMuon") String thoiGianMuon,
-    @RequestParam("gioMuon") String gioMuon, @RequestParam("maThanhVien") int maThanhVien, Model model, @RequestHeader(value = "referer", required = false) String referer) {
+    public String datChoMuonThietBiResultCoMaThanhVien(@RequestParam("maThietBi") int maThietBi, @RequestParam("thoiGianMuon") String thoiGianMuon,
+            @RequestParam("gioMuon") String gioMuon, @RequestParam("maThanhVien") int maThanhVien, Model model, @RequestHeader(value = "referer", required = false) String referer) {
         ThietBiDTO thietBiDTO = thietBiUserService.getThietBiDTOByID(maThietBi);
-        model.addAttribute("thietBi",thietBiDTO);
+        model.addAttribute("thietBi", thietBiDTO);
         ThanhVienDTO thanhVienDTO = thanhVienUserService.getThanhVienDTOById(maThanhVien);
-        model.addAttribute("thanhVien",thanhVienDTO);
-        
-        
-        
+        model.addAttribute("thanhVien", thanhVienDTO);
+
         List<String> messages = new ArrayList<>();
-        boolean exists=true;
+        boolean exists = true;
         // Kiểm tra các thông báo về việc xử lý của thành viên
         List<XuLy> xuLys = xuLyUserService.getXuLyByMaTV(maThanhVien);
         if (xuLys != null && !xuLys.isEmpty()) {
@@ -99,10 +94,10 @@ public class UserDatChoThietBiController {
             for (XuLy xuLy : xuLys) {
                 int soTien = xuLy.getSoTien();
                 if (soTien != 0) {
-                    String message = "Mã số sinh viên " + xuLy.getThanhVien().getMaTV() + " " + xuLy.getHinhThucXL() + " với số tiền " + xuLy.getSoTien() +"đ, không được vào khu học tập";
+                    String message = "Mã số sinh viên " + xuLy.getThanhVien().getMaTV() + " " + xuLy.getHinhThucXL() + " với số tiền " + xuLy.getSoTien() + "đ, không được vào khu học tập";
                     messages.add(message);
                 } else {
-                    String message = "Mã số sinh viên " + xuLy.getThanhVien().getMaTV() + " " + xuLy.getHinhThucXL()+", không được vào khu học tập";
+                    String message = "Mã số sinh viên " + xuLy.getThanhVien().getMaTV() + " " + xuLy.getHinhThucXL() + ", không được vào khu học tập";
                     messages.add(message);
                 }
             }
@@ -112,35 +107,33 @@ public class UserDatChoThietBiController {
         } else {
             ThanhVien thanhVien = thanhVienUserService.getThanhVienById(maThanhVien);
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm");
-            LocalDateTime tgDatMuonFinal = LocalDateTime.parse(thoiGianMuon+"T"+ gioMuon, formatter);
+            LocalDateTime tgDatMuonFinal = LocalDateTime.parse(thoiGianMuon + "T" + gioMuon, formatter);
             ThietBi thietBi = thietBiUserService.getThietBiByID(maThietBi);
             ThongTinSDDTO thongTinSDDTO = new ThongTinSDDTO(thanhVien, thietBi, null, null, null, tgDatMuonFinal);
             thongTinSDUserService.addThongTinSD(thongTinSDDTO);
             String message = "Lưu ý: Vui lòng đến nhận thiết bị đúng giờ, nếu sau 1 giờ mà thiết bị vẫn chưa được nhận thì sẽ xóa đặt chổ!";
             messages.add(message);
-            model.addAttribute("timeNgayDatChoMuon",thoiGianMuon);
-            model.addAttribute("timeGioDatChoMuon",gioMuon);
+            model.addAttribute("timeNgayDatChoMuon", thoiGianMuon);
+            model.addAttribute("timeGioDatChoMuon", gioMuon);
             model.addAttribute("messages", messages);
         }
         model.addAttribute("maThanhVien", maThanhVien);
 
-    
-    return "user/datchomuonthietbiresultwithmember";
+        return "user/datchomuonthietbiresultwithmember";
 
     }
-    
 
     @GetMapping("/user/datchomuonthietbi/resultSearch")
-    public String timKiemThietBi(@RequestParam("searchTerm") String searchTerm , Model model) {
+    public String timKiemThietBi(@RequestParam("searchTerm") String searchTerm, Model model) {
         List<ThietBiDTO> thietBiDTOs = thietBiUserService.getSearchThietBiChuaMuon(searchTerm);
         model.addAttribute("searchTerm", searchTerm);
-        model.addAttribute("thietBis",thietBiDTOs);
+        model.addAttribute("thietBis", thietBiDTOs);
         return "user/datchomuonthietbiresultSearch";
     }
 
     @GetMapping("/user/xemdatchomuonthietbi")
     public String xemDatChoMuon(HttpSession session, Model model) {
-        
+
         ThanhVien thanhViens = (ThanhVien) session.getAttribute("thanhVien");
         List<ThongTinSDDTO> thanhVienthongTinSDDTOs = thongTinSDUserService.getThanhVienSDDaDatCho(thanhViens.getMaTV());
         model.addAttribute("thanhVienthongTinSDDTO", thanhVienthongTinSDDTOs);
@@ -148,32 +141,32 @@ public class UserDatChoThietBiController {
     }
 
     @GetMapping("/user/xemdatchomuonthietbiresult")
-    public String datChoMuonThietBiHuyLayThietBi(@RequestParam("maThietBi") int maThietBi,@RequestParam("maThanhVien") int maThanhVien,@RequestParam("thoiGianMuon") String thoiGianMuon, Model model) {
+    public String datChoMuonThietBiHuyLayThietBi(@RequestParam("maThietBi") int maThietBi, @RequestParam("maThanhVien") int maThanhVien, @RequestParam("thoiGianMuon") String thoiGianMuon, Model model) {
         ThietBiDTO thietBiDTO = thietBiUserService.getThietBiDTOByID(maThietBi);
-        model.addAttribute("thietBi",thietBiDTO);
+        model.addAttribute("thietBi", thietBiDTO);
         ThanhVienDTO thanhVienDTO = thanhVienUserService.getThanhVienDTOById(maThanhVien);
-        model.addAttribute("thanhVien",thanhVienDTO);
+        model.addAttribute("thanhVien", thanhVienDTO);
 
         model.addAttribute("thoiGianMuon", thoiGianMuon);
         return "user/xemdatchomuonthietbiresult";
     }
-    
+
     @GetMapping("/user/xemdatchomuonthietbiresultfinal")
     public String datchomuonThietBiHuyLayThietBiResultCoMaThanhVien(@RequestParam("maThietBi") int maThietBi, @RequestParam("maThanhVien") int maThanhVien, Model model) {
         ThongTinSD thongTinSD = thongTinSDUserService.getThongTinSDByMaTB(maThietBi);
-        model.addAttribute("thongTinSD",thongTinSD);
-        
+        model.addAttribute("thongTinSD", thongTinSD);
+
         List<String> messages = new ArrayList<>();
-        boolean exists=true;
+        boolean exists = true;
 
         exists = false;
         String message = "Mã số sinh viên " + maThanhVien + " hủy mượn thiết bị thành công!";
         thongTinSDUserService.deleteThongTinSDId(thongTinSD.getMaTT());
-        
+
         model.addAttribute("coViPham", exists);
         model.addAttribute("messages", messages);
         model.addAttribute("maThanhVien", maThanhVien);
-        
+
         return "user/xemdatchomuonthietbiresultfinal";
     }
 
