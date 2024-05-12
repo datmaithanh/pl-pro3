@@ -256,20 +256,20 @@
 
                                             <div class="form-group">
                                                 <label for="exampleFormControlSelect3">Thành viên</label>
-                                                <select class="form-control form-control-sm" id="exampleFormControlSelect3"
-                                                        name="maTV">
-                                                    <option value="0">Mã thành viên</option>
+                                                <select class="form-control form-control-sm" id="exampleFormControlSelect3" name="maTV" required>
+                                                    <option value="">Chọn mã thành viên</option>
                                                     <option th:each="thanhVien : ${thanhViens}" th:value="${thanhVien.maTV}"
                                                             th:text="${thanhVien.maTV + ' - ' + thanhVien.hoTen}"></option>
                                                 </select>
                                             </div>
+                                            
 
 
                                       
 
 
                                             <div class="form-group">
-                                                <label for="exampleFormControlSelect3">Thành viên</label>
+                                                <label for="exampleFormControlSelect3">Hình thức</label>
                                                 <select class="form-control form-control-sm" id="exampleFormControlSelect3"
                                                         name="hinhThucXL">
                                                     <option value="0">Khóa thẻ 1 tháng</option>
