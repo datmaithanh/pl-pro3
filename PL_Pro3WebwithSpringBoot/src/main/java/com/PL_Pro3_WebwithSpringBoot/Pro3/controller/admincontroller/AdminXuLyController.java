@@ -72,20 +72,18 @@ public class AdminXuLyController {
         model.addAttribute("xuLys", xuLys);
         List<ThanhVienDTO> thanhViens = thanhVienAdminService.getAllThanhVien();
         model.addAttribute("thanhViens", thanhViens);
+
         return "/admin/themxulyvipham";
     }
 
     @GetMapping("/admin/store")
-    public String addXuLy(@ModelAttribute XuLyDTO xuLyDTO, @RequestParam("maTV") int maTV, @RequestParam("maXL") String maXL) {
-        if (maTV != 0 && maXL != "") {
+    public String addXuLy(@ModelAttribute XuLyDTO xuLyDTO, @RequestParam("maTV") int maTV) {
+        if (maTV != 0) {
             xuLyAdminService.AddXuLy(maTV, xuLyDTO);
-            return "redirect:/admin/xulyvipham";
-
+            return "redirect:/admin/xulyvipham";  
         } else {
             return "redirect:/admin/themxulyvipham";
         }
-//        xuLyAdminService.AddXuLy(maTV, xuLyDTO);
-//        return "redirect:/admin/xulyvipham";
     }
 
     @GetMapping("/admin/delete/{id}")

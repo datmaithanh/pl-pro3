@@ -198,6 +198,13 @@
 
                 </a>
             </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/admin">
+                    <i class="ti-user menu-icon"></i>
+                    <span class="menu-title">Admin</span>
+
+                </a>
+            </li>
         </ul>   
     </nav>
       <!-- partial -->
@@ -215,7 +222,7 @@
             <input type="hidden" id="maThanhVien" name="maThanhVien" th:value="${thanhVien.maTV}" />
             <div class="form-group">
                 
-                <label class="m-2" for="thoiGianMuon" style="font-size: 18px; font-weight: bold;">Chọn thời gian mượn:</label>
+                <label class="m-2" for="thoiGianMuon" style="font-size: 14px; font-weight: bold;">Chọn thời gian mượn:</label>
                 <input class="m-2" type="date" id="thoiGianMuon" name="thoiGianMuon" th:value="${#temporals.format(#temporals.createToday(), 'yyyy-MM-dd')}" th:min="${#temporals.format(#temporals.createToday(), 'yyyy-MM-dd')}" th:max="${#temporals.format(#temporals.createToday().plusDays(1), 'yyyy-MM-dd')}" required>
                 <input class="m-2" type="time" id="gioMuon" name="gioMuon" th:value="${currentTimeHour + ':' + currentTimeMinute}" required>
 

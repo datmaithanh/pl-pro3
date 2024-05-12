@@ -247,19 +247,6 @@
                                             <a class="btn btn-primary btn-icon-text btn-rounded" th:href="@{/admin/themxulyvipham}">Thêm</a>
                                         </div>
                                         <br>
-<<<<<<< Updated upstream
-                                        
-                                        <form th:action="@{/admin/searchMaTV}" class="col-md-12 grid-margin">
-                                            <div class="form-group"  style="display:flex;">
-
-                                                <select class="form-control form-control-sm" id="exampleFormControlSelect3"
-                                                        name="maTV">
-                                                    <option value="0">Mã thành viên</option>
-                                                    <option th:each="thanhVien : ${thanhViens}" th:value="${thanhVien.maTV}"
-                                                            th:text="${thanhVien.maTV}"></option>
-                                                </select>
-                                                <input type="submit" value="Search" class="btn btn-primary"/>
-=======
 
                                         <div class="col-md-12 grid-margin">
                                             <div class="input-group">
@@ -267,7 +254,6 @@
                                                 <div class="input-group-append">
                                                     <button class="btn btn-primary" type="button" id="searchButton">Search</button>
                                                 </div>
->>>>>>> Stashed changes
                                             </div>
                                         </div>
 
@@ -294,7 +280,20 @@
                                                         <td th:text="${xuLy.maXL}"></td>
                                                         <td th:text="${xuLy.thanhVien.maTV}"></td>
                                                         <td th:text="${xuLy.thanhVien.hoTen}"></td>
-                                                        <td th:text="${xuLy.HinhThucXL}"></td>
+
+
+                                                        <!--<td th:text="${xuLy.HinhThucXL}"></td>-->
+                                                        <td>
+                                                            <span th:switch="${xuLy.HinhThucXL}">
+                                                                <span th:case="'0'">Khóa thẻ 1 tháng</span>
+                                                                <span th:case="'1'">Khóa thẻ 2 tháng</span>
+                                                                <span th:case="'2'">Khóa thẻ 3 tháng</span>
+                                                                <span th:case="'3'">Khóa thẻ vĩnh viễn</span>
+                                                                <span th:case="'4'">Bồi thường</span>
+                                                            </span>
+                                                        </td>
+
+
                                                         <td th:text="${xuLy.soTien}"></td>
                                                         <td th:text="${xuLy.trangThaiXL} ? 'Đã xử lý' : 'Chưa xử lý'"></td>
                                                         <td><a class="btn btn-warning"
@@ -333,6 +332,29 @@
             <!-- page-body-wrapper ends -->
         </div>
         <!-- container-scroller -->
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+                document.getElementById('searchButton').addEventListener('click', function () {
+                  var searchText = document.getElementById('searchInput').value.toLowerCase();
+                  var rows = document.querySelectorAll('tbody tr');
+            
+                  rows.forEach(function (row) {
+                    var maTB = row.querySelector('td:nth-child(1)').textContent.toLowerCase(); // Lấy nội dung cột maTB
+                    var tenTB = row.querySelector('td:nth-child(2)').textContent.toLowerCase(); // Lấy nội dung cột tenTB
+                    var moTaTB = row.querySelector('td:nth-child(3)').textContent.toLowerCase(); // Lấy nội dung cột moTaTB
+                    var maTB1 = row.querySelector('td:nth-child(4)').textContent.toLowerCase(); // Lấy nội dung cột maTB
+                    var tenTB2 = row.querySelector('td:nth-child(5)').textContent.toLowerCase(); // Lấy nội dung cột tenTB
+                    var moTaTB3 = row.querySelector('td:nth-child(6)').textContent.toLowerCase(); // Lấy nội dung cột moTaTB
+                    // Kiểm tra nếu searchText xuất hiện trong bất kỳ cột nào
+                    if (maTB.includes(searchText) || tenTB.includes(searchText) || moTaTB.includes(searchText) || maTB1.includes(searchText) || tenTB2.includes(searchText) || moTaTB3.includes(searchText)) {
+                      row.style.display = '';
+                    } else {
+                      row.style.display = 'none';
+                    }
+                  });
+                });
+              });
+            </script>
         <!-- plugins:js -->
         <script src="../../vendors/base/vendor.bundle.base.js"></script>
         <!-- endinject -->

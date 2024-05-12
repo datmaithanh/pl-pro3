@@ -17,35 +17,35 @@ import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-
 /**
  *
  * @author Lenovo
  */
 @Service
-public class XuLyAdminServiceImpl implements XuLyAdminService{
+public class XuLyAdminServiceImpl implements XuLyAdminService {
+
     private XuLyRepository xuLyRepository;
     private ThanhVienRepository thanhVienRepository;
-    
+
     @Autowired
     public XuLyAdminServiceImpl(XuLyRepository xuLyRepository, ThanhVienRepository thanhVienRepository) {
         this.xuLyRepository = xuLyRepository;
         this.thanhVienRepository = thanhVienRepository;
     }
-    
-    
+
     @Override
     public boolean checkMaSoSVTrongXuLy(int maSoSinhVien) {
-       List<XuLy> xuLyList = xuLyRepository.findByThanhVien_MaTV(maSoSinhVien);
+        List<XuLy> xuLyList = xuLyRepository.findByThanhVien_MaTV(maSoSinhVien);
         return !xuLyList.isEmpty();
     }
 
     @Override
     public List<XuLyDTO> getAllXuLy() {
         List<XuLy> xuLys = xuLyRepository.findAll();
-        return xuLys.stream().map((xuly ->mapToXuLyDTO(xuly))).collect(Collectors.toList());
+        return xuLys.stream().map((xuly -> mapToXuLyDTO(xuly))).collect(Collectors.toList());
     }
-    private  XuLyDTO mapToXuLyDTO(XuLy xuLy){
+
+    private XuLyDTO mapToXuLyDTO(XuLy xuLy) {
         XuLyDTO xuLyDTO = XuLyDTO.builder()
                 .maXL(xuLy.getMaXL())
                 .thanhVien(xuLy.getThanhVien())
@@ -53,7 +53,6 @@ public class XuLyAdminServiceImpl implements XuLyAdminService{
                 .soTien(xuLy.getSoTien())
                 .ngayXL(xuLy.getNgayXL())
                 .trangThaiXL(xuLy.getTrangThaiXL())
-                
                 .build();
 
         return xuLyDTO;
@@ -95,12 +94,18 @@ public class XuLyAdminServiceImpl implements XuLyAdminService{
     private XuLy mapToXuLy(int maTV, XuLyDTO xuLyDTO) {
 
         ThanhVien thanhVien = thanhVienRepository.findById(maTV).get();
+        int soTien = 0;
+        if (xuLyDTO.getHinhThucXL() == "4") {
+            soTien = xuLyDTO.getSoTien();
+        } else {
+            soTien = 0;
+        }
 
         XuLy xuLy = XuLy.builder()
                 .maXL(xuLyDTO.getMaXL())
                 .thanhVien(thanhVien)
                 .hinhThucXL(xuLyDTO.getHinhThucXL())
-                .soTien(xuLyDTO.getSoTien())
+                .soTien(soTien)
                 .ngayXL(xuLyDTO.getNgayXL())
                 .trangThaiXL(xuLyDTO.getTrangThaiXL())
                 .build();
@@ -131,6 +136,5 @@ public class XuLyAdminServiceImpl implements XuLyAdminService{
 
         }
     }
-    
-    
+
 }
