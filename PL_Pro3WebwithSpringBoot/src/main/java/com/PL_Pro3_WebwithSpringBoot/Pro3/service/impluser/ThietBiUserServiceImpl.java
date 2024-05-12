@@ -25,16 +25,20 @@ public class ThietBiUserServiceImpl implements ThietBiUserService{
     private ThietBiRepository thietBiRepository;
     
     @Autowired
-    ThietBiRepository repository;
-
-    @Override
-    public Optional<ThietBi> findById(Integer id) {
-        return repository.findById(id);
+    public ThietBiUserServiceImpl(ThietBiRepository thietBiRepository) {
+        this.thietBiRepository = thietBiRepository;
     }
 
     @Override
+    public Optional<ThietBi> findById(Integer id) {
+        return thietBiRepository.findById(id);
+    }
+
+    
+
+    @Override
     public List<ThietBi> findAll() {
-        return repository.findAll();
+        return thietBiRepository.findAll();
     }
     
     

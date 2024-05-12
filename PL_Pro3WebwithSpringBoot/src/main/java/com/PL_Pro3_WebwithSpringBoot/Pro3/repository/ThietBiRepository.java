@@ -16,7 +16,7 @@ import org.springframework.data.jpa.repository.Query;
  * @author Lenovo
  */
 
-public interface ThietBiRepository extends JpaRepository<ThietBi, Integer>{
+public interface ThietBiRepository extends JpaRepository<ThietBi, Object>{
      Optional<ThietBi> findByTenTB(String url);
      Optional<ThietBi> findByMaTB(int maTB);
      
