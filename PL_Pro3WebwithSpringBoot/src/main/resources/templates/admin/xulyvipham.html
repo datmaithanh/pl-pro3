@@ -247,7 +247,7 @@
                                             <a class="btn btn-primary btn-icon-text btn-rounded" th:href="@{/admin/themxulyvipham}">Thêm</a>
                                         </div>
                                         <br>
-                                        
+
                                         <form th:action="@{/admin/searchMaTV}" class="col-md-12 grid-margin">
                                             <div class="form-group"  style="display:flex;">
 
@@ -285,7 +285,20 @@
                                                         <td th:text="${xuLy.maXL}"></td>
                                                         <td th:text="${xuLy.thanhVien.maTV}"></td>
                                                         <td th:text="${xuLy.thanhVien.hoTen}"></td>
-                                                        <td th:text="${xuLy.HinhThucXL}"></td>
+
+
+                                                        <!--<td th:text="${xuLy.HinhThucXL}"></td>-->
+                                                        <td>
+                                                            <span th:switch="${xuLy.HinhThucXL}">
+                                                                <span th:case="'0'">Khóa thẻ 1 tháng</span>
+                                                                <span th:case="'1'">Khóa thẻ 2 tháng</span>
+                                                                <span th:case="'2'">Khóa thẻ 3 tháng</span>
+                                                                <span th:case="'3'">Khóa thẻ vĩnh viễn</span>
+                                                                <span th:case="'4'">Bồi thường</span>
+                                                            </span>
+                                                        </td>
+
+
                                                         <td th:text="${xuLy.soTien}"></td>
                                                         <td th:text="${xuLy.trangThaiXL} ? 'Đã xử lý' : 'Chưa xử lý'"></td>
                                                         <td><a class="btn btn-warning"

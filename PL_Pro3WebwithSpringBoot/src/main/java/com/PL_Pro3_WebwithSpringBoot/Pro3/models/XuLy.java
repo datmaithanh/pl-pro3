@@ -18,6 +18,7 @@ import java.time.LocalDateTime;
 public class XuLy implements Serializable {
     @Id
     @Column(name = "MaXL")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer maXL;
 
     @ManyToOne
