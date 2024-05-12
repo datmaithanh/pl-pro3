@@ -255,17 +255,20 @@
                             <h4 class="font-weight-bold mb-0">Quản lý thiết bị</h4>
                         </div>
                         <div>
-                            <button id="addButton" type="button" class="btn btn-primary btn-icon-text btn-rounded">
-                                <a href="adddevice" class="text-decoration-none link-dark"><i class="ti-plus btn-icon-prepend"></i>Thêm</a>
+                             <button type="button" class="btn btn-primary btn-icon-text btn-rounded">
+                                <a  href="/admin/thietbi" style="color: black;"><i class="ti-check btn-icon-prepend" ></i>Hoàn thành</a>
+                </button>
+                            <button type="button" class="btn btn-primary btn-icon-text btn-rounded">
+                                <a  href="adddevice" style="color: black;"><i class="ti-plus btn-icon-prepend"></i>Thêm</a>
                             </button>
                             <button id="excelButton" type="button" class="btn btn-primary btn-icon-text btn-rounded">
-                                 <a href="exportexcel" class="text-decoration-none link-dark"><i class="ti-plus btn-icon-prepend"></i>Excel</a>
+                                 <a href="exportexcel" style="color: black;"><i class="ti-plus btn-icon-prepend"></i>Excel</a>
                             </button>
                             <button type="button" class="btn btn-primary btn-icon-text btn-rounded">
-                                <a href="editdevice" class="text-decoration-none link-dark"><i class="ti-pencil btn-icon-prepend"></i>Sửa</a>
+                                <a  href="editdevice" style="color: black;"><i class="ti-pencil btn-icon-prepend"></i>Sửa</a>
                             </button>
                             <button type="button" class="btn btn-primary btn-icon-text btn-rounded">
-                                <a href="deletedevice" class="text-decoration-none link-dark"><i class="ti-trash btn-icon-prepend"></i>Xóa</a>
+                                <a  href="deletedevice" style="color: black;"><i class="ti-minus btn-icon-prepend"></i>Xóa</a>
                             </button>
                         </div>
                     </div>
@@ -325,8 +328,13 @@
 </body>
 <script>
 
+
+     document.querySelector('.btn-hoanthanh').addEventListener('click', function() {
+        window.location.href = '/admin/thietbi'; // Chuyển hướng về trang quản lý thiết bị
+    });
    // Lấy danh sách tất cả các nút "Trash"
     var trashButtons = document.querySelectorAll('.table tbody button');
+
 
     // Xử lý sự kiện khi click vào nút "Trash"
     trashButtons.forEach(function(button) {

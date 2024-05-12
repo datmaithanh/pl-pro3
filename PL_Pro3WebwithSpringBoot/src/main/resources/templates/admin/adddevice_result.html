@@ -21,16 +21,7 @@
   <link rel="stylesheet" href="/static/vendors/ti-icons/css/themify-icons.css" type="text/css">
 
 </head>
-<!--<style>
-/*    #addFormContainer {
-        position: fixed;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        z-index: 9999;
-        width: 400px;
-    }*/
-</style>-->
+
 <body>
   <div class="container-scroller">
     <div class="row p-0 m-0 proBanner" id="proBanner">
@@ -256,16 +247,19 @@
                         </div>
                         <div>
                             <button type="button" class="btn btn-primary btn-icon-text btn-rounded">
-                                <a href="adddevice"><i class="ti-plus btn-icon-prepend"></i>Thêm</a>
+                                <a  href="/admin/thietbi" style="color: black;"><i class="ti-check btn-icon-prepend" ></i>Hoàn thành</a>
+                </button>
+                            <button type="button" class="btn btn-primary btn-icon-text btn-rounded">
+                                <a  href="adddevice" style="color: black;"><i class="ti-plus btn-icon-prepend"></i>Thêm</a>
                             </button>
                             <button id="excelButton" type="button" class="btn btn-primary btn-icon-text btn-rounded">
-                                 <a href="exportexcel"><i class="ti-plus btn-icon-prepend"></i>Excel</a>
+                                 <a href="exportexcel" style="color: black;"><i class="ti-plus btn-icon-prepend"></i>Excel</a>
                             </button>
                             <button type="button" class="btn btn-primary btn-icon-text btn-rounded">
-                                <a href="editdevice"><i class="ti-pencil btn-icon-prepend"></i>Sửa</a>
+                                <a  href="editdevice" style="color: black;"><i class="ti-pencil btn-icon-prepend"></i>Sửa</a>
                             </button>
                             <button type="button" class="btn btn-primary btn-icon-text btn-rounded">
-                                <a href="deletedevice"><i class="ti-minus btn-icon-prepend"></i>Xóa</a>
+                                <a  href="deletedevice" style="color: black;"><i class="ti-minus btn-icon-prepend"></i>Xóa</a>
                             </button>
                         </div>
                     </div>
@@ -329,6 +323,9 @@
     const addFormContainer = document.getElementById('addFormContainer');
     const closeButton = document.getElementById('closeButton');
 
+ document.querySelector('.btn-hoanthanh').addEventListener('click', function() {
+        window.location.href = '/admin/thietbi'; // Chuyển hướng về trang quản lý thiết bị
+    });
     // Xử lý sự kiện click vào nút "Them"
     addButton.addEventListener('click', function() {
         addFormContainer.classList.remove('d-none');
