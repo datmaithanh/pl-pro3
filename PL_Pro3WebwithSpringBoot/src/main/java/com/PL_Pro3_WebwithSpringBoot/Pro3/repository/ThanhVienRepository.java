@@ -17,6 +17,7 @@ import org.springframework.data.jpa.repository.Query;
 
 public interface ThanhVienRepository extends JpaRepository<ThanhVien, Object>{
     ThanhVien findByMaTVAndPassword(int maTV, String password);
+    
     Optional<ThanhVien> findByMaTV(int maTV);
     
     @Query("SELECT tv FROM ThanhVien tv WHERE tv.email = :email")

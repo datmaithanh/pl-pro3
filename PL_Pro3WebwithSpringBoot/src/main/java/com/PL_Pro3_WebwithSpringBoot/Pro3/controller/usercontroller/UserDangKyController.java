@@ -4,8 +4,12 @@
  */
 package com.PL_Pro3_WebwithSpringBoot.Pro3.controller.usercontroller;
 
-import com.PL_Pro3_WebwithSpringBoot.Pro3.dto.ThanhVienDTO;
 import com.PL_Pro3_WebwithSpringBoot.Pro3.models.ThanhVien;
+import com.PL_Pro3_WebwithSpringBoot.Pro3.repository.ThanhVienRepository;
+import com.PL_Pro3_WebwithSpringBoot.Pro3.service.serviceadmin.ThanhVienAdminService;
+import com.PL_Pro3_WebwithSpringBoot.Pro3.service.serviceadmin.ThietBiAdminService;
+import com.PL_Pro3_WebwithSpringBoot.Pro3.service.serviceadmin.ThongTinSDAdminService;
+import com.PL_Pro3_WebwithSpringBoot.Pro3.service.serviceadmin.XuLyAdminService;
 import com.PL_Pro3_WebwithSpringBoot.Pro3.service.serviceuser.ThanhVienUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -20,8 +24,14 @@ import org.springframework.web.bind.annotation.RequestParam;
  */
 @Controller
 public class UserDangKyController {
-    @Autowired
     private ThanhVienUserService thanhVienUserService;
+    private ThanhVienAdminService thanhVienAdminService;
+ 
+    @Autowired
+    public UserDangKyController(ThanhVienAdminService thanhVienAdminService, ThanhVienUserService thanhVienUserService) {
+        this.thanhVienAdminService = thanhVienAdminService;
+        this.thanhVienUserService = thanhVienUserService;
+    }
     
     @GetMapping("/user/dangky")
     public String trangDangKy() {
@@ -42,6 +52,16 @@ public class UserDangKyController {
         
         if (thanhVienUserService.getThanhVienById(maTV)!=null) {
             model.addAttribute("error", "Mã thành viên đã có người sử dụng!");
+            return "user/dangky";
+        }
+        
+        if (thanhVienAdminService.isExistingEmail(email)) {
+            model.addAttribute("error", "Email đã có người sử dụng!");
+            return "user/dangky";
+        }
+        
+        if (thanhVienAdminService.isExistingSDT(sdt)) {
+            model.addAttribute("error", "Số điện thoại đã có người sử dụng!");
             return "user/dangky";
         }
         
