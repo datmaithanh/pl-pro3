@@ -32,4 +32,14 @@ public interface ThanhVienUserService {
     void updateThanhVien(ThanhVienDTO thanhVienDTO);
     
     void deleteThanhVienByID(int thanhVienID);
+    
+    void sendOtpToEmail(String email, String otpString);
+    
+    String generateOtp();
+    
+    boolean emailExists(String email);
+
+    public void updatePassword(String email, String newPassword);
+    
+
 }

@@ -26,138 +26,41 @@
                     <a class="navbar-brand brand-logo me-5" th:href="@{/user/{maTV}}"><img src="../../images/logo.svg" class="me-2" alt="logo"/></a>
                     <a class="navbar-brand brand-logo-mini" href="/admin"><img src="../../images/logo-mini.svg" alt="logo"/></a>
                 </div>
-                <div class="navbar-menu-wrapper d-flex align-items-center justify-content-end">
-                    <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
+                <div class="navbar-menu-wrapper d-flex align-items-center justify-content-between">
+                    <button class=" navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
                         <span class="ti-view-list"></span>
                     </button>
                     <ul class="navbar-nav mr-lg-2">
-                        <!--                        <li class="nav-item nav-search d-none d-lg-block">
-                                                    <div class="input-group">
-                                                        <div class="input-group-prepend hover-cursor" id="navbar-search-icon">
-                                                            <span class="input-group-text" id="search">
-                                                                <i class="ti-search"></i>
-                                                            </span>
-                                                        </div>
-                                                        <input type="text" class="form-control" id="navbar-search-input" placeholder="Search now" aria-label="search" aria-describedby="search">
-                                                    </div>
-                                                </li>-->
-                    </ul>
-                    <ul class="navbar-nav navbar-nav-right">
-                        <li class="nav-item dropdown me-1">
-                            <!--                            <a class="nav-link count-indicator dropdown-toggle d-flex justify-content-center align-items-center" id="messageDropdown" href="#" data-bs-toggle="dropdown">
-                                                            <i class="ti-email mx-0"></i>
-                                                        </a>
-                                                        <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="messageDropdown">
-                                                            <p class="mb-0 font-weight-normal float-left dropdown-header">Messages</p>
-                                                            <a class="dropdown-item">
-                                                                <div class="item-thumbnail">
-                                                                    <img src="/images/faces/face4.jpg" alt="image" class="profile-pic">
-                                                                </div>
-                                                                <div class="item-content flex-grow">
-                                                                    <h6 class="ellipsis font-weight-normal">David Grey
-                                                                    </h6>
-                                                                    <p class="font-weight-light small-text text-muted mb-0">
-                                                                        The meeting is cancelled
-                                                                    </p>
-                                                                </div>
-                                                            </a>
-                                                            <a class="dropdown-item">
-                                                                <div class="item-thumbnail">
-                                                                    <img src="/images/faces/face2.jpg" alt="image" class="profile-pic">
-                                                                </div>
-                                                                <div class="item-content flex-grow">
-                                                                    <h6 class="ellipsis font-weight-normal">Tim Cook
-                                                                    </h6>
-                                                                    <p class="font-weight-light small-text text-muted mb-0">
-                                                                        New product launch
-                                                                    </p>
-                                                                </div>
-                                                            </a>
-                                                            <a class="dropdown-item">
-                                                                <div class="item-thumbnail">
-                                                                    <img src="/images/faces/face3.jpg" alt="image" class="profile-pic">
-                                                                </div>
-                                                                <div class="item-content flex-grow">
-                                                                    <h6 class="ellipsis font-weight-normal"> Johnson
-                                                                    </h6>
-                                                                    <p class="font-weight-light small-text text-muted mb-0">
-                                                                        Upcoming board meeting
-                                                                    </p>
-                                                                </div>
-                                                            </a>
-                                                        </div>-->
-                        </li>
-                        <li class="nav-item dropdown">
-                            <!--                            <a class="nav-link count-indicator dropdown-toggle" id="notificationDropdown" href="#" data-bs-toggle="dropdown">
-                                                            <i class="ti-bell mx-0"></i>
-                                                            <span class="count"></span>
-                                                        </a>
-                                                        <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="notificationDropdown">
-                                                            <p class="mb-0 font-weight-normal float-left dropdown-header">Notifications</p>
-                                                            <a class="dropdown-item">
-                                                                <div class="item-thumbnail">
-                                                                    <div class="item-icon bg-success">
-                                                                        <i class="ti-info-alt mx-0"></i>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="item-content">
-                                                                    <h6 class="font-weight-normal">Application Error</h6>
-                                                                    <p class="font-weight-light small-text mb-0 text-muted">
-                                                                        Just now
-                                                                    </p>
-                                                                </div>
-                                                            </a>
-                                                            <a class="dropdown-item">
-                                                                <div class="item-thumbnail">
-                                                                    <div class="item-icon bg-warning">
-                                                                        <i class="ti-settings mx-0"></i>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="item-content">
-                                                                    <h6 class="font-weight-normal">Settings</h6>
-                                                                    <p class="font-weight-light small-text mb-0 text-muted">
-                                                                        Private message
-                                                                    </p>
-                                                                </div>
-                                                            </a>
-                                                            <a class="dropdown-item">
-                                                                <div class="item-thumbnail">
-                                                                    <div class="item-icon bg-info">
-                                                                        <i class="ti-user mx-0"></i>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="item-content">
-                                                                    <h6 class="font-weight-normal">New user registration</h6>
-                                                                    <p class="font-weight-light small-text mb-0 text-muted">
-                                                                        2 days ago
-                                                                    </p>
-                                                                </div>
-                                                            </a>
-                                                        </div>-->
-                        </li>
-                        <li class="nav-item nav-profile dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" id="profileDropdown">
-                                <img src="../../images/faces/face28.jpg" alt="profile"/>
-                            </a>
-                            <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="profileDropdown">
-                                <a th:href="@{/user/hoso}" class="dropdown-item">
-                                    <i class="ti-user text-primary"></i>
-                                    Hồ sơ
+
+                        <ul class="navbar-nav navbar-nav-right">
+                            <li class="nav-item dropdown me-1">
+
+                            </li>
+                            <li class="nav-item dropdown">
+                            </li>
+                            <li class="nav-item nav-profile dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" id="profileDropdown">
+                                    <img src="../../images/faces/face28.jpg" alt="profile"/>
                                 </a>
-                                <a th:href="@{/user/doimatkhau}" class="dropdown-item" href>
-                                    <i class="ti-key text-primary"></i>
-                                    Đổi mật khẩu
-                                </a>
-                                <a th:href="@{/user/dangnhap}" class="dropdown-item">
-                                    <i class="ti-power-off text-primary"></i>
-                                    Đăng xuất
-                                </a>
-                            </div>
-                        </li>
-                    </ul>
-                    <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button" data-toggle="offcanvas">
-                        <span class="ti-view-list"></span>
-                    </button>
+                                <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="profileDropdown">
+                                    <a th:href="@{/user/hoso}" class="dropdown-item">
+                                        <i class="ti-user text-primary"></i>
+                                        Hồ sơ
+                                    </a>
+                                    <a th:href="@{/user/doimatkhau}" class="dropdown-item" href>
+                                        <i class="ti-key text-primary"></i>
+                                        Đổi mật khẩu
+                                    </a>
+                                    <a th:href="@{/user/dangnhap}" class="dropdown-item">
+                                        <i class="ti-power-off text-primary"></i>
+                                        Đăng xuất
+                                    </a>
+                                </div>
+                            </li>
+                        </ul>
+                        <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button" data-toggle="offcanvas">
+                            <span class="ti-view-list"></span>
+                        </button>
                 </div>
             </nav>
             <!-- partial -->
@@ -169,35 +72,35 @@
                             <a class="nav-link" th:href="@{/user/vipham}">
                                 <i class="ti-alert menu-icon"></i>
                                 <span class="menu-title">Xem trạng thái vi phạm</span>
-        
+
                             </a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" th:href="@{/user/datchomuonthietbi}">
                                 <i class="ti-flag menu-icon"></i>
                                 <span class="menu-title">Đặt chổ mượn thiết bị</span>
-        
+
                             </a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" th:href="@{/user/xemdatchomuonthietbi}">
                                 <i class="ti-flag-alt menu-icon"></i>
                                 <span class="menu-title">Xem đặt chổ mượn của tôi</span>
-        
+
                             </a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" th:href="@{/user/xemthietbidangmuon}">
                                 <i class="ti-eye menu-icon"></i>
                                 <span class="menu-title">Xem thiết bị đang mượn</span>
-            
+
                             </a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="/admin">
                                 <i class="ti-user menu-icon"></i>
                                 <span class="menu-title">Admin</span>
-            
+
                             </a>
                         </li>
                     </ul>   
@@ -207,34 +110,56 @@
                     <div class="content-wrapper">
                         <div class="container">
                             <div class="row justify-content-center">
-
-                                <div class="col-md-10 bg-white p-4">
-                                    <h2 class="text-center mb-4">Hồ sơ thành viên</h2>
-                                    <table class="table table-bordered mx-auto ">
-                                        <thead>
-                                            <tr>
-                                                <th scope="col">Mã thành viên</th>
-                                                <th scope="col">Họ tên</th>
-                                                <th scope="col">Khoa</th>
-                                                <th scope="col">Ngành</th>
-                                                <th scope="col">Số điện thoại</th>
-                                                <th scope="col">Email</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td th:text="${thanhVien.maTV}"></td>
-                                                <td th:text="${thanhVien.hoTen}"></td>
-                                                <td th:text="${thanhVien.khoa}"></td>
-                                                <td th:text="${thanhVien.nganh}"></td>
-                                                <td th:text="${thanhVien.sdt}"></td>
-                                                <td th:text="${thanhVien.email}"></td>
-
-                                            </tr>            
-                                        </tbody>
-
-                                    </table>
+                                <div class="col-md-10 grid-margin stretch-card">
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <h1 class="card-title fs-3">Hồ sơ</h1>
+                                            <p class="card-description">
+                                                Thông tin chi tiết
+                                            </p>
+                                            <form class="forms-sample">
+                                                <div class="form-group row">
+                                                    <label for="exampleInputMaTV" class="col-sm-3 col-form-label">Mã thành viên</label>
+                                                    <div class="col-sm-9">
+                                                        <input type="text" class="form-control" id="exampleInputMaTV" placeholder="Mã thành viên" th:value="${thanhVien.maTV}" readonly>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group row">
+                                                    <label for="exampleInputHoTen" class="col-sm-3 col-form-label">Họ tên</label>
+                                                    <div class="col-sm-9">
+                                                        <input type="text" class="form-control" id="exampleInputHoTen" placeholder="Họ tên" th:value="${thanhVien.hoTen}" readonly>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group row">
+                                                    <label for="exampleInputKhoa" class="col-sm-3 col-form-label">Khoa</label>
+                                                    <div class="col-sm-9">
+                                                        <input type="text" class="form-control" id="exampleInputKhoa" placeholder="Khoa" th:value="${thanhVien.khoa}" readonly>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group row">
+                                                    <label for="exampleInputNganh" class="col-sm-3 col-form-label">Ngành</label>
+                                                    <div class="col-sm-9">
+                                                        <input type="text" class="form-control" id="exampleInputNganh" placeholder="Ngành" th:value="${thanhVien.nganh}" readonly>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group row">
+                                                    <label for="exampleInputMobile" class="col-sm-3 col-form-label">Số điện thoại</label>
+                                                    <div class="col-sm-9">
+                                                        <input type="text" class="form-control" id="exampleInputMobile" placeholder="Số điện thoại" th:value="${thanhVien.sdt}" readonly>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group row">
+                                                    <label for="exampleInputEmail" class="col-sm-3 col-form-label">Email</label>
+                                                    <div class="col-sm-9">
+                                                        <input type="email" class="form-control" id="exampleInputEmail" placeholder="Email" th:value="${thanhVien.email}" readonly>
+                                                    </div>
+                                                </div>
+                                                <a type="button" href="/user/{maTV}" class="btn btn-primary" >Cancel</a>
+                                            </form>
+                                        </div>
+                                    </div>
                                 </div>
+
 
                             </div>
                         </div>

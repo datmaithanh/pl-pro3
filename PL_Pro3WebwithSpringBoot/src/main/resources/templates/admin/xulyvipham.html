@@ -355,6 +355,14 @@
                 });
               });
             </script>
+            <script>
+      document.addEventListener('DOMContentLoaded', function () {
+        var allCollapses = document.querySelectorAll('.collapse');
+        allCollapses.forEach(function (collapse) {
+            bootstrap.Collapse.getOrCreateInstance(collapse).hide();
+        });
+    });
+</script>
         <!-- plugins:js -->
         <script src="../../vendors/base/vendor.bundle.base.js"></script>
         <!-- endinject -->

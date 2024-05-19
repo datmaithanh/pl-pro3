@@ -333,6 +333,14 @@
         <!-- endinject -->
         <!-- Custom js for this page-->
         <script src="../../js/file-upload.js"></script>
+        <script>
+      document.addEventListener('DOMContentLoaded', function () {
+        var allCollapses = document.querySelectorAll('.collapse');
+        allCollapses.forEach(function (collapse) {
+            bootstrap.Collapse.getOrCreateInstance(collapse).hide();
+        });
+    });
+</script>
         <!-- End custom js for this page-->
     </body>
 

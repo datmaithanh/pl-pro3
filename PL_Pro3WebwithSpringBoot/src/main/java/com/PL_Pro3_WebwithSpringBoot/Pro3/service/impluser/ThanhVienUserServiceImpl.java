@@ -10,8 +10,11 @@ import com.PL_Pro3_WebwithSpringBoot.Pro3.repository.ThanhVienRepository;
 import com.PL_Pro3_WebwithSpringBoot.Pro3.service.serviceuser.ThanhVienUserService;
 import java.util.Optional;
 import java.util.List;
+import java.security.SecureRandom;
 import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 
 /**
@@ -21,6 +24,10 @@ import org.springframework.stereotype.Service;
 @Service
 public class ThanhVienUserServiceImpl implements ThanhVienUserService {
     private ThanhVienRepository thanhVienRepository;
+    
+    @Autowired
+    private JavaMailSender mailSender;
+    
     @Autowired
     public ThanhVienUserServiceImpl(ThanhVienRepository thanhVienRepository) {
         this.thanhVienRepository = thanhVienRepository;
@@ -120,4 +127,56 @@ public class ThanhVienUserServiceImpl implements ThanhVienUserService {
     public ThanhVien addOrUpdateThanhVien(ThanhVien thanhVien) {
         return thanhVienRepository.save(thanhVien);
     }
+
+    @Override
+    public void sendOtpToEmail(String email , String otpString) {
+        String subject = "Your OTP Code";
+        String body = "Your OTP code is: " + otpString;
+
+        sendEmail(email, subject, body);
+    }
+    
+    
+    private static final String charString = "0123456789";
+    private static final int OTP_LENGTH = 6;
+    private static final SecureRandom RANDOM = new SecureRandom();
+    @Override
+    public String generateOtp() {
+        
+        StringBuilder otp = new StringBuilder(OTP_LENGTH);
+        for (int i = 0; i < OTP_LENGTH; i++) {
+            otp.append(charString.charAt(RANDOM.nextInt(charString.length())));
+        }
+        return otp.toString();
+    }
+
+
+    public void sendEmail(String toEmail, String subject, String body) {
+        SimpleMailMessage message = new SimpleMailMessage();
+        message.setTo(toEmail);
+        message.setSubject(subject);
+        message.setText(body);
+        mailSender.send(message);
+    }
+
+    @Override
+    public boolean emailExists(String email) {
+        return thanhVienRepository.getThanhVienByEmail(email) != null;
+    }
+
+    @Override
+    public void updatePassword(String email, String newPassword) {
+        ThanhVienDTO thanhVienDTO = mapToThanhVienDTO(thanhVienRepository.getThanhVienByEmail(email));
+        
+        thanhVienDTO.setPassword(newPassword);
+        updateThanhVien(thanhVienDTO);
+        
+        
+    }
+
+
+    
+    
+    
+    
 }

@@ -30,4 +30,8 @@ public interface ThanhVienRepository extends JpaRepository<ThanhVien, Object>{
     
     @Query("SELECT DISTINCT khoa FROM ThanhVien")
     List<String> getAllKhoa();
+    
+    @Query("SELECT tv FROM ThanhVien tv WHERE tv.email = :email")
+    ThanhVien getThanhVienByEmail(String email);
+    
 }
