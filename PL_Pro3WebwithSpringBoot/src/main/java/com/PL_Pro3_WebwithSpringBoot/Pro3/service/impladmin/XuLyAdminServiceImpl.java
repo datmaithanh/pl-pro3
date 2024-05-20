@@ -92,8 +92,11 @@ public class XuLyAdminServiceImpl implements XuLyAdminService {
     }
 
     private XuLy mapToXuLy(int maTV, XuLyDTO xuLyDTO) {
-
+        
         ThanhVien thanhVien = thanhVienRepository.findById(maTV).get();
+        if(!xuLyDTO.getHinhThucXL().equals("Bồi thường")){
+            xuLyDTO.setSoTien(0);
+        }
         XuLy xuLy = XuLy.builder()
                 .maXL(xuLyDTO.getMaXL())
                 .thanhVien(thanhVien)
