@@ -68,7 +68,7 @@
     document.getElementById("formDangNhap").addEventListener("submit", function () {
         let maTV = document.getElementById("maTV").value;
         let regex = /^(11)\d{8}$/;
-        if (!regex.test(maTV)) {        
+        if (!regex.test(maTV) && maTV !== "admin") {        
             event.preventDefault();
             alert("Mã thành viên phải là dãy 10 kí tự số bắt đầu bằng '11'.");
             return;

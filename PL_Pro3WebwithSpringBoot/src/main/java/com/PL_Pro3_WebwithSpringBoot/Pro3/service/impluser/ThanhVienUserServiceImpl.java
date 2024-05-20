@@ -140,6 +140,7 @@ public class ThanhVienUserServiceImpl implements ThanhVienUserService {
     private static final String charString = "0123456789";
     private static final int OTP_LENGTH = 6;
     private static final SecureRandom RANDOM = new SecureRandom();
+    
     @Override
     public String generateOtp() {
         
@@ -149,7 +150,6 @@ public class ThanhVienUserServiceImpl implements ThanhVienUserService {
         }
         return otp.toString();
     }
-
 
     public void sendEmail(String toEmail, String subject, String body) {
         SimpleMailMessage message = new SimpleMailMessage();
@@ -169,9 +169,7 @@ public class ThanhVienUserServiceImpl implements ThanhVienUserService {
         ThanhVienDTO thanhVienDTO = mapToThanhVienDTO(thanhVienRepository.getThanhVienByEmail(email));
         
         thanhVienDTO.setPassword(newPassword);
-        updateThanhVien(thanhVienDTO);
-        
-        
+        updateThanhVien(thanhVienDTO);      
     }
 
 
